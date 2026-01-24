@@ -15,7 +15,7 @@ const Experience = () => {
       <div className="container-main">
         <SectionHeader
           title="Polyvalence Showcase."
-          subtitle="Experience & Leadership"
+          subtitle="Experience"
           className="mb-16"
         />
 
@@ -44,28 +44,60 @@ const Experience = () => {
             </div>
           </Card>
 
-          {/* Card 2: Club President - Orange Card */}
-          <Card className="md:col-span-1 row-span-2 bg-orange-600 border-none text-white p-8 flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/4 blur-3xl pointer-events-none" />
+          {/* Card 2: Club President - Redesigned Dark Card */}
+          <Card className="md:col-span-1 row-span-2 !bg-[#212121] border border-white/5 text-white p-6 flex flex-col gap-6 relative overflow-hidden group">
 
-            <div>
-              <div className="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-bold uppercase tracking-wider mb-6">Leadership</div>
-              <h3 className="text-3xl font-bold mb-4">{clubPresident?.role}</h3>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                {clubPresident?.description[0]}
-              </p>
+            {/* Top Section - Glass/Light Dark */}
+            <div className="bg-white/5 rounded-2xl p-5 border border-white/5 relative z-10 backdrop-blur-sm">
+              <div className="flex items-center justify-between mb-4">
+                <div className="w-10 h-10 rounded-lg bg-[#F0F0F0] flex items-center justify-center">
+                  <Users className="w-5 h-5 text-[#121212]" />
+                </div>
+                <span className="px-3 py-1 rounded-full border border-white/10 text-[10px] font-bold uppercase tracking-wider text-gray-400 bg-white/5">
+                  Sep 2023 – Jun 2025
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-bold mb-1">Club President</h3>
+              <p className="text-gray-400 text-sm font-medium">AI & Cyber Security Club</p>
             </div>
 
-            <div>
-              <div className="flex -space-x-3 mb-6">
-                {[1, 2, 3].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-orange-600 bg-gray-300" />
-                ))}
-                <div className="w-10 h-10 rounded-full border-2 border-orange-600 bg-black flex items-center justify-center text-xs font-bold">
+            {/* List Content */}
+            <div className="flex flex-col gap-4 relative z-10">
+              <ul className="space-y-4">
+                <li className="flex gap-3 items-start">
+                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--color-accent-primary)] shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Lead Python and Machine Learning workshops for <span className="text-white font-bold">200+ technology enthusiasts</span>, fostering technical skill development.
+                  </p>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-600 shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Developed proof-of-concept for <span className="text-white font-bold">AI-powered autonomous drone system</span> for industrial inspection applications.
+                  </p>
+                </li>
+                <li className="flex gap-3 items-start">
+                  <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-gray-600 shrink-0" />
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    Manage cross-functional teams developing projects in classical ML, computer vision, and Python development.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            {/* Bottom/Decoration */}
+            <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#0099ff] underline decoration-[#0099ff]/30">
+                Impact
+              </span>
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-gray-700 border border-[#212121]" />
+                <div className="w-6 h-6 rounded-full bg-gray-600 border border-[#212121]" />
+                <div className="w-6 h-6 rounded-full bg-[var(--color-accent-primary)] border border-[#212121] flex items-center justify-center text-[8px] font-bold text-black">
                   +200
                 </div>
               </div>
-              <div className="text-sm font-bold uppercase tracking-wider">AI & Cyber Security Club</div>
             </div>
           </Card>
 

@@ -20,9 +20,12 @@ const Hero = () => {
           className="flex flex-col items-start gap-8"
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)]">
-            <span className="w-2 h-2 rounded-full bg-[var(--color-accent-tertiary)] animate-pulse" />
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--color-text-secondary)]">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-white/10 shadow-lg">
+            <div className="relative h-2 w-2">
+              <div className="absolute inset-0 m-auto h-2 w-2 rounded-full bg-[var(--color-accent-primary)]"></div>
+              <div className="absolute inset-0 animate-ping rounded-full bg-[var(--color-accent-primary)]"></div>
+            </div>
+            <span className="text-xs font-bold uppercase tracking-wider text-white">
               Available for Collaboration
             </span>
           </div>
@@ -32,8 +35,8 @@ const Hero = () => {
             AI Engineer <br />
             <span className="text-[var(--color-text-secondary)]">&</span> <br />
             <span className="relative inline-block">
-              Cybersecurity
-              <span className="absolute -bottom-1 left-0 w-full h-4 bg-[var(--color-accent-primary)] -z-10 -rotate-1 rounded-sm opacity-100" />
+              <span className="relative z-10">Cybersecurity </span>
+              <span className="absolute -bottom-1 left-0 w-full h-4 bg-[var(--color-accent-primary)] -rotate-1 rounded-sm opacity-100" />
             </span> <br />
             Specialist.
           </h1>
@@ -82,7 +85,7 @@ const Hero = () => {
 
             {/* Card 2: Cloud */}
             <Card className="col-span-1 row-span-1 flex flex-col justify-center items-center text-center p-6 gap-4 bg-[#1e1e1e]">
-              <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500">
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-primary)]/10 flex items-center justify-center text-[var(--color-accent-primary)]">
                 <Cloud className="w-6 h-6" />
               </div>
               <h4 className="font-bold text-white">Cloud-Native <br />Architecture</h4>

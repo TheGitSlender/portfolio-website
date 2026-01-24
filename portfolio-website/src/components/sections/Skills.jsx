@@ -17,7 +17,7 @@ const Skills = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Card 1: Model Architecture */}
           <Card className="bg-white text-black border-none p-8 group">
-            <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6 from-orange-500 to-rose-500">
+            <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] flex items-center justify-center mb-6">
               <Database className="w-6 h-6" />
             </div>
             <h3 className="text-2xl font-bold mb-4">Model Architecture</h3>
@@ -33,7 +33,7 @@ const Skills = () => {
 
           {/* Card 2: Cyber Defense */}
           <Card className="bg-white text-black border-none p-8 group shadow-xl">
-            <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6">
+            <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] flex items-center justify-center mb-6">
               <Lock className="w-6 h-6" />
             </div>
             <h3 className="text-2xl font-bold mb-4">Cyber Defense</h3>
@@ -49,7 +49,7 @@ const Skills = () => {
 
           {/* Card 3: MLOps & Cloud */}
           <Card className="bg-white text-black border-none p-8 group">
-            <div className="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-6">
+            <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)] flex items-center justify-center mb-6">
               <Cloud className="w-6 h-6" />
             </div>
             <h3 className="text-2xl font-bold mb-4">MLOps & Cloud</h3>

@@ -1,36 +1,111 @@
 
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import Button from '../ui/Button';
+import { Linkedin, Mail, Phone, Gamepad2, ArrowRight, GithubIcon } from 'lucide-react';
 
 const Contact = () => {
+  const contactMethods = [
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      value: 'Hany El Atlassi',
+      link: 'https://linkedin.com/in/el-atlassi-hany',
+      icon: Linkedin,
+      color: '#0077b5',
+      bg: 'bg-[#0077b5]/10',
+    },
+    {
+      id: 'email',
+      name: 'Email',
+      value: 'elatlassi.hany@gmail.com',
+      link: 'mailto:elatlassi.hany@gmail.com',
+      icon: Mail,
+      color: '#EA4335',
+      bg: 'bg-[#EA4335]/10',
+    },
+    {
+      id: 'github',
+      name: 'Github',
+      value: 'TheGitSlender',
+      link: 'https://github.com/TheGitSlender',
+      icon: GithubIcon,
+      color: '#5865F2',
+      bg: 'bg-[#5865F2]/10',
+    },
+    {
+      id: 'discord',
+      name: 'Discord',
+      value: 'TheGitSlender',
+      link: 'https://discord.com/users/.theslender',
+      icon: Gamepad2,
+      color: '#5865F2',
+      bg: 'bg-[#5865F2]/10',
+    }
+  ];
+
   return (
     <section id="contact" className="py-24 bg-[var(--color-bg-primary)]">
       <div className="container-main">
-        <div className="relative rounded-[2.5rem] bg-[var(--color-accent-primary)] overflow-hidden px-8 py-20 md:px-20 md:py-32 text-center text-white">
 
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-white rounded-full blur-3xl" />
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-black rounded-full blur-3xl" />
+        {/* Container matching the Framer reference style */}
+        <div className="bg-[var(--color-accent-primary)] rounded-[40px] p-8 md:p-12 lg:p-16 overflow-hidden relative">
+
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+
+            {/* Left: Heading & Intro */}
+            <div className="flex flex-col gap-8">
+              {/* Contact Badge (like the snippet) */}
+              <div className="inline-flex items-center gap-3 bg-[#212121] rounded-full px-5 py-2 w-fit border border-white/5">
+                <span className="text-[var(--color-accent-primary)] font-bold">//</span>
+                <span className="text-white font-medium">Contact</span>
+                <span className="text-[var(--color-accent-primary)] font-bold">//</span>
+              </div>
+
+              <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-tight">
+                Let's talk.
+              </h2>
+
+              <p className="text-white/80 text-lg max-w-md">
+                Got questions or ready to start your next project? Reach out and let's bring your ideas to life.
+              </p>
+            </div>
+
+            {/* Right: Contact Cards Grid */}
+            <div className="grid sm:grid-cols-2 gap-4 w-full">
+              {contactMethods.map((method, index) => (
+                <motion.a
+                  key={method.id}
+                  href={method.link || '#'}
+                  target={method.link ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  className="bg-white p-6 rounded-3xl border border-black/5 group hover:shadow-xl transition-all relative overflow-hidden"
+                  whileHover={{ y: -5 }}
+                >
+                  {/* Progressive Dot Indicator */}
+                  <div className="absolute top-6 right-6 flex gap-1.5">
+                    {[0, 1, 2, 3].map((dotIndex) => (
+                      <div
+                        key={dotIndex}
+                        className={`h-1.5 w-4 rounded-full transition-colors duration-300 ${dotIndex <= index
+                            ? 'bg-[var(--color-accent-primary)]'
+                            : 'bg-[#e5e5e5]'
+                          }`}
+                      />
+                    ))}
+                  </div>
+
+                  <div className={`w-12 h-12 rounded-xl ${method.bg} flex items-center justify-center mb-6`} style={{ color: method.color }}>
+                    <method.icon size={24} />
+                  </div>
+
+                  <h4 className="text-[#121212] font-bold text-lg mb-1">{method.name}</h4>
+                  <p className="text-gray-500 text-sm font-medium truncate">{method.value}</p>
+                </motion.a>
+              ))}
+            </div>
+
           </div>
 
-          <div className="relative z-10 flex flex-col items-center max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-              Let's build the <br />
-              future together.
-            </h2>
-            <p className="text-white/80 text-lg md:text-xl mb-10 max-w-2xl">
-              Currently open to internship opportunities and specialized freelance technical consultations.
-            </p>
-
-            <Button
-              to="mailto:elatlassi.hany@gmail.com"
-              className="bg-white text-[var(--color-accent-primary)] hover:bg-white/90 px-8 py-4 text-lg border-none"
-            >
-              Start a Project <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
         </div>
       </div>
     </section>

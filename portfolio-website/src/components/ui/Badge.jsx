@@ -31,7 +31,7 @@ const Badge = ({
     default: 'bg-[--color-surface-hover] text-[--color-primary-text-secondary]',
     primary: 'bg-[--color-accent-blue]/10 text-[--color-accent-blue]',
     success: 'bg-[--color-accent-green]/10 text-[--color-accent-green]',
-    warning: 'bg-[--color-accent-orange]/10 text-[--color-accent-orange]',
+    warning: 'bg-[--color-accent-primary]/10 text-[--color-accent-primary]',
     purple: 'bg-[--color-accent-purple]/10 text-[--color-accent-purple]',
   };
 
