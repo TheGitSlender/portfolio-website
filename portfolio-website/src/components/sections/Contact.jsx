@@ -82,13 +82,13 @@ const Contact = () => {
                   whileHover={{ y: -5 }}
                 >
                   {/* Progressive Dot Indicator */}
-                  <div className="absolute top-6 right-6 flex gap-1.5">
+                  <div className="absolute top-6 right-6 flex gap-1">
                     {[0, 1, 2, 3].map((dotIndex) => (
                       <div
                         key={dotIndex}
-                        className={`h-1.5 w-4 rounded-full transition-colors duration-300 ${dotIndex <= index
-                            ? 'bg-[var(--color-accent-primary)]'
-                            : 'bg-[#e5e5e5]'
+                        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${dotIndex <= index
+                          ? 'bg-[var(--color-accent-primary)]'
+                          : 'bg-[#e5e5e5]'
                           }`}
                       />
                     ))}
