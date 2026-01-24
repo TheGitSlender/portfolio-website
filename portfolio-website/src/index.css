@@ -1,0 +1,224 @@
+/**
+ * Global Styles - Portfolio Website
+ *
+ * Formix-inspired design with:
+ * - Dark mode default
+ * - Bold typography
+ * - Glassmorphism & Bento grids
+ */
+
+/* Import Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* ============================================
+   CUSTOM THEME CONFIGURATION
+   Formix-inspired (Dark Mode Default)
+   ============================================ */
+
+@theme {
+  /* Color Palette - Light Mode Primary */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F4F4F5;
+  /* Zinc 100 */
+  --color-bg-tertiary: #E4E4E7;
+  /* Zinc 200 */
+
+  --color-text-primary: #18181B;
+  /* Zinc 900 */
+  --color-text-secondary: #52525B;
+  /* Zinc 600 */
+  --color-text-tertiary: #71717A;
+  /* Zinc 500 */
+  --color-text-inverse: #FFFFFF;
+  /* For dark cards */
+
+  /* Accents - Orange/Warm Theme */
+  --color-accent-primary: rgb(255, 71, 38);
+  /* User Specific RGB */
+  --color-accent-secondary: #FF6600;
+  /* Lighter Orange */
+  --color-accent-tertiary: #0D9488;
+  /* Teal/Green (darker for contrast on light) */
+  --color-accent-glw: rgba(255, 71, 38, 0.25);
+
+  /* Borders & Glass */
+  --color-border-subtle: #E4E4E7;
+  /* Zinc 200 */
+  --color-border-hover: #D4D4D8;
+  /* Zinc 300 */
+  --color-glass-bg: rgba(255, 255, 255, 0.7);
+  --color-glass-border: rgba(24, 24, 27, 0.05);
+
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing & Sizing */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
+
+  /* Shadows */
+  --shadow-strong: 0px 7px 20px 0.5px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(255, 71, 38, 0.4);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: black;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* ============================================
+   UTILITIES & COMPONENTS
+   ============================================ */
+
+/* Layout Containers */
+.container-main {
+  width: 100%;
+  max-width: 1400px;
+  /* Wider for Bento feel */
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-main {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-main {
+    padding: 0 4rem;
+  }
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+h1 {
+  letter-spacing: -0.04em;
+}
+
+/* Bento Card Style */
+.bento-card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  isolation: isolate;
+}
+
+.bento-card:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+/* Glass Effect */
+.glass-panel {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+}
+
+/* Gradient Text */
+.text-gradient {
+  background: linear-gradient(to right, #FFFFFF, #A1A1AA);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(to right, var(--color-accent-primary), var(--color-accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Button Reset & Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-text-primary);
+  background: var(--color-glass-bg);
+}
