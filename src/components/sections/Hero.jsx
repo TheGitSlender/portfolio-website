@@ -36,7 +36,7 @@ const Hero = () => {
             Engineer <br />
             <span className="text-[var(--color-text-secondary)]">&</span> <br />
             <span className="relative inline-block">
-              <span className="relative z-10">Cybersecurity </span>
+              <span className="relative z-10">Hany wa3r </span>
               <span className="absolute bottom-1 md:bottom-2 left-0 w-full h-4 md:h-8 bg-[var(--color-accent-primary)] -rotate-1 rounded-sm opacity-100" />
             </span> <br />
             Specialist.
