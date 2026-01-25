@@ -3,41 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, Cloud, Shield, Database, Layout, Search } from 'lucide-react';
 
-const expData = [
-  {
-    id: 1,
-    title: "Senior AI Architect",
-    company: "Leading Innovation Lab @ Cyberdyne Systems",
-    period: "2023—PRESENT",
-    description: "Spearheading the development of autonomous security protocols and large-scale generative models for threat detection. Managed a team of 12 engineers to deliver zero-day vulnerability scanning at 10x speed.",
-    tags: ["AI", "LEADERSHIP"],
-    icon: Terminal,
-    color: "#ff3700",
-    image: null // Placeholder
-  },
-  {
-    id: 2,
-    title: "Cloud Security Engineer",
-    company: "Global Infrastructure Hub",
-    period: "2021—2023",
-    description: "Architected multi-cloud environments across AWS and GCP with a focus on high-availability and military-grade encryption standards. Automated 95% of security auditing processes using custom ML agents.",
-    tags: ["CLOUD"],
-    icon: Cloud,
-    color: "#ffb088",
-    image: null
-  },
-  {
-    id: 3,
-    title: "Machine Learning Developer",
-    company: "DeepData Analytics",
-    period: "2019—2021",
-    description: "Early-stage engineer building computer vision models for autonomous vehicles. Specialized in data pipeline optimization and hyper-parameter tuning for real-time edge computing.",
-    tags: ["AI", "CLOUD"],
-    icon: Database,
-    color: "#ffb088",
-    image: null
-  }
-];
+import { experiences } from '../../data/experience';
 
 const Experience = () => {
   return (
@@ -66,7 +32,7 @@ const Experience = () => {
           <div className="absolute left-6 md:left-[60px] top-0 bottom-0 w-[4px] bg-gray-200/50" />
 
           <div className="flex flex-col gap-12 md:gap-24 relative z-10">
-            {expData.map((item, index) => (
+            {experiences.map((item, index) => (
               <div key={item.id} className="relative pl-16 md:pl-48 group">
 
                 {/* Timeline Dot - Animated lighting effect */}
@@ -85,7 +51,7 @@ const Experience = () => {
                   viewport={{ once: false, amount: 0.5, margin: "-20% 0px -20% 0px" }}
                   className="mb-4 lg:absolute lg:-left-24 lg:top-12 text-base font-black text-[#121212] whitespace-nowrap hidden lg:block uppercase tracking-tighter"
                 >
-                  {item.period}
+                  {item.period.start} — {item.period.end}
                 </motion.div>
 
                 {/* Card */}
@@ -100,33 +66,39 @@ const Experience = () => {
                   <div className="flex-1 flex flex-col items-start gap-6">
                     {/* Tags */}
                     <div className="flex gap-2">
-                      {item.tags.map(tag => (
-                        <span key={tag} className="px-3 py-1 bg-gray-100 rounded-full text-[9px] font-black tracking-widest text-gray-500 uppercase">
-                          {tag}
+                      {item.skills && item.skills.map(skill => (
+                        <span key={skill} className="px-3 py-1 bg-gray-100 rounded-full text-[9px] font-black tracking-widest text-gray-500 uppercase">
+                          {skill}
                         </span>
                       ))}
                     </div>
 
                     <div>
                       <h3 className="text-4xl md:text-5xl font-bold font-serif leading-tight mb-2">
-                        {item.title}
+                        {item.role || item.title}
                       </h3>
                       <p className="text-lg md:text-xl text-gray-500 font-medium">
                         {item.company}
                       </p>
                     </div>
 
-                    <p className="text-gray-500 text-lg leading-relaxed max-w-2xl font-medium">
-                      {item.description}
-                    </p>
+                    <div className="text-gray-500 text-lg leading-relaxed max-w-2xl font-medium space-y-2">
+                      {Array.isArray(item.description) ? (
+                        item.description.map((point, i) => (
+                          <p key={i}>• {point}</p>
+                        ))
+                      ) : (
+                        <p>{item.description}</p>
+                      )}
+                    </div>
                   </div>
 
                   {/* Right Column: Illustration/Image Placeholder */}
                   <div className="w-full md:w-[320px] h-[320px] rounded-[32px] bg-gray-50 flex items-center justify-center overflow-hidden border border-gray-100 relative group-hover:border-[var(--color-accent-primary)]/20 transition-colors">
-                    {/* Placeholder Abstract (Matching the image hint) */}
-                    {item.id === 1 && <div className="p-12 opacity-40"><item.icon size={120} strokeWidth={1} /></div>}
-                    {item.id === 2 && <div className="w-full h-full bg-gradient-to-br from-gray-800 to-black opacity-90" />}
-                    {item.id === 3 && <div className="w-full h-full bg-[#f0f0f0] flex items-center justify-center"><Layout size={100} className="text-gray-300" strokeWidth={1} /></div>}
+                    {/* Placeholder Abstract */}
+                    {item.type === 'work' && <div className="p-12 opacity-40"><Terminal size={120} strokeWidth={1} /></div>}
+                    {item.type === 'leadership' && <div className="p-12 opacity-40"><Search size={120} strokeWidth={1} /></div>}
+                    {item.type === 'education' && <div className="w-full h-full bg-[#f0f0f0] flex items-center justify-center"><Layout size={100} className="text-gray-300" strokeWidth={1} /></div>}
 
                     <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
                   </div>

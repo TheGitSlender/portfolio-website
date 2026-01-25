@@ -15,18 +15,14 @@
 
 export const skillCategories = [
   {
-    name: "AI/ML Frameworks & Libraries",
+    name: "AI/ML Frameworks",
     icon: "Brain",
     skills: [
       { name: "PyTorch", proficiency: "advanced" },
-      { name: "TensorFlow", proficiency: "intermediate" },
+      { name: "TensorFlow", proficiency: "advanced" },
       { name: "Scikit-Learn", proficiency: "advanced" },
-      { name: "Lightning AI", proficiency: "intermediate" },
+      { name: "Lightning AI", proficiency: "advanced" },
       { name: "Keras", proficiency: "intermediate" },
-      { name: "Hugging Face", proficiency: "intermediate" },
-      { name: "OpenCV", proficiency: "advanced" },
-      { name: "Pandas", proficiency: "advanced" },
-      { name: "NumPy", proficiency: "advanced" },
     ],
   },
   {
@@ -34,11 +30,11 @@ export const skillCategories = [
     icon: "Code",
     skills: [
       { name: "Python", proficiency: "advanced" },
-      { name: "C/C++", proficiency: "intermediate" },
-      { name: "Java", proficiency: "intermediate" },
+      { name: "C/C++", proficiency: "advanced" },
+      { name: "Java", proficiency: "advanced" },
       { name: "SQL", proficiency: "intermediate" },
       { name: "Bash", proficiency: "intermediate" },
-      { name: "JavaScript", proficiency: "intermediate" },
+      { name: "NoSQL", proficiency: "beginner" },
     ],
   },
   {
@@ -46,13 +42,10 @@ export const skillCategories = [
     icon: "Sparkles",
     skills: [
       { name: "Computer Vision", proficiency: "advanced" },
-      { name: "3D Computer Vision", proficiency: "intermediate" },
+      { name: "3D Computer Vision", proficiency: "advanced" },
       { name: "Deep Learning", proficiency: "advanced" },
       { name: "CNNs / RNNs", proficiency: "advanced" },
-      { name: "Transformers", proficiency: "intermediate" },
       { name: "NLP", proficiency: "intermediate" },
-      { name: "Reinforcement Learning", proficiency: "intermediate" },
-      { name: "Point Cloud Processing", proficiency: "intermediate" },
     ],
   },
   {
@@ -61,41 +54,28 @@ export const skillCategories = [
     skills: [
       { name: "Git/GitHub", proficiency: "advanced" },
       { name: "Linux", proficiency: "advanced" },
+      { name: "Anaconda", proficiency: "intermediate" },
+      { name: "Streamlit", proficiency: "advanced" },
       { name: "Jupyter", proficiency: "advanced" },
-      { name: "VS Code", proficiency: "advanced" },
-      { name: "Streamlit", proficiency: "intermediate" },
-      { name: "Weights & Biases", proficiency: "intermediate" },
-      { name: "Docker", proficiency: "intermediate" },
     ],
   },
   {
-    name: "Cloud & Infrastructure",
-    icon: "Cloud",
-    skills: [
-      { name: "AWS", proficiency: "intermediate" },
-      { name: "Google Cloud", proficiency: "beginner" },
-      { name: "Docker", proficiency: "intermediate" },
-      { name: "CUDA", proficiency: "intermediate" },
-    ],
-  },
-  {
-    name: "Cybersecurity",
+    name: "Systems & Security",
     icon: "Shield",
     skills: [
-      { name: "Network Security", proficiency: "intermediate" },
-      { name: "Digital Forensics", proficiency: "advanced" },
-      { name: "Wazuh SIEM", proficiency: "intermediate" },
-      { name: "Wireshark", proficiency: "advanced" },
-      { name: "CTF Competitions", proficiency: "advanced" },
+      { name: "OS/Memory Forensics", proficiency: "intermediate" },
+      { name: "Network Analysis", proficiency: "intermediate" },
+      { name: "NTFS Artifacts", proficiency: "intermediate" },
+      { name: "Linux Bash Workflows", proficiency: "advanced" },
     ],
   },
   {
     name: "Languages",
     icon: "Globe",
     skills: [
-      { name: "English", proficiency: "fluent", flag: "🇬🇧" },
-      { name: "French", proficiency: "fluent", flag: "🇫🇷" },
-      { name: "Arabic", proficiency: "native", flag: "🇲🇦" },
+      { name: "English", proficiency: "Fluent", flag: "🇬🇧" },
+      { name: "French", proficiency: "Fluent", flag: "🇫🇷" },
+      { name: "Arabic", proficiency: "Native", flag: "🇲🇦" },
     ],
   },
 ];

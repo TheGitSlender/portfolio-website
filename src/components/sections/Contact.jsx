@@ -1,47 +1,15 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Linkedin, Mail, Phone, Gamepad2, ArrowRight, GithubIcon } from 'lucide-react';
+import { socialLinks, contactInfo } from '../../data/contact';
+import * as LucideIcons from 'lucide-react';
 
 const Contact = () => {
-  const contactMethods = [
-    {
-      id: 'linkedin',
-      name: 'LinkedIn',
-      value: 'Hany El Atlassi',
-      link: 'https://linkedin.com/in/el-atlassi-hany',
-      icon: Linkedin,
-      color: '#0077b5',
-      bg: 'bg-[#0077b5]/10',
-    },
-    {
-      id: 'email',
-      name: 'Email',
-      value: 'elatlassi.hany@gmail.com',
-      link: 'mailto:elatlassi.hany@gmail.com',
-      icon: Mail,
-      color: '#EA4335',
-      bg: 'bg-[#EA4335]/10',
-    },
-    {
-      id: 'github',
-      name: 'Github',
-      value: 'TheGitSlender',
-      link: 'https://github.com/TheGitSlender',
-      icon: GithubIcon,
-      color: '#5865F2',
-      bg: 'bg-[#5865F2]/10',
-    },
-    {
-      id: 'discord',
-      name: 'Discord',
-      value: 'TheGitSlender',
-      link: 'https://discord.com/users/.theslender',
-      icon: Gamepad2,
-      color: '#5865F2',
-      bg: 'bg-[#5865F2]/10',
-    }
-  ];
+  const contactMethods = socialLinks.map(link => ({
+    ...link,
+    icon: LucideIcons[link.icon] || LucideIcons.Mail,
+    bg: `bg-[#000000]/5`, // Default bg for simplicity or could be expanded
+  }));
 
   return (
     <section id="contact" className="py-24 bg-[var(--color-bg-primary)]">
@@ -74,8 +42,8 @@ const Contact = () => {
             <div className="grid sm:grid-cols-2 gap-4 w-full">
               {contactMethods.map((method, index) => (
                 <motion.a
-                  key={method.id}
-                  href={method.link || '#'}
+                  key={method.platform}
+                  href={method.url || '#'}
                   target={method.link ? "_blank" : "_self"}
                   rel="noopener noreferrer"
                   className="bg-white p-6 rounded-3xl border border-black/5 group hover:shadow-xl transition-all relative overflow-hidden"

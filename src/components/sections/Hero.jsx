@@ -8,6 +8,10 @@ import { personalInfo } from '../../data/personal';
 const Hero = () => {
   const { title, tagline } = personalInfo;
 
+  // Split title to handle the specific layout styling if needed
+  // Using the new info from the user's CV: "AI engineer-in-training passionate about intelligent systems..."
+  // But the component uses a bold multi-line design. I'll adapt it.
+
   return (
     <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
       <div className="container-main grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
@@ -32,24 +36,22 @@ const Hero = () => {
 
           {/* Heading */}
           <h1 className="text-6xl md:text-8xl lg:text-[110px] font-bold">
-            AI <br />
-            Engineer <br />
+            AI Specialist<br />
             <span className="text-[var(--color-text-secondary)]">&</span> <br />
             <span className="relative inline-block">
-              <span className="relative z-10">Hany wa3r </span>
+              <span className="relative z-10 ">Cloud Engineer</span>
               <span className="absolute bottom-1 md:bottom-2 left-0 w-full h-4 md:h-8 bg-[var(--color-accent-primary)] -rotate-1 rounded-sm opacity-100" />
-            </span> <br />
-            Specialist.
+            </span>
           </h1>
 
           {/* Tagline */}
           <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-lg leading-relaxed font-medium">
-            Engineering secure, intelligent systems at the intersection of Cloud Infrastructure and Deep Learning.
+            {tagline}
           </p>
 
           {/* Buttons */}
           <div className="flex flex-wrap items-center gap-4 pt-4">
-            <Button to="#projects" variant="primary" icon={ArrowRight}>
+            <Button href="#projects" variant="primary" icon={ArrowRight}>
               View Projects
             </Button>
             <Button variant="secondary" icon={Download}>

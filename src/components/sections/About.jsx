@@ -36,18 +36,12 @@ const About = () => {
 
             {/* Minimal Stats Row (Optional, simplified) */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-gray-100">
-              <div>
-                <span className="block text-4xl font-bold text-black mb-1">4+</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Years Exp</span>
-              </div>
-              <div>
-                <span className="block text-4xl font-bold text-black mb-1">12</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Projects</span>
-              </div>
-              <div>
-                <span className="block text-4xl font-bold text-black mb-1">100%</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Delivery</span>
-              </div>
+              {personalInfo.stats && personalInfo.stats.map((stat, index) => (
+                <div key={index}>
+                  <span className="block text-4xl font-bold text-black mb-1">{stat.value}</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-gray-400">{stat.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
