@@ -49,7 +49,7 @@ const Experience = () => {
                   initial={{ opacity: 0.3 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: false, amount: 0.5, margin: "-20% 0px -20% 0px" }}
-                  className="mb-4 lg:absolute lg:-left-24 lg:top-12 text-base font-black text-[#121212] whitespace-nowrap hidden lg:block uppercase tracking-tighter"
+                  className="mb-4 lg:absolute lg:-left-40 lg:top-12 text-base font-black text-[#121212] whitespace-nowrap hidden lg:block uppercase tracking-tighter"
                 >
                   {item.period.start} — {item.period.end}
                 </motion.div>

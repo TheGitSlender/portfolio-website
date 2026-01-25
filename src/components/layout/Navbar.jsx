@@ -33,7 +33,7 @@ const Navbar = () => {
         >
             <div className="container-main flex items-center justify-between">
                 <Link to="/" className="text-xl font-extrabold tracking-tighter uppercase text-[var(--color-text-primary)]">
-                    TheSlender
+                    Hany EL Atlassi 
                 </Link>
 
                 {/* Desktop Nav */}

@@ -29,7 +29,7 @@ export const socialLinks = [
     platform: "GitHub",
     url: "https://github.com/thegitslender",
     icon: "Github",
-    color: "#181717",
+    color: "#8B5CF6",
     username: "thegitslender",
   },
   {

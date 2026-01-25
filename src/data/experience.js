@@ -21,8 +21,7 @@ export const experiences = [
   {
     id: "scale-ai",
     role: "AI Trainer",
-    company: "Scale AI (Outlier.ai)",
-    companyUrl: "https://scale.com",
+    company: "Outlier.ai - Alignerr",
     location: "San Francisco, California (Remote)",
     period: {
       start: "Oct 2024",
@@ -67,7 +66,7 @@ export const experiences = [
     location: "Casablanca, Morocco",
     period: {
       start: "Sep 2023",
-      end: "Present",
+      end: "Jun 2025",
     },
     description: [
       "Lead Python and Machine Learning workshops for 200+ technology enthusiasts, fostering technical skill development",
@@ -75,24 +74,6 @@ export const experiences = [
       "Developed proof-of-concept for AI-powered autonomous drone system for industrial inspection applications",
     ],
     skills: ["Leadership", "Python", "Machine Learning", "Strategic Planning"],
-    type: "leadership",
-  },
-  {
-    id: "ensam-casablanca",
-    role: "Cybersecurity & Cloud Engineering Student",
-    company: "ENSAM (École Nationale Supérieure des Arts & Métiers)",
-    location: "Casablanca, Morocco",
-    period: {
-      start: "Sep 2022",
-      end: "Jun 2027",
-    },
-    current: true,
-    description: [
-      "Specializing in Cybersecurity and Cloud Engineering with a focus on intelligent systems and distributed architectures.",
-      "Participating in various technical projects and research initiatives in AI and security.",
-    ],
-    skills: ["Cybersecurity", "Cloud Engineering", "Distributed Systems", "AI"],
-    type: "education",
   },
 ];
 

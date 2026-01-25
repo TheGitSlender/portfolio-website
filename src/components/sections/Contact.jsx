@@ -40,36 +40,40 @@ const Contact = () => {
 
             {/* Right: Contact Cards Grid */}
             <div className="grid sm:grid-cols-2 gap-4 w-full">
-              {contactMethods.map((method, index) => (
-                <motion.a
-                  key={method.platform}
-                  href={method.url || '#'}
-                  target={method.link ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                  className="bg-white p-6 rounded-3xl border border-black/5 group hover:shadow-xl transition-all relative overflow-hidden"
-                  whileHover={{ y: -5 }}
-                >
-                  {/* Progressive Dot Indicator */}
-                  <div className="absolute top-6 right-6 flex gap-1">
-                    {[0, 1, 2, 3].map((dotIndex) => (
-                      <div
-                        key={dotIndex}
-                        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${dotIndex <= index
-                          ? 'bg-[var(--color-accent-primary)]'
-                          : 'bg-[#e5e5e5]'
-                          }`}
-                      />
-                    ))}
-                  </div>
+              {contactMethods.map((method, index) => {
+                const isDark = ['LinkedIn', 'GitHub', 'Email'].includes(method.platform);
 
-                  <div className={`w-12 h-12 rounded-xl ${method.bg} flex items-center justify-center mb-6`} style={{ color: method.color }}>
-                    <method.icon size={24} />
-                  </div>
+                return (
+                  <motion.a
+                    key={method.platform}
+                    href={method.url || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${isDark ? 'bg-black text-white border-white/10' : 'bg-white text-[#121212] border-black/5'} p-6 rounded-3xl border group hover:shadow-xl transition-all relative overflow-hidden`}
+                    whileHover={{ y: -5 }}
+                  >
+                    {/* Progressive Dot Indicator */}
+                    <div className="absolute top-6 right-6 flex gap-1">
+                      {[0, 1, 2, 3].map((dotIndex) => (
+                        <div
+                          key={dotIndex}
+                          className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${dotIndex <= index
+                            ? 'bg-[var(--color-accent-primary)]'
+                            : (isDark ? 'bg-white/10' : 'bg-[#e5e5e5]')
+                            }`}
+                        />
+                      ))}
+                    </div>
 
-                  <h4 className="text-[#121212] font-bold text-lg mb-1">{method.name}</h4>
-                  <p className="text-gray-500 text-sm font-medium truncate">{method.value}</p>
-                </motion.a>
-              ))}
+                    <div className={`w-12 h-12 rounded-xl ${isDark ? 'bg-white/10' : `${method.bg} text-[var(--color-accent-primary)]`} flex items-center justify-center mb-6`}>
+                      <method.icon size={24} color={isDark ? method.color : 'currentColor'} />
+                    </div>
+
+                    <h4 className={`${isDark ? '!text-white' : 'text-[#121212]'} font-bold text-lg mb-1`}>{method.platform}</h4>
+                    <p className={`${isDark ? '!text-white/70' : 'text-gray-500'} text-sm font-medium truncate`}>{method.username || method.value}</p>
+                  </motion.a>
+                );
+              })}
             </div>
 
           </div>
