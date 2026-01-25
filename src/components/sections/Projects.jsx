@@ -15,7 +15,7 @@ const Projects = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <SectionHeader
             title="Selected Work."
-            subtitle="Projects"
+            subtitle="// Projects //"
             className="mb-0"
           />
           <p className="text-[var(--color-text-secondary)] max-w-xs text-right hidden md:block">

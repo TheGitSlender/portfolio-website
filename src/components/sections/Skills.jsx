@@ -11,7 +11,7 @@ const Skills = () => {
       <div className="container-main">
         <SectionHeader
           title="What I Do."
-          subtitle="Expertise"
+          subtitle="// Expertise //"
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

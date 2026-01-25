@@ -6,10 +6,12 @@ import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 
 const navItems = [
-    { label: 'Work', href: '#projects' },
     { label: 'About', href: '#experience' },
     { label: 'Stack', href: '#skills' },
+    { label: 'Certifications', href: '#certifications' },
+    { label: 'Work', href: '#projects' },
 ];
+
 
 const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -27,13 +29,13 @@ const Navbar = () => {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-[var(--color-bg-primary)]/80 backdrop-blur-md py-4 border-b border-[var(--color-border-subtle)]'
-                    : 'bg-transparent py-6'
+                ? 'bg-[var(--color-bg-primary)]/80 backdrop-blur-md py-4 border-b border-[var(--color-border-subtle)]'
+                : 'bg-transparent py-6'
                 }`}
         >
             <div className="container-main flex items-center justify-between">
                 <Link to="/" className="text-xl font-extrabold tracking-tighter uppercase text-[var(--color-text-primary)]">
-                    Hany EL Atlassi 
+                    Hany EL Atlassi
                 </Link>
 
                 {/* Desktop Nav */}
@@ -48,12 +50,13 @@ const Navbar = () => {
                         </a>
                     ))}
                     <Button
-                        to="#contact"
+                        href="#contact"
                         variant="primary"
                         className="text-sm px-6 py-2.5 rounded-full"
                     >
                         Get in touch
                     </Button>
+
                 </nav>
 
                 {/* Mobile Menu Toggle */}
@@ -85,9 +88,10 @@ const Navbar = () => {
                                     {item.label}
                                 </a>
                             ))}
-                            <Button to="#contact" variant="primary" className="w-full justify-center">
+                            <Button href="#contact" variant="primary" className="w-full justify-center">
                                 Get in touch
                             </Button>
+
                         </div>
                     </motion.div>
                 )}

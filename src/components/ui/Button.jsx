@@ -33,9 +33,9 @@ const Button = ({
     ghost: "bg-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-glass-bg)]"
   };
 
-  const Component = to ? Link : motion.button;
-  const linkProps = to ? { to } : {};
-  const motionProps = to ? {} : { whileHover: { scale: 1.02 }, whileTap: { scale: 0.98 } };
+  const Component = to ? Link : (props.href ? 'a' : motion.button);
+  const linkProps = to ? { to } : (props.href ? { href: props.href } : {});
+  const motionProps = (to || props.href) ? {} : { whileHover: { scale: 1.02 }, whileTap: { scale: 0.98 } };
 
   return (
     <Component
@@ -44,13 +44,14 @@ const Button = ({
       {...motionProps}
       {...props}
     >
+
       <span>{children}</span>
 
       {/* Icon Circle Logic to match reference */}
       {Icon && (
         <span className={`flex items-center justify-center w-8 h-8 rounded-full ${variant === 'primary' ? 'bg-[#111] text-white' :
-            variant === 'secondary' ? 'bg-[var(--color-accent-primary)] text-black' :
-              'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]'
+          variant === 'secondary' ? 'bg-[var(--color-accent-primary)] text-black' :
+            'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]'
           }`}>
           <Icon className="w-4 h-4" />
         </span>

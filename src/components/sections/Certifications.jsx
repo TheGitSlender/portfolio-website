@@ -1,45 +1,136 @@
-/**
- * Certifications Section
- * Student.AI Light Theme
- */
-
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
-import { certifications } from '../../data/certifications';
+import { Cloud, BarChart, Shield, Cpu, Brain, ExternalLink } from 'lucide-react';
+import { certifications, upcomingGoals } from '../../data/certifications';
+
+const MasteryLevel = ({ level = 5 }) => {
+  return (
+    <div className="flex flex-col items-end gap-1">
+      <div className="flex gap-1">
+        {[1, 2, 3, 4, 5].map((dot) => (
+          <div
+            key={dot}
+            className={`h-2.5 w-2.5 rounded-full ${dot <= level ? 'bg-[var(--color-accent-primary)]' : 'bg-gray-200'
+              }`}
+          />
+        ))}
+      </div>
+      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Mastery Level</span>
+    </div>
+  );
+};
+
+const ZigZagLine = ({ side = 'left' }) => {
+  return (
+    <div className={`absolute top-0 bottom-0 w-4 flex flex-col justify-between py-12 ${side === 'left' ? '-left-8' : '-right-8'}`}>
+      {[...Array(20)].map((_, i) => (
+        <div key={i} className="h-4 w-[2px] bg-[var(--color-accent-primary)] rotate-45 mb-4" />
+      ))}
+    </div>
+  );
+};
+
 
 const Certifications = () => {
+  const IconMap = { Cloud, BarChart, Shield, Cpu, Brain };
+
   return (
-    <section id="certifications" className="py-24 bg-white">
-      <div className="container-main">
-        {/* Header (Optional if needed, but keeping it minimal) */}
-        <div className="mb-16">
-          <h2 className="text-4xl font-black tracking-tighter mb-4">Credentials.</h2>
-          <div className="h-1 w-12 bg-[var(--color-accent-primary)]" />
+    <section id="certifications" className="py-24 bg-white relative overflow-hidden">
+      <div className="container-main relative">
+        {/* Header */}
+        <div className="mb-24">
+          <div className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg mb-8">
+            <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">// GLOBAL ACCOLADES //</span>
+          </div>
+          <h2 className="text-7xl md:text-9xl font-black tracking-tighter leading-[0.85] mb-4">
+            Certifications <br />
+            <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
+          </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {certifications.map((cert) => (
-            <div key={cert.id} className="group relative p-8 rounded-[2rem] border border-gray-200 hover:border-black transition-colors bg-white">
-              <div className="flex justify-between items-start mb-6">
-                <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded ${cert.type === 'award' ? 'bg-[var(--color-accent-primary)]/10 text-[var(--color-accent-primary)]' : 'bg-gray-100 text-gray-600'}`}>
-                  {cert.type}
-                </span>
-                {cert.status === 'in-progress' && (
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent-primary)]">In Progress</span>
-                )}
+        {/* Stacked Cards Container */}
+        <div className="relative max-w-5xl mx-auto px-4 md:px-16">
+          {/* Vertical Stripped Lines */}
+          <ZigZagLine side="left" />
+          <ZigZagLine side="right" />
+
+          <div className="flex flex-col gap-8 md:gap-12">
+            {certifications.map((cert, index) => {
+              const Icon = IconMap[cert.icon] || Cloud;
+              return (
+                <motion.div
+                  key={cert.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{
+                    scale: 1.02,
+                    zIndex: 50,
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.1)"
+                  }}
+                  className={`relative bg-[#F8F9FA] rounded-[2.5rem] p-10 md:p-12 border border-gray-100 flex flex-col md:flex-row items-center gap-8 transition-all duration-300 cursor-pointer w-full ${index % 2 === 0 ? 'md:-translate-x-8' : 'md:translate-x-8'
+                    }`}
+                >
+                  {/* Icon Circle */}
+                  <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md border border-gray-50 shrink-0">
+                    <Icon className="w-12 h-12 text-[var(--color-accent-primary)]" strokeWidth={1.2} />
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 text-center md:text-left">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-accent-primary)] mb-2 block">
+                      {cert.title}
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{cert.subtitle}</h3>
+                    <p className="text-gray-500 text-base leading-relaxed max-w-2xl">
+                      {cert.description}
+                    </p>
+                  </div>
+
+                  {/* Mastery */}
+                  <div className="shrink-0">
+                    <MasteryLevel level={cert.mastery} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Upcoming Goals */}
+        <div className="mt-32 max-w-5xl mx-auto px-4 md:px-16">
+          <div className="bg-[#F8F9FA] rounded-[2.5rem] p-12 border border-gray-100">
+            <h3 className="text-3xl font-bold mb-8 italic tracking-tight font-sans">Upcoming Goals</h3>
+            {upcomingGoals.map((goal, i) => (
+              <div key={i} className="space-y-6">
+                <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
+                  {goal.description.split(/(\*\*.*?\*\*)/).map((part, index) =>
+                    part.startsWith('**') && part.endsWith('**') ? (
+                      <strong key={index} className="text-black font-bold">{part.slice(2, -2)}</strong>
+                    ) : (
+                      part
+                    )
+                  )}
+                </p>
+
+
+                <div className="relative pt-4">
+                  <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${goal.progress}%` }}
+                      transition={{ duration: 1.5, ease: "easeOut" }}
+                      className="h-full bg-[var(--color-accent-primary)]"
+                    />
+                  </div>
+                  <div className="flex justify-between mt-3">
+                    <span className="text-[11px] font-black text-gray-400 uppercase tracking-widest">Training Progress</span>
+                    <span className="text-[11px] font-black text-[var(--color-accent-primary)] uppercase tracking-widest">{goal.progress}% Complete</span>
+                  </div>
+                </div>
               </div>
-
-              <h3 className="text-xl font-bold mb-2 group-hover:text-[var(--color-accent-primary)] transition-colors">{cert.title}</h3>
-              <p className="text-sm text-gray-500 font-medium mb-4">{cert.issuer} • {cert.date}</p>
-              <p className="text-sm text-gray-500 mb-6">{cert.description}</p>
-
-              {cert.credentialUrl && (
-                <a href={cert.credentialUrl} target="_blank" className="text-xs font-bold uppercase tracking-widest flex items-center gap-1 hover:gap-2 transition-all">
-                  View <ExternalLink size={12} />
-                </a>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
