@@ -41,7 +41,7 @@ const Certifications = () => {
           <div className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg mb-8">
             <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">// GLOBAL ACCOLADES //</span>
           </div>
-          <h2 className="text-7xl md:text-9xl font-black tracking-tighter leading-[0.85] mb-4">
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] mb-4">
             Certifications <br />
             <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
           </h2>
@@ -81,8 +81,8 @@ const Certifications = () => {
                     <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-accent-primary)] mb-2 block">
                       {cert.title}
                     </span>
-                    <h3 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">{cert.subtitle}</h3>
-                    <p className="text-gray-500 text-base leading-relaxed max-w-2xl">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">{cert.subtitle}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
                       {cert.description}
                     </p>
                   </div>
@@ -100,10 +100,10 @@ const Certifications = () => {
         {/* Upcoming Goals */}
         <div className="mt-32 max-w-5xl mx-auto px-4 md:px-16">
           <div className="bg-[#F8F9FA] rounded-[2.5rem] p-12 border border-gray-100">
-            <h3 className="text-3xl font-bold mb-8 italic tracking-tight font-sans">Upcoming Goals</h3>
+            <h3 className="text-2xl font-bold mb-8 italic tracking-tight font-sans">Upcoming Goals</h3>
             {upcomingGoals.map((goal, i) => (
               <div key={i} className="space-y-6">
-                <p className="text-gray-600 text-lg leading-relaxed max-w-3xl">
+                <p className="text-gray-600 text-base leading-relaxed max-w-3xl">
                   {goal.description.split(/(\*\*.*?\*\*)/).map((part, index) =>
                     part.startsWith('**') && part.endsWith('**') ? (
                       <strong key={index} className="text-black font-bold">{part.slice(2, -2)}</strong>

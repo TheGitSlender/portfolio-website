@@ -8,8 +8,8 @@ import Button from '../ui/Button';
 const navItems = [
     { label: 'About', href: '#experience' },
     { label: 'Stack', href: '#skills' },
-    { label: 'Certifications', href: '#certifications' },
     { label: 'Work', href: '#projects' },
+    { label: 'Certifications', href: '#certifications' },
 ];
 
 

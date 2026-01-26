@@ -144,21 +144,21 @@ h6 {
 /* Layout Containers */
 .container-main {
   width: 100%;
-  max-width: 1600px;
-  /* Wider for Bento feel */
+  max-width: 1400px;
+  /* Centered and focused layout */
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
 @media (min-width: 768px) {
   .container-main {
-    padding: 0 2rem;
+    padding: 0 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .container-main {
-    padding: 0 4rem;
+    padding: 0 5rem;
   }
 }
 

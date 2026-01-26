@@ -16,7 +16,7 @@ const Experience = () => {
             <div className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg">
               <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">// CAREER JOURNEY //</span>
             </div>
-            <h2 className="text-6xl md:text-8xl font-black italic tracking-tighter leading-[0.85] font-serif">
+            <h2 className="text-5xl md:text-7xl font-black italic tracking-tighter leading-[0.85] font-serif">
               Experience & <br /> History
             </h2>
           </div>
@@ -74,15 +74,15 @@ const Experience = () => {
                     </div>
 
                     <div>
-                      <h3 className="text-4xl md:text-5xl font-bold font-serif leading-tight mb-2">
+                      <h3 className="text-3xl md:text-4xl font-bold font-serif leading-tight mb-2">
                         {item.role || item.title}
                       </h3>
-                      <p className="text-lg md:text-xl text-gray-500 font-medium">
+                      <p className="text-base md:text-lg text-gray-500 font-medium">
                         {item.company}
                       </p>
                     </div>
 
-                    <div className="text-gray-500 text-lg leading-relaxed max-w-2xl font-medium space-y-2">
+                    <div className="text-gray-500 text-base leading-relaxed max-w-2xl font-medium space-y-2">
                       {Array.isArray(item.description) ? (
                         item.description.map((point, i) => (
                           <p key={i}>• {point}</p>

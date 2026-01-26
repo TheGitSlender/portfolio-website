@@ -35,7 +35,7 @@ const Hero = () => {
           </div>
 
           {/* Heading */}
-          <h1 className="text-6xl md:text-8xl lg:text-[110px] font-bold">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold">
             AI Specialist<br />
             <span className="text-[var(--color-text-secondary)]">&</span> <br />
             <span className="relative inline-block">
@@ -45,7 +45,7 @@ const Hero = () => {
           </h1>
 
           {/* Tagline */}
-          <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-lg leading-relaxed font-medium">
+          <p className="text-base md:text-lg text-[var(--color-text-secondary)] max-w-lg leading-relaxed font-medium">
             {tagline}
           </p>
 
@@ -61,7 +61,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Right Column: Complex Bento Visuals */}
-        <div className="relative h-[600px] hidden lg:block">
+        <div className="relative h-[560px] hidden lg:block">
           <div className="grid grid-cols-2 gap-4 h-full">
 
             {/* Top Row */}
@@ -75,7 +75,7 @@ const Hero = () => {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 opacity-10">
                   <Terminal className="w-full h-full text-black" />
                 </div>
-                <h3 className="text-4xl font-black text-[var(--color-accent-primary)] leading-none uppercase tracking-tighter">
+                <h3 className="text-3xl font-black text-[var(--color-accent-primary)] leading-none uppercase tracking-tighter">
                   AI <br />
                   Research
                 </h3>

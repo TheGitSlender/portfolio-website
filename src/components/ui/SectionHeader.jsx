@@ -16,7 +16,8 @@ const SectionHeader = ({ title, subtitle, centered = false, className = '' }) =>
                 </motion.span>
             )}
             <motion.h2
-                className="text-4xl md:text-5xl font-bold tracking-tight"
+                className="text-3xl md:text-4xl font-bold tracking-tight"
+
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
