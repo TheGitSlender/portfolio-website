@@ -327,3 +327,136 @@ export const createStaggerContainer = (stagger = 0.1, delay = 0) => ({
     },
   },
 });
+
+// ============================================
+// FLOATING ANIMATIONS
+// ============================================
+
+/**
+ * Gentle floating animation for decorative elements
+ */
+export const float = {
+  animate: {
+    y: [-8, 8, -8],
+    transition: {
+      duration: 6,
+      ease: "easeInOut",
+      repeat: Infinity,
+    },
+  },
+};
+
+/**
+ * Slow rotation for rings/circles
+ */
+export const slowRotate = {
+  animate: {
+    rotate: 360,
+    transition: {
+      duration: 30,
+      ease: "linear",
+      repeat: Infinity,
+    },
+  },
+};
+
+/**
+ * Pulse scale animation
+ */
+export const pulse = {
+  animate: {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 3,
+      ease: "easeInOut",
+      repeat: Infinity,
+    },
+  },
+};
+
+// ============================================
+// TEXT REVEAL ANIMATIONS
+// ============================================
+
+/**
+ * Character-by-character text reveal container
+ */
+export const textRevealContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+/**
+ * Single character reveal
+ */
+export const textRevealChar = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1],
+    },
+  },
+};
+
+/**
+ * Word reveal (slide up with mask)
+ */
+export const wordReveal = {
+  hidden: { y: "100%" },
+  visible: {
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.33, 1, 0.68, 1],
+    },
+  },
+};
+
+/**
+ * Line reveal container
+ */
+export const lineRevealContainer = {
+  hidden: { opacity: 1 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+// ============================================
+// 3D TILT EFFECT
+// ============================================
+
+/**
+ * Get tilt transform based on mouse position
+ * @param {number} x - Mouse X relative to element center (-1 to 1)
+ * @param {number} y - Mouse Y relative to element center (-1 to 1)
+ * @param {number} intensity - Tilt intensity in degrees
+ */
+export const getTiltTransform = (x, y, intensity = 10) => ({
+  rotateX: y * -intensity,
+  rotateY: x * intensity,
+  transformPerspective: 1000,
+});
+
+// ============================================
+// SPRING CONFIGS
+// ============================================
+
+export const springConfigs = {
+  gentle: { type: "spring", stiffness: 120, damping: 14 },
+  bouncy: { type: "spring", stiffness: 300, damping: 10 },
+  stiff: { type: "spring", stiffness: 400, damping: 30 },
+  slow: { type: "spring", stiffness: 80, damping: 20 },
+};

@@ -22,15 +22,38 @@ const Certifications = () => {
     <section id="certifications" className="py-24 bg-white relative overflow-hidden">
       <div className="container-main relative">
         {/* Header */}
-        <div className="mb-24">
-          <div className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg mb-8">
+        <motion.div
+          className="mb-24"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+          }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg mb-8"
+            variants={{
+              hidden: { opacity: 0, y: 20, scale: 0.9 },
+              visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } }
+            }}
+          >
             <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">// GLOBAL ACCOLADES //</span>
+          </motion.div>
+          <div className="overflow-hidden">
+            <motion.h2
+              className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] mb-4"
+              variants={{
+                hidden: { y: "100%" },
+                visible: { y: 0, transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } }
+              }}
+            >
+              Certifications <br />
+              <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
+            </motion.h2>
           </div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] mb-4">
-            Certifications <br />
-            <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
-          </h2>
-        </div>
+        </motion.div>
 
         {/* Stacked Cards Container */}
         <div className="relative max-w-5xl mx-auto px-4 md:px-16">

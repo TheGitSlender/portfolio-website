@@ -16,30 +16,74 @@ const Contact = () => {
       <div className="container-main">
 
         {/* Container matching the Framer reference style */}
-        <div className="bg-[var(--color-accent-primary)] rounded-[40px] p-8 md:p-12 lg:p-16 overflow-hidden relative">
+        <motion.div
+          className="bg-[var(--color-accent-primary)] rounded-[40px] p-8 md:p-12 lg:p-16 overflow-hidden relative"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
 
           <div className="grid lg:grid-cols-2 gap-12 items-start">
 
             {/* Left: Heading & Intro */}
-            <div className="flex flex-col gap-8">
+            <motion.div
+              className="flex flex-col gap-8"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
+              }}
+            >
               {/* Contact Badge (like the snippet) */}
-              <div className="inline-flex items-center gap-3 bg-[#212121] rounded-full px-5 py-2 w-fit border border-white/5">
+              <motion.div
+                className="inline-flex items-center gap-3 bg-[#212121] rounded-full px-5 py-2 w-fit border border-white/5"
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  visible: { opacity: 1, scale: 1 }
+                }}
+              >
                 <span className="text-[var(--color-accent-primary)] font-bold">//</span>
                 <span className="text-white font-medium">Contact</span>
                 <span className="text-[var(--color-accent-primary)] font-bold">//</span>
+              </motion.div>
+
+              <div className="overflow-hidden">
+                <motion.h2
+                  className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-tight"
+                  variants={{
+                    hidden: { y: "100%" },
+                    visible: { y: 0, transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } }
+                  }}
+                >
+                  Let's talk.
+                </motion.h2>
               </div>
 
-              <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter leading-tight">
-                Let's talk.
-              </h2>
-
-              <p className="text-white/80 text-lg max-w-md">
+              <motion.p
+                className="text-white/80 text-lg max-w-md"
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 }
+                }}
+              >
                 Got questions or ready to start your next project? Reach out and let's bring your ideas to life.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             {/* Right: Contact Cards Grid */}
-            <div className="grid sm:grid-cols-2 gap-4 w-full">
+            <motion.div
+              className="grid sm:grid-cols-2 gap-4 w-full"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.4 } }
+              }}
+            >
               {contactMethods.map((method, index) => {
                 const isDark = ['LinkedIn', 'GitHub', 'Email'].includes(method.platform);
 
@@ -50,7 +94,11 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`${isDark ? 'bg-black text-white border-white/10' : 'bg-white text-[#121212] border-black/5'} p-6 rounded-3xl border group hover:shadow-xl transition-all relative overflow-hidden`}
-                    whileHover={{ y: -5 }}
+                    variants={{
+                      hidden: { opacity: 0, y: 30, scale: 0.95 },
+                      visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } }
+                    }}
+                    whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.2 } }}
                   >
                     {/* Progressive Dot Indicator */}
                     <div className="absolute top-6 right-6 flex gap-1">
@@ -74,11 +122,11 @@ const Contact = () => {
                   </motion.a>
                 );
               })}
-            </div>
+            </motion.div>
 
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Card from '../ui/Card';
+import TiltCard from '../ui/TiltCard';
 import SectionHeader from '../ui/SectionHeader';
 import { getFeaturedProjects } from '../../data/projects';
 import { Link } from 'react-router-dom';
@@ -57,13 +58,14 @@ const Projects = () => {
             }}
           >
             {duplicatedProjects.map((project, index) => (
-              <div
+              <TiltCard
                 key={`${project.id}-${index}`}
                 className="w-[260px] md:w-[300px] lg:w-[340px] shrink-0 flex flex-col h-full"
+                intensity={6}
               >
                 <Link to={`/project/${project.id}`} className="block group/card h-full">
                   <Card
-                    className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[24px] flex flex-col"
+                    className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[24px] flex flex-col group-hover/card:shadow-xl"
                     hover={false}
                   >
                     <div className="aspect-[16/9] bg-[#121212] relative overflow-hidden">
@@ -118,7 +120,7 @@ const Projects = () => {
                     </div>
                   </Card>
                 </Link>
-              </div>
+              </TiltCard>
             ))}
           </motion.div>
         </div>

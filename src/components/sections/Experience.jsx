@@ -14,25 +14,62 @@ const Experience = () => {
       <div className="container-main">
 
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-[var(--space-lg)] gap-8">
+        <motion.div
+          className="flex flex-col lg:flex-row lg:items-end justify-between mb-[var(--space-lg)] gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+          }}
+        >
           <div className="flex flex-col gap-6">
-            <div className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg">
+            <motion.div
+              className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg"
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.9 },
+                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } }
+              }}
+            >
               <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">// CAREER JOURNEY //</span>
+            </motion.div>
+            <div className="overflow-hidden">
+              <motion.h2
+                className="text-5xl md:text-7xl font-black italic tracking-tighter leading-[0.85] font-serif"
+                variants={{
+                  hidden: { y: "100%" },
+                  visible: { y: 0, transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } }
+                }}
+              >
+                Experience & <br /> History
+              </motion.h2>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black italic tracking-tighter leading-[0.85] font-serif">
-              Experience & <br /> History
-            </h2>
           </div>
 
-          <p className="text-gray-500 font-medium max-w-xs text-right hidden lg:block leading-relaxed">
+          <motion.p
+            className="text-gray-500 font-medium max-w-xs text-right hidden lg:block leading-relaxed"
+            variants={{
+              hidden: { opacity: 0, x: 20 },
+              visible: { opacity: 1, x: 0, transition: { duration: 0.6 } }
+            }}
+          >
             A chronicle of engineering impact across specialized domains in tech.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Timeline Content */}
         <div className="relative">
-          {/* Main vertical line */}
+          {/* Main vertical line - background */}
           <div className="absolute left-4 md:left-[60px] top-0 bottom-0 w-[2px] md:w-[4px] bg-gray-200/50" />
+          {/* Animated progress line */}
+          <motion.div
+            className="absolute left-4 md:left-[60px] top-0 w-[2px] md:w-[4px] bg-[var(--color-accent-primary)]"
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true, margin: "-200px" }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
 
           <div className="flex flex-col gap-[var(--space-md)] md:gap-[var(--space-lg)] relative z-10">
             {experiences.map((item, index) => (
@@ -61,25 +98,39 @@ const Experience = () => {
 
                 {/* Card */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: index * 0.1 }}
-                  className="bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col-reverse md:flex-row gap-8 items-center hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.15)] transition-shadow duration-500 max-w-5xl"
+                  initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+                  whileHover={{ y: -5, transition: { duration: 0.3 } }}
+                  className="bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col-reverse md:flex-row gap-8 items-center hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.15)] transition-shadow duration-500 max-w-5xl cursor-default"
                 >
                   {/* Info */}
                   <div className="flex-1 flex flex-col items-start gap-6 w-full">
                     {/* Tags */}
-                    <div className="flex flex-wrap items-center gap-2">
+                    <motion.div
+                      className="flex flex-wrap items-center gap-2"
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={{
+                        hidden: { opacity: 0 },
+                        visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.3 } }
+                      }}
+                    >
                       {item.skills && item.skills.map((skill) => (
-                        <span
+                        <motion.span
                           key={skill}
-                          className="text-[10px] px-3 py-1 bg-gray-100 rounded-full font-black tracking-widest text-gray-500 uppercase transition-transform hover:scale-105"
+                          className="text-[10px] px-3 py-1 bg-gray-100 rounded-full font-black tracking-widest text-gray-500 uppercase transition-transform hover:scale-105 hover:bg-[var(--color-accent-primary)]/10"
+                          variants={{
+                            hidden: { opacity: 0, scale: 0.8 },
+                            visible: { opacity: 1, scale: 1 }
+                          }}
                         >
                           {skill}
-                        </span>
+                        </motion.span>
                       ))}
-                    </div>
+                    </motion.div>
 
                     <div>
                       <h3 className="text-3xl md:text-4xl font-bold font-serif leading-tight mb-2">
