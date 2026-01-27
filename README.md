@@ -1,10 +1,10 @@
-# Hany El Atlassi - Portfolio
+# Portfolio Website
 
 Personal portfolio website showcasing my work as an AI Engineer and Cybersecurity & Cloud Engineering student at ENSAM Casablanca.
 
 ## About Me
 
-AI Engineer with experience in computer vision, deep learning, and 3D point cloud segmentation. President of the AI Club at ENSAM, leading a community of 200+ members. Active in cybersecurity competitions with a top 3% worldwide CTF ranking.
+Currently studying Cybersecurity & Cloud Engineering, I'm extremely devoted to Artificial Intelligence, and the field of MLOps. With experience in computer vision, deep learning, and 3D point cloud segmentation, I'm also President of the AI Club at ENSAM, leading a community of 200+ members. Active in cybersecurity competitions with a top 3% worldwide CTF ranking.
 
 ## Tech Stack
 
