@@ -33,7 +33,7 @@ const Experience = () => {
 
           <div className="flex flex-col gap-[var(--space-md)] md:gap-[var(--space-lg)] relative z-10">
             {experiences.map((item, index) => (
-              <div key={item.id} className="relative pl-10 md:pl-48 group">
+              <div key={item.id} className="relative pl-10 md:pl-40 lg:pl-56 group">
 
                 {/* Timeline Dot */}
                 <motion.div
@@ -41,17 +41,19 @@ const Experience = () => {
                   whileInView={{ backgroundColor: "#ff3700", scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="absolute left-[9px] md:left-[51px] top-12 w-4 md:w-6 h-4 md:h-6 rounded-full shadow-xl z-20 border-2 md:border-4 border-[var(--color-bg-primary)]"
+                  className="absolute left-[9px] md:left-[51px] top-12 md:top-8 w-4 md:w-6 h-4 md:h-6 rounded-full shadow-xl z-20 border-2 md:border-4 border-[var(--color-bg-primary)]"
                 />
 
-                {/* Year Label */}
+                {/* Year Label - Positioned between timeline and card */}
                 <motion.div
                   initial={{ opacity: 0.3 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  className="mb-4 lg:absolute lg:-left-40 lg:top-12 text-base font-black text-[#121212] whitespace-nowrap hidden lg:block uppercase tracking-tighter"
+                  className="mb-4 md:absolute md:left-20 lg:left-26 md:top-8 lg:top-10 text-xs md:text-sm lg:text-base font-black text-[#121212] uppercase tracking-tighter flex flex-col items-center gap-2"
                 >
-                  {item.period.start} — {item.period.end}
+                  <span>{item.period.end}</span>
+                  <span className="text-[var(--color-accent-primary)]">↑</span>
+                  <span>{item.period.start}</span>
                 </motion.div>
 
                 {/* Card */}
@@ -60,7 +62,7 @@ const Experience = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: index * 0.1 }}
-                  className="bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col-reverse md:flex-row gap-8 items-center hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.15)] transition-shadow duration-500"
+                  className="bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col-reverse md:flex-row gap-8 items-center hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.15)] transition-shadow duration-500 max-w-5xl"
                 >
                   {/* Info */}
                   <div className="flex-1 flex flex-col items-start gap-6 w-full">

@@ -7,9 +7,9 @@ const ProfileCard = () => {
   return (
     <div className="relative w-full aspect-square max-w-[480px] flex items-center justify-center">
       {/* Concentric Rings (Subtle) */}
-      <div className="absolute inset-0 border border-gray-100 rounded-full scale-[1.3] opacity-40" />
-      <div className="absolute inset-0 border border-gray-100 rounded-full scale-[1.1] opacity-70" />
-      <div className="absolute inset-0 border border-gray-100 rounded-full scale-[0.9] opacity-90" />
+      <div className="absolute inset-0 border border-gray-300 rounded-full scale-[1.3] opacity-40" />
+      <div className="absolute inset-0 border border-gray-300 rounded-full scale-[1.1] opacity-70" />
+      <div className="absolute inset-0 border border-gray-300 rounded-full scale-[0.9] opacity-90" />
 
       {/* Profile Image - High quality placeholder */}
       <div className="relative w-4/5 h-4/5 rounded-full bg-white overflow-hidden border border-gray-100 z-10 shadow-xl">
