@@ -18,7 +18,7 @@ const Button = ({
   magnetic = true,
   ...props
 }) => {
-  const { ref, x, y, handleMouseMove, handleMouseLeave } = useMagnetic(0.4);
+  const { ref, x, y, handleMouseMove, handleMouseLeave } = useMagnetic(0.15);
 
   // Base styles
   const baseStyles = "inline-flex items-center justify-between gap-4 px-8 py-4 rounded-[50px] font-bold text-lg transition-shadow duration-300 active:scale-95";
