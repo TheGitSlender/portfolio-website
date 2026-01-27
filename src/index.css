@@ -73,6 +73,26 @@
   --radius-2xl: 2rem;
   --radius-3xl: 2.5rem;
 
+  /* Fluid Typography - even more conservative */
+  --text-xs: clamp(0.65rem, 0.6rem + 0.1vw, 0.75rem);
+  --text-sm: clamp(0.75rem, 0.7rem + 0.1vw, 0.85rem);
+  --text-base: clamp(0.85rem, 0.8rem + 0.15vw, 0.95rem);
+  --text-lg: clamp(1rem, 0.95rem + 0.2vw, 1.1rem);
+  --text-xl: clamp(1.15rem, 1.1rem + 0.3vw, 1.25rem);
+  --text-2xl: clamp(1.35rem, 1.25rem + 0.5vw, 1.6rem);
+  --text-3xl: clamp(1.6rem, 1.5rem + 0.8vw, 2.1rem);
+  --text-4xl: clamp(2rem, 1.8rem + 1vw, 2.8rem);
+  --text-5xl: clamp(2.5rem, 2.2rem + 1.5vw, 3.5rem);
+  --text-6xl: clamp(3rem, 2.8rem + 2vw, 4.5rem);
+  --text-7xl: clamp(3.5rem, 3.2rem + 3vw, 6rem);
+
+  /* Fluid Spacing - significantly more compact */
+  --space-xs: clamp(0.3rem, 0.25rem + 0.15vw, 0.5rem);
+  --space-sm: clamp(0.5rem, 0.45rem + 0.3vw, 0.8rem);
+  --space-md: clamp(1rem, 0.9rem + 0.8vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+  --space-xl: clamp(2.5rem, 2rem + 3vw, 5rem);
+
   /* Shadows */
   --shadow-strong: 0px 8px 16px rgba(0, 0, 0, 0.15);
   --shadow-glow: 0 0 20px rgba(255, 71, 38, 0.4);
@@ -81,6 +101,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 /* ============================================
@@ -100,6 +121,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   overflow-x: hidden;
+  font-size: var(--text-base);
 }
 
 /* Use Display font for Headings */
@@ -144,22 +166,10 @@ h6 {
 /* Layout Containers */
 .container-main {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1440px;
   /* Centered and focused layout */
   margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .container-main {
-    padding: 0 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-main {
-    padding: 0 5rem;
-  }
+  padding: 0 var(--space-md);
 }
 
 /* Typography Overrides */
@@ -172,12 +182,16 @@ h6 {
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 h1 {
   letter-spacing: -0.05em;
-  line-height: 0.9;
+  line-height: 1;
+}
+
+p {
+  font-size: var(--text-base);
 }
 
 /* Bento Card Style */

@@ -44,10 +44,7 @@ The interesting part? Seeing exactly where state-of-the-art models struggle. Tha
       end: "Sep 2024",
     },
     current: false,
-    description: `Implemented Superpoint Transformer for 3D point cloud segmentation. Mainly training AI to understand indoor scenes from laser scans.
-Processed 30GB+ of Stanford's 3D dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. Built a real-time Streamlit demo where you upload a 3D scan and get instant segmentation results.
-The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.
-`,
+    description: `Implemented Superpoint Transformer for 3D point cloud segmentation. Mainly training AI to understand indoor scenes from laser scans. Processed 30GB+ of Stanford's 3D dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. Built a real-time Streamlit demo where you upload a 3D scan and get instant segmentation results. The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.`,
     skills: ["PyTorch", "Lightning AI", "3D Computer Vision", "Streamlit", "Weights & Biases", "Linux"],
     type: "work",
   },

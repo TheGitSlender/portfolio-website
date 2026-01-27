@@ -34,9 +34,11 @@ const Certifications = () => {
 
         {/* Stacked Cards Container */}
         <div className="relative max-w-5xl mx-auto px-4 md:px-16">
-          {/* Vertical Stripped Lines */}
-          <ZigZagLine side="left" />
-          <ZigZagLine side="right" />
+          {/* Vertical Stripped Lines - Hidden on mobile */}
+          <div className="hidden md:block">
+            <ZigZagLine side="left" />
+            <ZigZagLine side="right" />
+          </div>
 
           <div className="flex flex-col gap-8 md:gap-12">
             {certifications.map((cert, index) => {
