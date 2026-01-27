@@ -152,10 +152,12 @@ const Skills = () => {
         {/* Technical Depth Header */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
           <div className="max-w-3xl">
-            <span className="inline-block bg-black text-white text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 mb-6 rounded-sm">
-              // SKILLSET STACKS //
-            </span>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] text-black">
+            <div className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg mb-6">
+              <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">
+                // SKILLSET STACKS //
+              </span>
+            </div>
+            <h2 className="text-5xl md:text-7xl font-black italic tracking-tighter leading-[0.85] text-black font-serif">
               Technical Depth.
             </h2>
           </div>

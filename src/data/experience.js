@@ -28,12 +28,8 @@ export const experiences = [
       end: "Present",
     },
     current: true,
-    description: [
-      "Design and evaluate complex coding challenges in Python, C/C++, and Java to assess AI model capabilities and identify failure modes",
-      "Analyze and rate AI-generated code solutions, providing detailed feedback on logic flaws, edge cases, and optimization opportunities",
-      "Debug and refactor AI-generated code to production-quality standards, contributing to model training data improvement",
-      "Collaborate with AI research teams to enhance autonomous code generation systems through iterative feedback and quality assessment",
-    ],
+    description: `I design coding challenges that break AI models, then evaluate and fix their responses. Think of it as quality control for autonomous coding systems, finding edge cases, identifying logic flaws, and refactoring messy code into production-grade solutions across Python, C/C++, and Java.
+The interesting part? Seeing exactly where state-of-the-art models struggle. That knowledge shapes how I architect my own ML systems.`,
     skills: ["Python", "C/C++", "Java", "Debugging", "AI Research"],
     type: "work",
   },
@@ -48,13 +44,10 @@ export const experiences = [
       end: "Sep 2024",
     },
     current: false,
-    description: [
-      "Implemented and trained Superpoint Transformer for 3D point cloud segmentation using PyTorch and Lightning AI on Linux",
-      "Preprocessed 30GB+ of 3D point cloud data from Stanford 3D Indoor Scenes Dataset, optimizing data pipeline for training efficiency",
-      "Achieved 90% overall accuracy and 70% mean IoU in 3D indoor scene segmentation, exceeding baseline performance",
-      "Developed and deployed a real-time web application using Streamlit, enabling interactive 3D segmentation model demonstration",
-      "Integrated comprehensive experiment tracking with Weights & Biases for performance monitoring and model optimization",
-    ],
+    description: `Implemented Superpoint Transformer for 3D point cloud segmentation. Mainly training AI to understand indoor scenes from laser scans.
+Processed 30GB+ of Stanford's 3D dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. Built a real-time Streamlit demo where you upload a 3D scan and get instant segmentation results.
+The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.
+`,
     skills: ["PyTorch", "Lightning AI", "3D Computer Vision", "Streamlit", "Weights & Biases", "Linux"],
     type: "work",
   },
@@ -68,11 +61,9 @@ export const experiences = [
       start: "Sep 2023",
       end: "Jun 2025",
     },
-    description: [
-      "Lead Python and Machine Learning workshops for 200+ technology enthusiasts, fostering technical skill development",
-      "Managed cross-functional teams developing projects in classical ML, computer vision, and Python development",
-      "Developed proof-of-concept for AI-powered autonomous drone system for industrial inspection applications",
-    ],
+    description: `
+Leading 200+ students through hands-on ML workshops, Python, computer vision, NLP, deployment. Getting through the theory, while building actual projects.
+Also coordinate team projects and run monthly technical sessions on everything from reinforcement learning to MLOps.`,
     skills: ["Leadership", "Python", "Machine Learning", "Strategic Planning"],
   },
 ];

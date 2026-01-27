@@ -6,7 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
 
 const navItems = [
-    { label: 'About', href: '#experience' },
+    { label: 'Experience', href: '#experience' },
     { label: 'Stack', href: '#skills' },
     { label: 'Work', href: '#projects' },
     { label: 'Certifications', href: '#certifications' },
@@ -34,8 +34,12 @@ const Navbar = () => {
                 }`}
         >
             <div className="container-main flex items-center justify-between">
-                <Link to="/" className="text-xl font-extrabold tracking-tighter uppercase text-[var(--color-text-primary)]">
-                    Hany EL Atlassi
+                <Link
+                    to="/"
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    className="text-xl font-extrabold tracking-tighter uppercase text-[var(--color-text-primary)]"
+                >
+                    Hany El Atlassi
                 </Link>
 
                 {/* Desktop Nav */}

@@ -27,7 +27,7 @@ const Projects = () => {
 
         {/* Carousel Viewport - Themed Grey Container */}
         <div
-          className="relative bg-[#4f4f4f] rounded-[32px] p-6 md:p-10 border border-white/5 overflow-hidden"
+          className="relative bg-white rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] overflow-hidden"
           style={{
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
@@ -48,14 +48,14 @@ const Projects = () => {
             {duplicatedProjects.map((project, index) => (
               <div
                 key={`${project.id}-${index}`}
-                className="min-w-[260px] md:min-w-[320px] lg:min-w-[380px] shrink-0"
+                className="w-[220px] md:w-[280px] lg:w-[320px] shrink-0 flex flex-col"
               >
                 <Link to={`/project/${project.id}`} className="block group/card h-full">
                   <Card
                     className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[20px]"
                     hover={false}
                   >
-                    <div className="aspect-[16/10] bg-[#121212] relative overflow-hidden">
+                    <div className="aspect-[21/9] bg-[#121212] relative overflow-hidden">
                       <div className="absolute inset-0 bg-black/40 group-hover/card:bg-black/0 transition-colors duration-500 z-10" />
 
                       {/* Project Badge */}
@@ -80,7 +80,7 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <div className="p-6">
+                    <div className="p-6 flex-1 flex flex-col">
                       <h3 className="text-lg font-bold text-[var(--color-text-primary)] group-hover/card:text-[var(--color-accent-primary)] transition-colors italic tracking-tighter uppercase font-sans mb-2">
                         {project.title}
                       </h3>
@@ -89,7 +89,7 @@ const Projects = () => {
                         {project.shortDescription}
                       </p>
 
-                      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-gray-100">
+                      <div className="flex flex-wrap gap-1.5 pt-2 border-t border-gray-100 mt-auto">
                         {project.technologies.slice(0, 3).map(tech => (
                           <span key={tech} className="text-[7px] font-black uppercase tracking-widest text-gray-400">
                             {tech}

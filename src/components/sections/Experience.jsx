@@ -94,11 +94,11 @@ const Experience = () => {
                   </div>
 
                   {/* Right Column: Illustration/Image Placeholder */}
-                  <div className="w-full md:w-[320px] h-[320px] rounded-[32px] bg-gray-50 flex items-center justify-center overflow-hidden border border-gray-100 relative group-hover:border-[var(--color-accent-primary)]/20 transition-colors">
+                  <div className="w-full md:w-[320px] h-[320px] rounded-[32px] bg-white flex items-center justify-center overflow-hidden border border-gray-100 relative group-hover:border-[var(--color-accent-primary)]/20 transition-colors">
                     {/* Placeholder Abstract */}
                     {item.type === 'work' && <div className="p-12 opacity-40"><Terminal size={120} strokeWidth={1} /></div>}
                     {item.type === 'leadership' && <div className="p-12 opacity-40"><Search size={120} strokeWidth={1} /></div>}
-                    {item.type === 'education' && <div className="w-full h-full bg-[#f0f0f0] flex items-center justify-center"><Layout size={100} className="text-gray-300" strokeWidth={1} /></div>}
+                    {item.type === 'education' && <div className="w-full h-full bg-white flex items-center justify-center"><Layout size={100} className="text-gray-300" strokeWidth={1} /></div>}
 
                     <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
                   </div>

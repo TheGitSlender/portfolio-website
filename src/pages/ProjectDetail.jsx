@@ -24,10 +24,12 @@ const ProjectDetail = () => {
   const {
     title,
     fullDescription,
+    architectureDescription,
     category,
     technologies,
     thumbnail,
     highlights, // Using highlights as 'System Core' features
+    techStack,
     links,
     duration,
   } = project;
@@ -131,14 +133,14 @@ const ProjectDetail = () => {
           </div>
           <div className="lg:col-span-8 space-y-8">
             <p className="text-[var(--color-text-secondary)] text-base leading-relaxed">
-              {fullDescription}
+              {architectureDescription || fullDescription}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-              {technologies.slice(0, 3).map(tech => (
-                <div key={tech}>
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">PLATFORM</span>
-                  <span className="text-xl font-bold">{tech}</span>
+              {techStack && techStack.map((item, idx) => (
+                <div key={idx}>
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">{item.label}</span>
+                  <span className="text-xl font-bold">{item.value}</span>
                 </div>
               ))}
             </div>
@@ -159,10 +161,10 @@ const ProjectDetail = () => {
                     {idx % 3 === 1 && <Zap size={20} />}
                     {idx % 3 === 2 && <Globe size={20} />}
                   </div>
-                  <h3 className="text-xl font-bold">Key Achievement {idx + 1}</h3>
+                  <h3 className="text-xl font-bold">{highlight.title}</h3>
                 </div>
                 <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-                  {highlight}
+                  {highlight.description}
                 </p>
               </div>
             ))}

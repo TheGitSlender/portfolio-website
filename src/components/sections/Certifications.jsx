@@ -2,22 +2,7 @@ import { motion } from 'framer-motion';
 import { Cloud, BarChart, Shield, Cpu, Brain, ExternalLink } from 'lucide-react';
 import { certifications, upcomingGoals } from '../../data/certifications';
 
-const MasteryLevel = ({ level = 5 }) => {
-  return (
-    <div className="flex flex-col items-end gap-1">
-      <div className="flex gap-1">
-        {[1, 2, 3, 4, 5].map((dot) => (
-          <div
-            key={dot}
-            className={`h-2.5 w-2.5 rounded-full ${dot <= level ? 'bg-[var(--color-accent-primary)]' : 'bg-gray-200'
-              }`}
-          />
-        ))}
-      </div>
-      <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Mastery Level</span>
-    </div>
-  );
-};
+
 
 const ZigZagLine = ({ side = 'left' }) => {
   return (
@@ -87,10 +72,7 @@ const Certifications = () => {
                     </p>
                   </div>
 
-                  {/* Mastery */}
-                  <div className="shrink-0">
-                    <MasteryLevel level={cert.mastery} />
-                  </div>
+
                 </motion.div>
               );
             })}
