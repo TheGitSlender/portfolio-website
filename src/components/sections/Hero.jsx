@@ -1,22 +1,54 @@
-
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Terminal, Cloud, Shield } from 'lucide-react';
+import { ArrowRight, Download } from 'lucide-react';
 import Button from '../ui/Button';
-import Card from '../ui/Card';
 import { personalInfo } from '../../data/personal';
+
+const ProfileCard = () => {
+  return (
+    <div className="relative w-80 h-80 md:w-[480px] md:h-[480px] flex items-center justify-center">
+      {/* Concentric Rings (Subtle) */}
+      <div className="absolute inset-0 border border-gray-100 rounded-full scale-[1.3] opacity-40" />
+      <div className="absolute inset-0 border border-gray-100 rounded-full scale-[1.1] opacity-70" />
+      <div className="absolute inset-0 border border-gray-100 rounded-full scale-[0.9] opacity-90" />
+
+      {/* Profile Image - High quality placeholder */}
+      <div className="relative w-4/5 h-4/5 rounded-full bg-white overflow-hidden border border-gray-100 z-10 shadow-xl">
+        <img
+          src="/home/theslender/.gemini/antigravity/brain/40107bce-a010-4c10-8cad-90b3ab1b0d7e/profile_placeholder_1769444240686.png"
+          alt="Profile"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Collab Badge - Interactive Hover */}
+      <motion.div
+        className="absolute bottom-4 left-4 z-20 cursor-pointer"
+        initial={{ rotate: -12 }}
+        whileHover={{
+          scale: 1.25,
+          rotate: 0,
+          zIndex: 50,
+          transition: { type: "spring", stiffness: 300, damping: 15 }
+        }}
+      >
+        <div className="bg-[#ff3700] text-white rounded-full px-4 py-4 flex items-center justify-center text-center w-20 h-20 md:w-24 md:h-24 shadow-[0_10px_20px_rgba(255,55,0,0.3)]">
+          <span className="text-[9px] md:text-[10px] font-black leading-tight uppercase tracking-widest">
+            Open for <br /> COLLAB
+          </span>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
 
 const Hero = () => {
   const { title, tagline } = personalInfo;
-
-  // Split title to handle the specific layout styling if needed
-  // Using the new info from the user's CV: "AI engineer-in-training passionate about intelligent systems..."
-  // But the component uses a bold multi-line design. I'll adapt it.
 
   return (
     <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden">
       <div className="container-main grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
 
-        {/* Left Column: Text Content */}
+        {/* Left Column: Info */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -60,45 +92,10 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Right Column: Complex Bento Visuals */}
-        <div className="relative h-[560px] hidden lg:block">
-          <div className="grid grid-cols-2 gap-4 h-full">
-
-            {/* Top Row */}
-            <div className="flex flex-col gap-4">
-              {/* Image 1: Landscape (Pins) */}
-              <div className="h-2/5 w-full rounded-[32px] bg-[#121212] flex items-center justify-center overflow-hidden">
-                <div className="w-full h-full opacity-40 bg-gradient-to-br from-gray-700 to-black" />
-              </div>
-              {/* Vertical Card 2: AI Research (Pinkish/Tall) */}
-              <div className="h-3/5 w-full rounded-[32px] bg-[#f9e9e2] p-8 flex flex-col justify-end relative overflow-hidden border border-black/5">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 opacity-10">
-                  <Terminal className="w-full h-full text-black" />
-                </div>
-                <h3 className="text-3xl font-black text-[var(--color-accent-primary)] leading-none uppercase tracking-tighter">
-                  AI <br />
-                  Research
-                </h3>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              {/* Vertical Card 3: Cloud Native (Dark/Tall) */}
-              <div className="h-3/5 w-full rounded-[32px] bg-[#0a0a0a] p-8 flex flex-col items-center justify-center text-center gap-6 border border-white/5">
-                <div className="w-16 h-16 rounded-2xl bg-[var(--color-accent-primary)] flex items-center justify-center shadow-[var(--shadow-glow)]">
-                  <Cloud className="w-8 h-8 text-black" />
-                </div>
-                <h4 className="text-xl font-bold text-white uppercase tracking-tight">
-                  Cloud-Native <br /> Architectures
-                </h4>
-              </div>
-              {/* Image 4: Wave/Green (Landscape) */}
-              <div className="h-2/5 w-full rounded-[32px] bg-[#112a21] flex items-center justify-center overflow-hidden border border-white/5">
-                <div className="w-full h-full opacity-60 bg-gradient-to-tr from-emerald-900 to-transparent" />
-                <Shield className="w-12 h-12 text-emerald-500 absolute opacity-20" />
-              </div>
-            </div>
-
+        {/* Right Column: Balanced Profile Visual */}
+        <div className="flex items-center justify-center lg:justify-center hidden lg:flex">
+          <div className="relative">
+            <ProfileCard />
           </div>
         </div>
       </div>

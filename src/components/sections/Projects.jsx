@@ -25,12 +25,12 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Carousel Viewport - Clean White Theme */}
+        {/* Carousel Viewport - Themed Grey Container */}
         <div
-          className="relative bg-white rounded-[32px] p-6 md:p-10 shadow-lg border border-gray-100 overflow-hidden"
+          className="relative bg-[#4f4f4f] rounded-[32px] p-6 md:p-10 border border-white/5 overflow-hidden"
           style={{
-            maskImage: 'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%)'
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
           }}
         >
           {/* Carousel Track - Uses translateX for GPU acceleration & smoothness */}
@@ -52,8 +52,8 @@ const Projects = () => {
               >
                 <Link to={`/project/${project.id}`} className="block group/card h-full">
                   <Card
-                    className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[20px] shadow-sm hover:shadow-md"
-                    hover={true}
+                    className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[20px]"
+                    hover={false}
                   >
                     <div className="aspect-[16/10] bg-[#121212] relative overflow-hidden">
                       <div className="absolute inset-0 bg-black/40 group-hover/card:bg-black/0 transition-colors duration-500 z-10" />
