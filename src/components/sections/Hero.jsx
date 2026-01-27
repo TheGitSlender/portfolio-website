@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import Button from '../ui/Button';
 import { personalInfo } from '../../data/personal';
+import profilePic from '../../assets/pictures/pfp.jpeg';
 
 const ProfileCard = () => {
   return (
@@ -11,11 +12,11 @@ const ProfileCard = () => {
       <div className="absolute inset-0 border border-gray-300 rounded-full scale-[1.1] opacity-70" />
       <div className="absolute inset-0 border border-gray-300 rounded-full scale-[0.9] opacity-90" />
 
-      {/* Profile Image - High quality placeholder */}
+      {/* Profile Image */}
       <div className="relative w-4/5 h-4/5 rounded-full bg-white overflow-hidden border border-gray-100 z-10 shadow-xl">
         <img
-          src="/home/theslender/.gemini/antigravity/brain/40107bce-a010-4c10-8cad-90b3ab1b0d7e/profile_placeholder_1769444240686.png"
-          alt="Profile"
+          src={profilePic}
+          alt="Hany El Atlassi"
           className="w-full h-full object-cover"
         />
       </div>

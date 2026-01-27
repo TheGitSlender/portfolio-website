@@ -4,6 +4,9 @@ import { motion } from 'framer-motion';
 import { Terminal, Cloud, Shield, Database, Layout, Search } from 'lucide-react';
 
 import { experiences } from '../../data/experience';
+import outlierImg from '../../assets/pictures/outlier_experience.png';
+import smartFactoryImg from '../../assets/pictures/3d_CV_experience.jpg';
+import presidentImg from '../../assets/pictures/president_experience.png';
 
 const Experience = () => {
   return (
@@ -94,9 +97,27 @@ const Experience = () => {
 
                   {/* Illustration/Image */}
                   <div className="w-full md:flex-initial aspect-video md:aspect-square md:w-[clamp(180px,15vw+50px,280px)] rounded-[20px] md:rounded-[32px] bg-white flex items-center justify-center overflow-hidden border border-gray-100 relative group-hover:border-[var(--color-accent-primary)]/20 transition-colors">
-                    {item.type === 'work' && <div className="p-8 opacity-40"><Terminal className="w-full h-full max-w-[80px] md:max-w-[120px]" strokeWidth={1} /></div>}
-                    {item.role === 'President' && <div className="p-8 opacity-40"><Search className="w-full h-full max-w-[80px] md:max-w-[120px]" strokeWidth={1} /></div>}
-                    {item.type === 'education' && <div className="p-8 opacity-40"><Layout className="w-full h-full max-w-[80px] md:max-w-[120px]" strokeWidth={1} /></div>}
+                    {item.id === 'scale-ai' && (
+                      <img
+                        src={outlierImg}
+                        alt="Outlier.ai Experience"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {item.id === '3d-smart-factory' && (
+                      <img
+                        src={smartFactoryImg}
+                        alt="3D Smart Factory Experience"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {item.id === 'ai-club-president' && (
+                      <img
+                        src={presidentImg}
+                        alt="AI Club President"
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
                   </div>
                 </motion.div>

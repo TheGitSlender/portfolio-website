@@ -6,6 +6,17 @@ import SectionHeader from '../ui/SectionHeader';
 import { getFeaturedProjects } from '../../data/projects';
 import { Link } from 'react-router-dom';
 
+// Carousel images
+import wazuhCarousel from '../../assets/pictures/wazuh_carousel.jpg';
+import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.png';
+import ctfCarousel from '../../assets/pictures/carousel_ctf.png';
+
+const carouselImages = {
+  'wazuh-llm': wazuhCarousel,
+  '3d-segmentator': segmentatorCarousel,
+  'ctf-achievements': ctfCarousel,
+};
+
 const Projects = () => {
   const featuredProjects = getFeaturedProjects();
   // Double the list for a seamless loop [A, B, C, A, B, C]
@@ -71,13 +82,21 @@ const Projects = () => {
                       </div>
 
                       {/* Background Visual */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-full text-center px-4">
-                          <span className="text-2xl md:text-3xl font-black text-white/[0.04] select-none uppercase tracking-tighter block mb-1 truncate">
-                            {project.id.split('-')[0]}
-                          </span>
+                      {carouselImages[project.id] ? (
+                        <img
+                          src={carouselImages[project.id]}
+                          alt={project.title}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-full text-center px-4">
+                            <span className="text-2xl md:text-3xl font-black text-white/[0.04] select-none uppercase tracking-tighter block mb-1 truncate">
+                              {project.id.split('-')[0]}
+                            </span>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     <div className="p-6 md:p-8 flex-1 flex flex-col">

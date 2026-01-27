@@ -12,6 +12,8 @@ export const projects = [
     category: "Cybersecurity & Cloud AI",
     tags: ["WAZUH", "SIEM", "LLM", "AWS", "Serverless", "Security Automation"],
     thumbnail: "/assets/images/projects/wazuh-thumbnail.jpg",
+    carouselImage: "wazuh_carousel.jpg",
+    detailImage: "llm_project_details.png",
     images: [],
     highlights: [
       { title: "Integrated SIEM & AI", description: "Integrated Wazuh SIEM with DistilBERT and classical ML models for real-time threat interpretation" },
@@ -48,6 +50,8 @@ export const projects = [
     category: "Computer Vision & 3D AI",
     tags: ["3D AI", "Transformers", "Point Clouds", "PyTorch", "Computer Vision"],
     thumbnail: "/assets/images/projects/3d-seg-thumbnail.jpg",
+    carouselImage: "3d_CV_carousel.png",
+    detailImage: "3d_CV_projectdetails.png",
     images: [],
     highlights: [
       { title: "Transformer Architecture", description: "Utilized Superpoint Transformer architecture for high-resolution semantic segmentation" },
@@ -84,6 +88,8 @@ export const projects = [
     category: "Cybersecurity & Problem Solving",
     tags: ["CTF", "Cybersecurity", "Forensics", "Problem Solving", "Competition"],
     thumbnail: "/assets/images/projects/ctf-thumbnail.jpg",
+    carouselImage: "carousel_ctf.png",
+    detailImage: null,
     images: [],
     highlights: [
       { title: "Global Ranking", description: "Top 3% worldwide in HackTheBox Forensics CTF" },

@@ -4,6 +4,17 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Zap, Shield, Globe } from 'lucide-react';
 import { getProjectById, getNextProjectId } from '../data/projects';
 
+// Project detail images
+import wazuhDetail from '../assets/pictures/llm_project_details.png';
+import segmentatorDetail from '../assets/pictures/3d_CV_projectdetails.png';
+import ctfDetail from '../assets/pictures/ctf_project_details.jpg';
+
+const detailImages = {
+  'wazuh-llm': wazuhDetail,
+  '3d-segmentator': segmentatorDetail,
+  'ctf-achievements': ctfDetail,
+};
+
 const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -110,17 +121,20 @@ const ProjectDetail = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="w-full aspect-video md:aspect-[21/9] bg-[#1a33cc] rounded-[2rem] mb-24 relative overflow-hidden flex items-center justify-center shadow-xl">
-          {thumbnail ? (
-            <img src={thumbnail} alt="Project Hero" className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay" />
+        <div className="w-full aspect-video md:aspect-[21/9] bg-white rounded-[2rem] mb-24 relative overflow-hidden flex items-center justify-center shadow-xl border border-gray-100">
+          {detailImages[id] ? (
+            <img
+              src={detailImages[id]}
+              alt={title}
+              className={`absolute inset-0 w-full h-full object-cover ${id === 'wazuh-llm' ? 'object-[center_70%]' : ''} ${id === 'ctf-achievements' ? 'object-[center_30%]' : ''}`}
+            />
           ) : (
             <div className="text-center relative z-10">
-              <h2 className="text-white text-4xl md:text-6xl font-bold mb-4">{title}</h2>
-              <div className="h-16 w-1 bg-gradient-to-b from-white to-transparent mx-auto mb-2" />
-              <p className="text-blue-100/80 text-xs tracking-[0.3em] uppercase">Advanced Technology // Real-world Impact</p>
+              <h2 className="text-[var(--color-text-primary)] text-4xl md:text-6xl font-bold mb-4">{title}</h2>
+              <div className="h-16 w-1 bg-gradient-to-b from-gray-300 to-transparent mx-auto mb-2" />
+              <p className="text-gray-500 text-xs tracking-[0.3em] uppercase">Advanced Technology // Real-world Impact</p>
             </div>
           )}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light" />
         </div>
 
         {/* Content Section */}
