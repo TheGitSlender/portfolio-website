@@ -1,4 +1,4 @@
-import { useParams, Link, Navigate, useNavigate } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Zap, Shield, Globe } from 'lucide-react';
@@ -17,7 +17,6 @@ const detailImages = {
 
 const ProjectDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const project = getProjectById(id);
 
   // Ensure scroll to top on mount or id change
@@ -38,8 +37,7 @@ const ProjectDetail = () => {
     architectureDescription,
     category,
     technologies,
-    thumbnail,
-    highlights, // Using highlights as 'System Core' features
+    highlights,
     techStack,
     links,
     duration,

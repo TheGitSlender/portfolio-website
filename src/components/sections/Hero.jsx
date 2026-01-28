@@ -103,7 +103,7 @@ const itemVariants = {
 };
 
 const Hero = () => {
-  const { title, tagline } = personalInfo;
+  const { tagline } = personalInfo;
 
   return (
     <section className="relative pt-[var(--space-lg)] pb-[var(--space-xl)] overflow-hidden">

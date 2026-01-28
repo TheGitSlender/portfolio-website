@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Card from '../ui/Card';
 import TiltCard from '../ui/TiltCard';

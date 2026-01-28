@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { socialLinks, contactInfo } from '../../data/contact';
+import { socialLinks } from '../../data/contact';
 import * as LucideIcons from 'lucide-react';
 
 const Contact = () => {

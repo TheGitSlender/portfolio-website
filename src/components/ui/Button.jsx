@@ -31,7 +31,6 @@ const Button = ({
     ghost: "bg-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-glass-bg)]"
   };
 
-  const isLink = to || props.href;
   const Component = to ? Link : (props.href ? 'a' : 'button');
   const linkProps = to ? { to } : (props.href ? { href: props.href } : {});
 
