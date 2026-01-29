@@ -14,18 +14,18 @@
  * Actual imports happen in the component to keep data files clean.
  */
 export const carouselImageMap = {
-  'wazuh-llm': 'wazuh_carousel.jpg',
-  '3d-segmentator': '3d_CV_carousel.png',
-  'ctf-achievements': 'carousel_ctf.png',
+  'wazuh-llm': 'wazuh_carousel.webp',
+  '3d-segmentator': '3d_CV_carousel.webp',
+  'ctf-achievements': 'carousel_ctf.webp',
 };
 
 /**
  * Detail page image filenames by project ID.
  */
 export const detailImageMap = {
-  'wazuh-llm': 'llm_project_details.png',
-  '3d-segmentator': '3d_CV_projectdetails.png',
-  'ctf-achievements': 'ctf_project_details.jpg',
+  'wazuh-llm': 'llm_project_details.webp',
+  '3d-segmentator': '3d_CV_projectdetails.webp',
+  'ctf-achievements': 'ctf_project_details.webp',
 };
 
 // =============================================================================
@@ -43,9 +43,9 @@ export const projects = [
     architectureDescription: 'Wazuh SIEM communicates with the stremalit app containing RandomForest and XGBoost, whilst DistilBERT was deployed on a simple AWS serverless architecture with API Gateway and Lambda function. Streamlit speaks to the LLM, Wazuh speaks to streamlit alone, ensuring transparency. ',
     category: 'Cybersecurity & Cloud AI',
     tags: ['WAZUH', 'SIEM', 'LLM', 'AWS', 'Serverless', 'Security Automation'],
-    thumbnail: '/assets/images/projects/wazuh-thumbnail.jpg',
-    carouselImage: 'wazuh_carousel.jpg',
-    detailImage: 'llm_project_details.png',
+    thumbnail: '/assets/images/projects/wazuh-thumbnail.webp',
+    carouselImage: 'wazuh_carousel.webp',
+    detailImage: 'llm_project_details.webp',
     images: [],
     highlights: [
       { title: 'Integrated SIEM & AI', description: 'Integrated Wazuh SIEM with DistilBERT and classical ML models for real-time threat interpretation' },
@@ -81,9 +81,9 @@ export const projects = [
     architectureDescription: `The challenge was making transformers work efficiently on millions of 3D points. Solution: hierarchical processing that groups points into "superpoints" before running expensive attention mechanisms.`,
     category: 'Computer Vision & 3D AI',
     tags: ['3D AI', 'Transformers', 'Point Clouds', 'PyTorch', 'Computer Vision'],
-    thumbnail: '/assets/images/projects/3d-seg-thumbnail.jpg',
-    carouselImage: '3d_CV_carousel.png',
-    detailImage: '3d_CV_projectdetails.png',
+    thumbnail: '/assets/images/projects/3d-seg-thumbnail.webp',
+    carouselImage: '3d_CV_carousel.webp',
+    detailImage: '3d_CV_projectdetails.webp',
     images: [],
     highlights: [
       { title: 'Transformer Architecture', description: 'Utilized Superpoint Transformer architecture for high-resolution semantic segmentation' },
@@ -119,9 +119,9 @@ export const projects = [
     architectureDescription: "Turns out thinking like an attacker makes you way better at building defensive AI systems. My intrusion detection work directly benefited from understanding how real attacks unfold.",
     category: 'Cybersecurity & Problem Solving',
     tags: ['CTF', 'Cybersecurity', 'Forensics', 'Problem Solving', 'Competition'],
-    thumbnail: '/assets/images/projects/ctf-thumbnail.jpg',
-    carouselImage: 'carousel_ctf.png',
-    detailImage: 'ctf_project_details.jpg',
+    thumbnail: '/assets/images/projects/ctf-thumbnail.webp',
+    carouselImage: 'carousel_ctf.webp',
+    detailImage: 'ctf_project_details.webp',
     images: [],
     highlights: [
       { title: 'Global Ranking', description: 'Top 3% worldwide in HackTheBox Forensics CTF' },

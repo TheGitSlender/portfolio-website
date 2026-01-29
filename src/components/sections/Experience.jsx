@@ -18,9 +18,9 @@ import {
 } from '../../config/animations';
 
 // Experience images
-import outlierImg from '../../assets/pictures/outlier_experience.png';
-import smartFactoryImg from '../../assets/pictures/3d_CV_experience.jpg';
-import presidentImg from '../../assets/pictures/president_experience.png';
+import outlierImg from '../../assets/pictures/outlier_experience.webp';
+import smartFactoryImg from '../../assets/pictures/3d_CV_experience.webp';
+import presidentImg from '../../assets/pictures/president_experience.webp';
 
 /**
  * Image mapping for experiences
@@ -51,7 +51,7 @@ const Experience = () => {
           </div>
 
           <motion.p
-            className="text-gray-500 font-medium max-w-xs text-right hidden lg:block leading-relaxed"
+            className="text-[var(--color-text-secondary)] font-medium max-w-xs text-right hidden lg:block leading-relaxed"
             variants={fadeFromRight}
           >
             A chronicle of engineering impact across specialized domains in tech.
@@ -61,7 +61,7 @@ const Experience = () => {
         {/* Timeline Content */}
         <div className="relative">
           {/* Background Timeline Line */}
-          <div className="absolute left-4 md:left-[60px] top-0 bottom-0 w-[2px] md:w-[4px] bg-gray-200/50" />
+          <div className="absolute left-4 md:left-[60px] top-0 bottom-0 w-[2px] md:w-[4px] bg-[var(--color-border-default)]/50" />
 
           {/* Animated Progress Line */}
           <motion.div

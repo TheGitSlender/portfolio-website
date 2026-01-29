@@ -43,9 +43,10 @@ const Button = ({
       hover:shadow-[var(--shadow-glow)]
     `,
     secondary: `
-      bg-[var(--color-text-primary)] text-white
+      bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]
       shadow-[var(--shadow-strong)]
       hover:shadow-xl
+      active:bg-[var(--color-accent-primary)] active:text-white
     `,
     outline: `
       bg-transparent
@@ -63,7 +64,7 @@ const Button = ({
   };
 
   const iconVariants = {
-    primary: 'bg-[var(--color-text-primary)] text-white',
+    primary: 'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
     secondary: 'bg-[var(--color-accent-primary)] text-[var(--color-text-primary)]',
     outline: 'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',
     ghost: 'bg-[var(--color-text-primary)] text-[var(--color-bg-primary)]',

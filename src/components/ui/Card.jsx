@@ -16,7 +16,7 @@ const Card = ({
 }) => {
   return (
     <motion.div
-      className={`bento-card p-6 bg-[#F0F0F0] border border-[var(--color-border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-card)] ${className}`}
+      className={`bento-card p-6 bg-[var(--color-surface-card)] border border-[var(--color-border-subtle)] rounded-[var(--radius-xl)] shadow-[var(--shadow-card)] ${className}`}
       whileHover={hover ? {
         y: -5,
         borderColor: 'var(--color-border-hover)',

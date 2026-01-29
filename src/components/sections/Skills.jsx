@@ -27,7 +27,7 @@ const Skills = () => {
               Technical Depth.
             </AnimatedHeading>
           </div>
-          <p className="text-gray-500 max-w-sm text-sm md:text-base font-medium leading-relaxed italic lg:text-right">
+          <p className="text-[var(--color-text-secondary)] max-w-sm text-sm md:text-base font-medium leading-relaxed italic lg:text-right">
             Specialized expertise across the modern engineering stack. Vertically integrated for maximum efficiency.
           </p>
         </div>

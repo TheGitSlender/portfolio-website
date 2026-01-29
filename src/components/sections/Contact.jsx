@@ -41,11 +41,11 @@ const Contact = () => {
             >
               {/* Contact Badge */}
               <motion.div
-                className="inline-flex items-center gap-3 bg-[#212121] rounded-full px-5 py-2 w-fit border border-white/5"
+                className="inline-flex items-center gap-3 bg-[var(--color-badge-bg)] rounded-full px-5 py-2 w-fit border border-[var(--color-badge-border)]"
                 variants={fadeInScale}
               >
                 <span className="text-[var(--color-accent-primary)] font-bold">//</span>
-                <span className="text-white font-medium">Contact</span>
+                <span className="text-[var(--color-badge-text)] font-medium">Contact</span>
                 <span className="text-[var(--color-accent-primary)] font-bold">//</span>
               </motion.div>
 
@@ -103,7 +103,7 @@ const Contact = () => {
                             h-1.5 w-1.5 rounded-full transition-colors duration-300
                             ${dotIndex <= index
                               ? 'bg-[var(--color-accent-primary)]'
-                              : style.isDark ? 'bg-white/10' : 'bg-[#e5e5e5]'
+                              : style.isDark ? 'bg-white/10' : 'bg-[var(--color-border-default)]'
                             }
                           `}
                         />
@@ -133,7 +133,7 @@ const Contact = () => {
                       {link.platform}
                     </h4>
                     <p
-                      className={`text-sm font-medium truncate ${style.isDark ? '!text-white/70' : 'text-gray-500'}`}
+                      className={`text-sm font-medium truncate ${style.isDark ? '!text-white/70' : 'text-[var(--color-text-secondary)]'}`}
                     >
                       {link.username}
                     </p>

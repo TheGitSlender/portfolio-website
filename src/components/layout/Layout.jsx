@@ -7,11 +7,13 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import CustomCursor from '../common/CustomCursor';
+import ThemeToggle from '../ui/ThemeToggle';
 
 const Layout = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--color-bg-primary)]">
       <CustomCursor />
+      <ThemeToggle />
       {/* Sticky header navigation */}
       <Navbar />
 

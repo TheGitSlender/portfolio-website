@@ -14,9 +14,9 @@ import SectionHeader from '../ui/SectionHeader';
 import { getFeaturedProjects } from '../../data/projects';
 
 // Carousel images
-import wazuhCarousel from '../../assets/pictures/wazuh_carousel.jpg';
-import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.png';
-import ctfCarousel from '../../assets/pictures/carousel_ctf.png';
+import wazuhCarousel from '../../assets/pictures/wazuh_carousel.webp';
+import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.webp';
+import ctfCarousel from '../../assets/pictures/carousel_ctf.webp';
 
 /**
  * Image mapping for project carousel
@@ -49,7 +49,7 @@ const Projects = () => {
 
         {/* Carousel Container */}
         <div
-          className="relative bg-white rounded-[2rem] p-6 md:p-10 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] overflow-hidden"
+          className="relative bg-[var(--color-surface-card)] rounded-[2rem] p-6 md:p-10 border border-[var(--color-border-default)] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] overflow-hidden"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {/* Carousel Track */}
@@ -70,7 +70,7 @@ const Projects = () => {
               >
                 <Link to={`/project/${project.id}`} className="block group/card h-full">
                   <Card
-                    className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[24px] flex flex-col group-hover/card:shadow-xl"
+                    className="h-full p-0 overflow-hidden border-[var(--color-border-default)] group-hover/card:border-[var(--color-accent-primary)]/30 bg-[var(--color-surface-card)] transition-all duration-500 rounded-[24px] flex flex-col group-hover/card:shadow-xl"
                     hover={false}
                   >
                     {/* Image Section */}
@@ -79,7 +79,7 @@ const Projects = () => {
 
                       {/* Category Badge */}
                       <div className="absolute top-4 left-4 z-20">
-                        <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-white px-2.5 py-1 rounded-full text-[var(--color-text-primary)]">
+                        <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-white px-2.5 py-1 rounded-full text-[#121212]">
                           {project.category.split(' & ')[0]}
                         </span>
                       </div>
@@ -118,11 +118,11 @@ const Projects = () => {
                       </p>
 
                       {/* Technologies */}
-                      <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100 mt-auto">
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--color-border-default)] mt-auto">
                         {project.technologies.slice(0, 3).map((tech) => (
                           <span
                             key={tech}
-                            className="text-[8px] font-black uppercase tracking-widest text-gray-400"
+                            className="text-[8px] font-black uppercase tracking-widest text-[var(--color-text-muted)]"
                           >
                             {tech}
                           </span>

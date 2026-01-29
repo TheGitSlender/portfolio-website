@@ -32,7 +32,7 @@ Beyond AI, I'm an active participant in cybersecurity competitions, consistently
   location: "Casablanca, Morocco",
 
   // Profile photo path (update when actual photo is added)
-  photo: "/assets/images/profile.jpg",
+  photo: "/assets/images/profile.webp",
 
   // Availability status
   availability: {

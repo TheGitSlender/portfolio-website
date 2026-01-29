@@ -34,7 +34,7 @@ const Hero = () => {
           {/* Availability Badge */}
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-text-primary)] border border-white/10 shadow-lg"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212] border border-white/10 shadow-lg"
           >
             <div className="relative h-2 w-2">
               <div className="absolute inset-0 m-auto h-2 w-2 rounded-full bg-[var(--color-accent-primary)]" />

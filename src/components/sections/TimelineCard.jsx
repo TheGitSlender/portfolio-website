@@ -26,12 +26,12 @@ const TimelineCard = ({ experience, index, imageSrc }) => {
     <div className="relative pl-10 md:pl-40 lg:pl-56 group">
       {/* Timeline Dot */}
       <motion.div
-        initial={{ backgroundColor: '#e5e5e7', scale: 0.8 }}
-        whileInView={{ backgroundColor: 'var(--color-accent-primary)', scale: 1 }}
+        initial={{ backgroundColor: 'var(--color-border-default)', scale: 0.8 }}
+        whileInView={{ backgroundColor: '#ff3700', scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
         className="absolute left-[9px] md:left-[51px] top-12 md:top-8 w-4 md:w-6 h-4 md:h-6 rounded-full shadow-xl z-20 border-2 md:border-4 border-[var(--color-bg-primary)]"
-        style={{ backgroundColor: 'var(--color-accent-primary)' }}
+        style={{ backgroundColor: '#ff3700' }}
       />
 
       {/* Year Label */}
@@ -54,7 +54,7 @@ const TimelineCard = ({ experience, index, imageSrc }) => {
         viewport={viewport}
         transition={indexedDelay(index, 0.15)}
         whileHover={hoverLift}
-        className="bg-white rounded-[24px] md:rounded-[40px] p-6 md:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-gray-100 flex flex-col-reverse md:flex-row gap-8 items-center hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.15)] transition-shadow duration-500 max-w-5xl cursor-default"
+        className="bg-[var(--color-surface-card)] rounded-[24px] md:rounded-[40px] p-6 md:p-12 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.1)] border border-[var(--color-border-default)] flex flex-col-reverse md:flex-row gap-8 items-center hover:shadow-[0_40px_80px_-30px_rgba(0,0,0,0.15)] transition-shadow duration-500 max-w-5xl cursor-default"
       >
         {/* Info Section */}
         <div className="flex-1 flex flex-col items-start gap-6 w-full">
@@ -70,7 +70,7 @@ const TimelineCard = ({ experience, index, imageSrc }) => {
               {skills.map((skill) => (
                 <motion.span
                   key={skill}
-                  className="text-[10px] px-3 py-1 bg-gray-100 rounded-full font-black tracking-widest text-gray-500 uppercase transition-transform hover:scale-105 hover:bg-[var(--color-accent-primary)]/10"
+                  className="text-[10px] px-3 py-1 bg-[var(--color-surface-muted)] rounded-full font-black tracking-widest text-[var(--color-text-secondary)] uppercase transition-transform hover:scale-105 hover:bg-[var(--color-accent-primary)]/10"
                   variants={fadeInScale}
                 >
                   {skill}
@@ -84,26 +84,26 @@ const TimelineCard = ({ experience, index, imageSrc }) => {
             <h3 className="text-3xl md:text-4xl font-bold font-serif leading-tight mb-2">
               {role || title}
             </h3>
-            <p className="text-base md:text-lg text-gray-500 font-medium">
+            <p className="text-base md:text-lg text-[var(--color-text-secondary)] font-medium">
               {company}
             </p>
           </div>
 
           {/* Description */}
-          <div className="text-gray-500 text-base leading-relaxed max-w-2xl font-medium">
+          <div className="text-[var(--color-text-secondary)] text-base leading-relaxed max-w-2xl font-medium">
             <p>{description}</p>
           </div>
         </div>
 
         {/* Image Section */}
         {imageSrc && (
-          <div className="w-full md:flex-initial aspect-video md:aspect-square md:w-[clamp(180px,15vw+50px,280px)] rounded-[20px] md:rounded-[2rem] bg-white flex items-center justify-center overflow-hidden border border-gray-100 relative group-hover:border-[var(--color-accent-primary)]/20 transition-colors">
+          <div className="w-full md:flex-initial aspect-video md:aspect-square md:w-[clamp(180px,15vw+50px,280px)] rounded-[20px] md:rounded-[2rem] bg-[var(--color-surface-card)] flex items-center justify-center overflow-hidden border border-[var(--color-border-default)] relative group-hover:border-[var(--color-accent-primary)]/20 transition-colors">
             <img
               src={imageSrc}
               alt={`${company} Experience`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
         )}
       </motion.div>

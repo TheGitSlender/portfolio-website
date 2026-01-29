@@ -21,7 +21,7 @@ const ProgressBar = ({
 }) => {
   return (
     <div className={`relative pt-4 ${className}`}>
-      <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
+      <div className="h-2 w-full bg-[var(--color-border-default)] rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${progress}%` }}
@@ -31,7 +31,7 @@ const ProgressBar = ({
         />
       </div>
       <div className="flex justify-between mt-3">
-        <span className="text-[11px] font-black text-gray-400 uppercase tracking-widest">
+        <span className="text-[11px] font-black text-[var(--color-text-muted)] uppercase tracking-widest">
           {label}
         </span>
         {showPercentage && (

@@ -41,7 +41,7 @@ const IconMap = { Cloud, BarChart, Shield, Cpu, Brain };
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-24 bg-white relative overflow-hidden">
+    <section id="certifications" className="py-24 bg-[var(--color-bg-secondary)] relative overflow-hidden">
       <div className="container-main relative">
         {/* Header */}
         <div className="mb-24">
@@ -74,15 +74,15 @@ const Certifications = () => {
                   transition={indexedDelay(index)}
                   whileHover={cardHover}
                   className={`
-                    relative bg-[#F8F9FA] rounded-[2.5rem] p-10 md:p-12
-                    border border-gray-100 flex flex-col md:flex-row
+                    relative bg-[var(--color-surface-muted)] rounded-[2.5rem] p-10 md:p-12
+                    border border-[var(--color-border-default)] flex flex-col md:flex-row
                     items-center gap-8 transition-all duration-300
                     cursor-pointer w-full
                     ${index % 2 === 0 ? 'md:-translate-x-8' : 'md:translate-x-8'}
                   `}
                 >
                   {/* Icon Circle */}
-                  <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md border border-gray-50 shrink-0">
+                  <div className="w-24 h-24 rounded-full bg-[var(--color-surface-card)] flex items-center justify-center shadow-md border border-[var(--color-border-subtle)] shrink-0">
                     <Icon
                       className="w-12 h-12 text-[var(--color-accent-primary)]"
                       strokeWidth={1.2}
@@ -97,7 +97,7 @@ const Certifications = () => {
                     <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
                       {cert.subtitle}
                     </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
+                    <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed max-w-2xl">
                       {cert.description}
                     </p>
                   </div>
@@ -109,13 +109,13 @@ const Certifications = () => {
 
         {/* Upcoming Goals */}
         <div className="mt-32 max-w-5xl mx-auto px-4 md:px-16">
-          <div className="bg-[#F8F9FA] rounded-[2.5rem] p-12 border border-gray-100">
+          <div className="bg-[var(--color-surface-muted)] rounded-[2.5rem] p-12 border border-[var(--color-border-default)]">
             <h3 className="text-2xl font-bold mb-8 italic tracking-tight font-sans">
               Upcoming Goals
             </h3>
             {upcomingGoals.map((goal, i) => (
               <div key={i} className="space-y-6">
-                <p className="text-gray-600 text-base leading-relaxed max-w-3xl">
+                <p className="text-[var(--color-text-secondary)] text-base leading-relaxed max-w-3xl">
                   {goal.description.split(/(\*\*.*?\*\*)/).map((part, index) =>
                     part.startsWith('**') && part.endsWith('**') ? (
                       <strong key={index} className="text-[var(--color-text-primary)] font-bold">

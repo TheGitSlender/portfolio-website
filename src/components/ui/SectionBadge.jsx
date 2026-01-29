@@ -16,14 +16,14 @@ const SectionBadge = ({ children, animated = true, className = '' }) => {
   const baseClasses = `
     inline-flex items-center gap-2
     w-fit whitespace-nowrap
-    bg-[var(--color-text-primary)]
+    bg-[var(--color-badge-bg)]
     rounded-full px-4 py-1.5
-    border border-white/10
+    border border-[var(--color-badge-border)]
     shadow-lg
   `;
 
   const textClasses = `
-    text-white text-[10px] font-black
+    text-[var(--color-badge-text)] text-[10px] font-black
     uppercase tracking-[0.2em] font-sans
   `;
 

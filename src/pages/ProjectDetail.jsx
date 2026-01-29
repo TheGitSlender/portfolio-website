@@ -13,9 +13,9 @@ import { getProjectById, getNextProjectId } from '../data/projects';
 import { pageTransition } from '../config/animations';
 
 // Project detail images
-import wazuhDetail from '../assets/pictures/llm_project_details.png';
-import segmentatorDetail from '../assets/pictures/3d_CV_projectdetails.png';
-import ctfDetail from '../assets/pictures/ctf_project_details.jpg';
+import wazuhDetail from '../assets/pictures/llm_project_details.webp';
+import segmentatorDetail from '../assets/pictures/3d_CV_projectdetails.webp';
+import ctfDetail from '../assets/pictures/ctf_project_details.webp';
 
 /**
  * Image mapping for project details
@@ -147,7 +147,7 @@ const ProjectDetail = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="w-full aspect-video md:aspect-[21/9] bg-white rounded-[var(--radius-2xl)] mb-24 relative overflow-hidden flex items-center justify-center shadow-xl border border-gray-100">
+        <div className="w-full aspect-video md:aspect-[21/9] bg-[var(--color-surface-card)] rounded-[var(--radius-2xl)] mb-24 relative overflow-hidden flex items-center justify-center shadow-xl border border-[var(--color-border-default)]">
           {detailImages[id] ? (
             <img
               src={detailImages[id]}
@@ -164,7 +164,7 @@ const ProjectDetail = () => {
                 {title}
               </h2>
               <div className="h-16 w-1 bg-gradient-to-b from-gray-300 to-transparent mx-auto mb-2" />
-              <p className="text-gray-500 text-xs tracking-[0.3em] uppercase">
+              <p className="text-[var(--color-text-secondary)] text-xs tracking-[0.3em] uppercase">
                 Advanced Technology // Real-world Impact
               </p>
             </div>
@@ -174,7 +174,7 @@ const ProjectDetail = () => {
         {/* Architecture Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-32">
           <div className="lg:col-span-4">
-            <span className="bg-[var(--color-text-primary)] text-white text-xs font-bold px-2 py-1 uppercase mb-4 inline-block">
+            <span className="bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-xs font-bold px-2 py-1 uppercase mb-4 inline-block">
               Architecture
             </span>
             <h2 className="text-3xl font-bold leading-tight">
@@ -187,10 +187,10 @@ const ProjectDetail = () => {
             </p>
 
             {techStack && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-gray-200">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-[var(--color-border-default)]">
                 {techStack.map((item, idx) => (
                   <div key={idx}>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 block">
+                    <span className="text-[10px] font-bold text-[var(--color-text-muted)] uppercase tracking-widest mb-1 block">
                       {item.label}
                     </span>
                     <span className="text-xl font-bold">{item.value}</span>
@@ -235,7 +235,7 @@ const ProjectDetail = () => {
         <div className="flex justify-center pb-20">
           <Link
             to={`/project/${nextProjectId}`}
-            className="bg-gray-100 hover:bg-gray-200 transition-colors px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest flex items-center gap-3"
+            className="bg-[var(--color-surface-muted)] hover:bg-[var(--color-bg-tertiary)] transition-colors px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest flex items-center gap-3"
           >
             Next Project <ArrowUpRight size={18} />
           </Link>

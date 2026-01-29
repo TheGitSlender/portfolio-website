@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Button from '../ui/Button';
@@ -16,6 +16,7 @@ import { durations } from '../../config/animations';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,25 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Scroll to hash target after navigating back to home
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }, [location]);
+
+  const handleNavClick = (e, href) => {
+    setIsMobileMenuOpen(false);
+    if (location.pathname === '/') {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
@@ -41,9 +61,11 @@ const Navbar = () => {
     <header
       className={`
         fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${isScrolled || isMobileMenuOpen
-          ? 'bg-[var(--color-bg-primary)] backdrop-blur-md py-4 border-b border-[var(--color-border-subtle)]'
-          : 'bg-transparent py-6'
+        ${isMobileMenuOpen
+          ? 'bg-[var(--color-bg-primary)] py-4 border-b border-[var(--color-border-subtle)]'
+          : isScrolled
+            ? 'bg-[var(--color-bg-primary)]/80 backdrop-blur-md py-4 border-b border-[var(--color-border-subtle)]'
+            : 'bg-transparent py-6'
         }
       `}
     >
@@ -63,18 +85,20 @@ const Navbar = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={`/${item.href}`}
+              onClick={(e) => handleNavClick(e, item.href)}
               className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <Button
-            href={ctaButton.href}
+            to={`/${ctaButton.href}`}
             variant="primary"
             className="text-sm px-6 py-2.5 rounded-full"
+            onClick={(e) => handleNavClick(e, ctaButton.href)}
           >
             {ctaButton.label}
           </Button>
@@ -102,17 +126,20 @@ const Navbar = () => {
           >
             <div className="flex flex-col justify-center items-center h-full gap-8 px-8">
               {navItems.map((item, index) => (
-                <motion.a
+                <motion.div
                   key={item.label}
-                  href={item.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-3xl font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  {item.label}
-                </motion.a>
+                  <Link
+                    to={`/${item.href}`}
+                    className="text-3xl font-bold text-[var(--color-text-primary)] hover:text-[var(--color-accent-primary)] transition-colors"
+                    onClick={(e) => handleNavClick(e, item.href)}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -121,10 +148,10 @@ const Navbar = () => {
                 className="mt-4"
               >
                 <Button
-                  href={ctaButton.href}
+                  to={`/${ctaButton.href}`}
                   variant="primary"
                   className="px-10 py-4 text-lg"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, ctaButton.href)}
                 >
                   {ctaButton.label}
                 </Button>

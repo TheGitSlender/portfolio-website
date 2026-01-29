@@ -17,28 +17,22 @@ const CustomCursor = () => {
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
+  const isMobileOrTouch = () =>
+    typeof window !== 'undefined' && (
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(max-width: 768px)').matches
+    );
+
   const [isVisible, setIsVisible] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(isMobileOrTouch);
 
   useEffect(() => {
-    // Detect touch/mobile devices
-    const checkTouchDevice = () => {
-      const hasTouchScreen =
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        window.matchMedia('(pointer: coarse)').matches;
-
-      setIsTouchDevice(hasTouchScreen);
-    };
-
-    checkTouchDevice();
-
-    // Also check on resize in case device orientation/mode changes
-    window.addEventListener('resize', checkTouchDevice);
-
-    return () => {
-      window.removeEventListener('resize', checkTouchDevice);
-    };
+    const check = () => setIsTouchDevice(isMobileOrTouch());
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   useEffect(() => {

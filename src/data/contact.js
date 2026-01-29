@@ -48,9 +48,9 @@ export const platformStyles = {
   Twitter: {
     isDark: false,
     color: '#1DA1F2',
-    bgClass: 'bg-white',
+    bgClass: 'bg-[var(--color-surface-card)]',
     textClass: 'text-[var(--color-text-primary)]',
-    borderClass: 'border-black/5',
+    borderClass: 'border-[var(--color-border-subtle)]',
   },
 };
 
@@ -61,9 +61,9 @@ export const getPlatformStyle = (platform) => {
   return platformStyles[platform] || {
     isDark: false,
     color: 'var(--color-accent-primary)',
-    bgClass: 'bg-white',
+    bgClass: 'bg-[var(--color-surface-card)]',
     textClass: 'text-[var(--color-text-primary)]',
-    borderClass: 'border-black/5',
+    borderClass: 'border-[var(--color-border-subtle)]',
   };
 };
 

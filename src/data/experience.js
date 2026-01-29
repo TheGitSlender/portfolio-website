@@ -14,9 +14,9 @@
  * Actual imports happen in the component to keep data files clean.
  */
 export const experienceImageMap = {
-  'scale-ai': 'outlier_experience.png',
-  '3d-smart-factory': '3d_CV_experience.jpg',
-  'ai-club-president': 'president_experience.png',
+  'scale-ai': 'outlier_experience.webp',
+  '3d-smart-factory': '3d_CV_experience.webp',
+  'ai-club-president': 'president_experience.webp',
 };
 
 // =============================================================================
@@ -39,7 +39,7 @@ export const experiences = [
 The interesting part? Seeing exactly where state-of-the-art models struggle. That knowledge shapes how I architect my own ML systems.`,
     skills: ['Python', 'C/C++', 'Java', 'Debugging', 'AI Research'],
     type: 'work',
-    image: 'outlier_experience.png',
+    image: 'outlier_experience.webp',
   },
   {
     id: '3d-smart-factory',
@@ -55,7 +55,7 @@ The interesting part? Seeing exactly where state-of-the-art models struggle. Tha
     description: `Implemented Superpoint Transformer for 3D point cloud segmentation. Mainly training AI to understand indoor scenes from laser scans. Processed 30GB+ of Stanford's 3D dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. Built a real-time Streamlit demo where you upload a 3D scan and get instant segmentation results. The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.`,
     skills: ['PyTorch', 'Lightning AI', '3D Computer Vision', 'Streamlit', 'Weights & Biases', 'Linux'],
     type: 'work',
-    image: '3d_CV_experience.jpg',
+    image: '3d_CV_experience.webp',
   },
   {
     id: 'ai-club-president',
@@ -73,7 +73,7 @@ Leading 200+ students through hands-on ML workshops, Python, computer vision, NL
 Also coordinate team projects and run monthly technical sessions on everything from reinforcement learning to MLOps.`,
     skills: ['Leadership', 'Python', 'Machine Learning', 'Strategic Planning'],
     type: 'leadership',
-    image: 'president_experience.png',
+    image: 'president_experience.webp',
   },
 ];
 

@@ -22,7 +22,7 @@ const DomainAccordion = ({ domain, index, isOpen, toggle }) => {
     <div
       className={`
         mb-4 transition-all duration-500 rounded-[2rem] overflow-hidden
-        ${isOpen ? 'bg-white shadow-2xl' : 'bg-white shadow-sm hover:shadow-md'}
+        ${isOpen ? 'bg-[var(--color-surface-card)] shadow-2xl' : 'bg-[var(--color-surface-card)] shadow-sm hover:shadow-md'}
       `}
     >
       {/* Accordion Header */}
@@ -45,7 +45,7 @@ const DomainAccordion = ({ domain, index, isOpen, toggle }) => {
               p-4 rounded-2xl transition-all duration-500
               ${isOpen
                 ? 'bg-[var(--color-accent-primary)] text-white shadow-[0_10px_20px_rgba(255,55,0,0.3)]'
-                : 'text-[var(--color-accent-primary)] bg-white shadow-sm'
+                : 'text-[var(--color-accent-primary)] bg-[var(--color-surface-card)] shadow-sm'
               }
             `}
           >
@@ -54,7 +54,7 @@ const DomainAccordion = ({ domain, index, isOpen, toggle }) => {
           <motion.div
             animate={{ rotate: isOpen ? 90 : 0 }}
             transition={{ duration: durations.fast }}
-            className={`transition-colors duration-500 ${isOpen ? 'text-[var(--color-text-primary)]' : 'text-gray-300'}`}
+            className={`transition-colors duration-500 ${isOpen ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-muted)]'}`}
           >
             <ChevronRight size={24} />
           </motion.div>
@@ -99,12 +99,12 @@ const DomainAccordion = ({ domain, index, isOpen, toggle }) => {
                     return (
                       <div
                         key={i}
-                        className="flex items-center gap-3 p-4 bg-gray-50/50 border border-gray-100 rounded-2xl shadow-sm hover:border-[var(--color-accent-primary)]/20 transition-all hover:bg-white"
+                        className="flex items-center gap-3 p-4 bg-[var(--color-surface-muted)] border border-[var(--color-border-default)] rounded-2xl shadow-sm hover:border-[var(--color-accent-primary)]/20 transition-all hover:bg-[var(--color-surface-card)]"
                       >
                         <div className="text-[var(--color-accent-primary)]">
                           <ToolIcon size={18} strokeWidth={2.5} />
                         </div>
-                        <span className="text-sm font-bold text-gray-800">
+                        <span className="text-sm font-bold text-[var(--color-text-primary)]">
                           {tool.name}
                         </span>
                       </div>
