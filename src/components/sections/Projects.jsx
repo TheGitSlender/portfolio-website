@@ -1,17 +1,26 @@
+/**
+ * Projects Section
+ *
+ * Displays featured projects in an infinite scrolling carousel.
+ * Each project card links to its detail page.
+ */
+
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Card from '../ui/Card';
 import TiltCard from '../ui/TiltCard';
 import SectionHeader from '../ui/SectionHeader';
 import { getFeaturedProjects } from '../../data/projects';
-import { Link } from 'react-router-dom';
 
 // Carousel images
-import wazuhCarousel from '../../assets/pictures/wazuh_carousel.jpg';
-import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.png';
-import ctfCarousel from '../../assets/pictures/carousel_ctf.png';
+import wazuhCarousel from '../../assets/pictures/wazuh_carousel.webp';
+import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.webp';
+import ctfCarousel from '../../assets/pictures/carousel_ctf.webp';
 
+/**
+ * Image mapping for project carousel
+ */
 const carouselImages = {
   'wazuh-llm': wazuhCarousel,
   '3d-segmentator': segmentatorCarousel,
@@ -20,12 +29,13 @@ const carouselImages = {
 
 const Projects = () => {
   const featuredProjects = getFeaturedProjects();
-  // Double the list for a seamless loop [A, B, C, A, B, C]
+  // Duplicate for seamless infinite loop
   const duplicatedProjects = [...featuredProjects, ...featuredProjects];
 
   return (
     <section id="projects" className="py-[var(--space-xl)] bg-[var(--color-bg-primary)] overflow-hidden">
       <div className="container-main">
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-[var(--space-lg)] gap-8">
           <SectionHeader
             title="Selected Work."
@@ -37,24 +47,19 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* Carousel Viewport - Themed Grey Container */}
+        {/* Carousel Container */}
         <div
-          className="relative bg-white rounded-[32px] p-6 md:p-10 border border-gray-100 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] overflow-hidden"
-          style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}
+          className="relative bg-[var(--color-surface-card)] rounded-[2rem] p-6 md:p-10 border border-[var(--color-border-default)] shadow-[0_20px_50px_-20px_rgba(0,0,0,0.08)] overflow-hidden"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {/* Carousel Track - Uses translateX for GPU acceleration & smoothness */}
+          {/* Carousel Track */}
           <motion.div
             className="flex gap-8 w-max"
-            animate={{
-              x: [0, "-50%"]
-            }}
+            animate={{ x: [0, '-50%'] }}
             transition={{
-              duration: 25, // Adjust for speed
-              ease: "linear",
-              repeat: Infinity
+              duration: 25,
+              ease: 'linear',
+              repeat: Infinity,
             }}
           >
             {duplicatedProjects.map((project, index) => (
@@ -65,15 +70,16 @@ const Projects = () => {
               >
                 <Link to={`/project/${project.id}`} className="block group/card h-full">
                   <Card
-                    className="h-full p-0 overflow-hidden border-gray-100 group-hover/card:border-[var(--color-accent-primary)]/30 bg-white transition-all duration-500 rounded-[24px] flex flex-col group-hover/card:shadow-xl"
+                    className="h-full p-0 overflow-hidden border-[var(--color-border-default)] group-hover/card:border-[var(--color-accent-primary)]/30 bg-[var(--color-surface-card)] transition-all duration-500 rounded-[24px] flex flex-col group-hover/card:shadow-xl"
                     hover={false}
                   >
-                    <div className="aspect-[16/9] bg-[#121212] relative overflow-hidden">
+                    {/* Image Section */}
+                    <div className="aspect-[16/9] bg-[var(--color-text-primary)] relative overflow-hidden">
                       <div className="absolute inset-0 bg-black/40 group-hover/card:bg-black/0 transition-colors duration-500 z-10" />
 
-                      {/* Project Badge */}
+                      {/* Category Badge */}
                       <div className="absolute top-4 left-4 z-20">
-                        <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-white px-2.5 py-1 rounded-full text-black">
+                        <span className="text-[9px] font-black uppercase tracking-[0.2em] bg-white px-2.5 py-1 rounded-full text-[#121212]">
                           {project.category.split(' & ')[0]}
                         </span>
                       </div>
@@ -83,7 +89,7 @@ const Projects = () => {
                         <ArrowUpRight className="w-4 h-4" />
                       </div>
 
-                      {/* Background Visual */}
+                      {/* Background Image */}
                       {carouselImages[project.id] ? (
                         <img
                           src={carouselImages[project.id]}
@@ -101,6 +107,7 @@ const Projects = () => {
                       )}
                     </div>
 
+                    {/* Content Section */}
                     <div className="p-6 md:p-8 flex-1 flex flex-col">
                       <h3 className="text-sm md:text-base lg:text-lg font-bold text-[var(--color-text-primary)] group-hover/card:text-[var(--color-accent-primary)] transition-colors italic tracking-tight uppercase font-sans mb-3 leading-[1.2] line-clamp-3">
                         {project.title}
@@ -110,9 +117,13 @@ const Projects = () => {
                         {project.shortDescription}
                       </p>
 
-                      <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100 mt-auto">
-                        {project.technologies.slice(0, 3).map(tech => (
-                          <span key={tech} className="text-[8px] font-black uppercase tracking-widest text-gray-400">
+                      {/* Technologies */}
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-[var(--color-border-default)] mt-auto">
+                        {project.technologies.slice(0, 3).map((tech) => (
+                          <span
+                            key={tech}
+                            className="text-[8px] font-black uppercase tracking-widest text-[var(--color-text-muted)]"
+                          >
                             {tech}
                           </span>
                         ))}

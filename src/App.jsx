@@ -24,6 +24,9 @@ import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import NotFound from './pages/NotFound';
 
+// Favicon
+import logo from './assets/pictures/logo.png';
+
 /**
  * ScrollToTop Component
  * Scrolls to top of page on route change
@@ -46,6 +49,9 @@ function App() {
 
   return (
     <>
+      {/* React 19 document metadata */}
+      <link rel="icon" type="image/png" href={logo} />
+
       {/* Scroll restoration on route change */}
       <ScrollToTop />
 

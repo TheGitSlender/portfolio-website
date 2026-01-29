@@ -1,89 +1,92 @@
+/**
+ * Certifications Section
+ *
+ * Displays professional certifications and upcoming goals.
+ * Features stacked cards with hover effects and progress tracking.
+ */
+
 import { motion } from 'framer-motion';
-import { Cloud, BarChart, Shield, Cpu, Brain, ExternalLink } from 'lucide-react';
+import { Cloud, BarChart, Shield, Cpu, Brain } from 'lucide-react';
+import SectionBadge from '../ui/SectionBadge';
+import AnimatedHeading from '../ui/AnimatedHeading';
+import ProgressBar from '../ui/ProgressBar';
 import { certifications, upcomingGoals } from '../../data/certifications';
+import { fadeUp, cardHover, viewport, indexedDelay } from '../../config/animations';
 
-
-
+/**
+ * Decorative zigzag line for visual interest
+ */
 const ZigZagLine = ({ side = 'left' }) => {
   return (
-    <div className={`absolute top-0 bottom-0 w-4 flex flex-col justify-between py-12 ${side === 'left' ? '-left-8' : '-right-8'}`}>
+    <div
+      className={`
+        absolute top-0 bottom-0 w-4 flex flex-col justify-between py-12
+        ${side === 'left' ? '-left-8' : '-right-8'}
+      `}
+    >
       {[...Array(20)].map((_, i) => (
-        <div key={i} className="h-4 w-[2px] bg-[var(--color-accent-primary)] rotate-45 mb-4" />
+        <div
+          key={i}
+          className="h-4 w-[2px] bg-[var(--color-accent-primary)] rotate-45 mb-4"
+        />
       ))}
     </div>
   );
 };
 
+/**
+ * Icon mapping for certifications
+ */
+const IconMap = { Cloud, BarChart, Shield, Cpu, Brain };
 
 const Certifications = () => {
-  const IconMap = { Cloud, BarChart, Shield, Cpu, Brain };
-
   return (
-    <section id="certifications" className="py-24 bg-white relative overflow-hidden">
+    <section id="certifications" className="py-24 bg-[var(--color-bg-secondary)] relative overflow-hidden">
       <div className="container-main relative">
         {/* Header */}
-        <motion.div
-          className="mb-24"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-          }}
-        >
-          <motion.div
-            className="inline-flex items-center gap-2 bg-[#121212] rounded-full px-4 py-1.5 w-fit border border-white/10 shadow-lg mb-8"
-            variants={{
-              hidden: { opacity: 0, y: 20, scale: 0.9 },
-              visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } }
-            }}
-          >
-            <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] font-sans">// GLOBAL ACCOLADES //</span>
-          </motion.div>
-          <div className="overflow-hidden">
-            <motion.h2
-              className="text-5xl md:text-7xl font-black tracking-tighter leading-[0.85] mb-4"
-              variants={{
-                hidden: { y: "100%" },
-                visible: { y: 0, transition: { duration: 0.6, ease: [0.33, 1, 0.68, 1] } }
-              }}
-            >
-              Certifications <br />
-              <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
-            </motion.h2>
-          </div>
-        </motion.div>
+        <div className="mb-24">
+          <SectionBadge className="mb-8">// GLOBAL ACCOLADES //</SectionBadge>
+          <AnimatedHeading>
+            Certifications <br />
+            <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
+          </AnimatedHeading>
+        </div>
 
         {/* Stacked Cards Container */}
         <div className="relative max-w-5xl mx-auto px-4 md:px-16">
-          {/* Vertical Stripped Lines - Hidden on mobile */}
+          {/* Decorative Lines - Hidden on mobile */}
           <div className="hidden md:block">
             <ZigZagLine side="left" />
             <ZigZagLine side="right" />
           </div>
 
+          {/* Certification Cards */}
           <div className="flex flex-col gap-8 md:gap-12">
             {certifications.map((cert, index) => {
               const Icon = IconMap[cert.icon] || Cloud;
               return (
                 <motion.div
                   key={cert.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{
-                    scale: 1.02,
-                    zIndex: 50,
-                    boxShadow: "0 30px 60px rgba(0,0,0,0.1)"
-                  }}
-                  className={`relative bg-[#F8F9FA] rounded-[2.5rem] p-10 md:p-12 border border-gray-100 flex flex-col md:flex-row items-center gap-8 transition-all duration-300 cursor-pointer w-full ${index % 2 === 0 ? 'md:-translate-x-8' : 'md:translate-x-8'
-                    }`}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewport}
+                  transition={indexedDelay(index)}
+                  whileHover={cardHover}
+                  className={`
+                    relative bg-[var(--color-surface-muted)] rounded-[2.5rem] p-10 md:p-12
+                    border border-[var(--color-border-default)] flex flex-col md:flex-row
+                    items-center gap-8 transition-all duration-300
+                    cursor-pointer w-full
+                    ${index % 2 === 0 ? 'md:-translate-x-8' : 'md:translate-x-8'}
+                  `}
                 >
                   {/* Icon Circle */}
-                  <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow-md border border-gray-50 shrink-0">
-                    <Icon className="w-12 h-12 text-[var(--color-accent-primary)]" strokeWidth={1.2} />
+                  <div className="w-24 h-24 rounded-full bg-[var(--color-surface-card)] flex items-center justify-center shadow-md border border-[var(--color-border-subtle)] shrink-0">
+                    <Icon
+                      className="w-12 h-12 text-[var(--color-accent-primary)]"
+                      strokeWidth={1.2}
+                    />
                   </div>
 
                   {/* Content */}
@@ -91,13 +94,13 @@ const Certifications = () => {
                     <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-accent-primary)] mb-2 block">
                       {cert.title}
                     </span>
-                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">{cert.subtitle}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed max-w-2xl">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+                      {cert.subtitle}
+                    </h3>
+                    <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed max-w-2xl">
                       {cert.description}
                     </p>
                   </div>
-
-
                 </motion.div>
               );
             })}
@@ -106,35 +109,27 @@ const Certifications = () => {
 
         {/* Upcoming Goals */}
         <div className="mt-32 max-w-5xl mx-auto px-4 md:px-16">
-          <div className="bg-[#F8F9FA] rounded-[2.5rem] p-12 border border-gray-100">
-            <h3 className="text-2xl font-bold mb-8 italic tracking-tight font-sans">Upcoming Goals</h3>
+          <div className="bg-[var(--color-surface-muted)] rounded-[2.5rem] p-12 border border-[var(--color-border-default)]">
+            <h3 className="text-2xl font-bold mb-8 italic tracking-tight font-sans">
+              Upcoming Goals
+            </h3>
             {upcomingGoals.map((goal, i) => (
               <div key={i} className="space-y-6">
-                <p className="text-gray-600 text-base leading-relaxed max-w-3xl">
+                <p className="text-[var(--color-text-secondary)] text-base leading-relaxed max-w-3xl">
                   {goal.description.split(/(\*\*.*?\*\*)/).map((part, index) =>
                     part.startsWith('**') && part.endsWith('**') ? (
-                      <strong key={index} className="text-black font-bold">{part.slice(2, -2)}</strong>
+                      <strong key={index} className="text-[var(--color-text-primary)] font-bold">
+                        {part.slice(2, -2)}
+                      </strong>
                     ) : (
                       part
                     )
                   )}
                 </p>
-
-
-                <div className="relative pt-4">
-                  <div className="h-2 w-full bg-gray-200 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${goal.progress}%` }}
-                      transition={{ duration: 1.5, ease: "easeOut" }}
-                      className="h-full bg-[var(--color-accent-primary)]"
-                    />
-                  </div>
-                  <div className="flex justify-between mt-3">
-                    <span className="text-[11px] font-black text-gray-400 uppercase tracking-widest">Training Progress</span>
-                    <span className="text-[11px] font-black text-[var(--color-accent-primary)] uppercase tracking-widest">{goal.progress}% Complete</span>
-                  </div>
-                </div>
+                <ProgressBar
+                  progress={goal.progress}
+                  label="Training Progress"
+                />
               </div>
             ))}
           </div>
