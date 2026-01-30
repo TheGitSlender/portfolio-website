@@ -18,6 +18,9 @@ import wazuhCarousel from '../../assets/pictures/wazuh_carousel.webp';
 import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.webp';
 import ctfCarousel from '../../assets/pictures/carousel_ctf.webp';
 
+/** Carousel card height in pixels — adjust this single value to resize all cards */
+const CARD_HEIGHT = 430;
+
 /**
  * Image mapping for project carousel
  */
@@ -65,16 +68,17 @@ const Projects = () => {
             {duplicatedProjects.map((project, index) => (
               <TiltCard
                 key={`${project.id}-${index}`}
-                className="w-[260px] md:w-[300px] lg:w-[340px] shrink-0 flex flex-col h-full"
+                className="w-[260px] md:w-[300px] lg:w-[340px] shrink-0 flex flex-col"
+                style={{ height: CARD_HEIGHT }}
                 intensity={6}
               >
                 <Link to={`/project/${project.id}`} className="block group/card h-full">
                   <Card
-                    className="h-full p-0 overflow-hidden border-[var(--color-border-default)] group-hover/card:border-[var(--color-accent-primary)]/30 bg-[var(--color-surface-card)] transition-all duration-500 rounded-[24px] flex flex-col group-hover/card:shadow-xl"
+                    className="h-full !p-0 overflow-hidden !border-[var(--color-border-default)] group-hover/card:border-[var(--color-accent-primary)]/30 transition-all duration-500 flex flex-col group-hover/card:shadow-xl"
                     hover={false}
                   >
                     {/* Image Section */}
-                    <div className="aspect-[16/9] bg-[var(--color-text-primary)] relative overflow-hidden">
+                    <div className="aspect-[16/9] bg-[var(--color-text-primary)] relative overflow-hidden rounded-t-[24px]">
                       <div className="absolute inset-0 bg-black/40 group-hover/card:bg-black/0 transition-colors duration-500 z-10" />
 
                       {/* Category Badge */}

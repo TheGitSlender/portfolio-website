@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 /**
  * TiltCard - Wrapper component that adds 3D tilt effect on hover
  */
-const TiltCard = ({ children, className = '', intensity = 8 }) => {
+const TiltCard = ({ children, className = '', intensity = 8, style }) => {
   const ref = useRef(null);
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
 
@@ -41,7 +41,7 @@ const TiltCard = ({ children, className = '', intensity = 8 }) => {
         rotateY: tilt.rotateY,
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      style={{ transformPerspective: 1000, transformStyle: "preserve-3d" }}
+      style={{ transformPerspective: 1000, transformStyle: "preserve-3d", ...style }}
       className={className}
     >
       {children}
