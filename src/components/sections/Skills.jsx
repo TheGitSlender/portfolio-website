@@ -21,7 +21,7 @@ const Skills = () => {
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
           <div className="max-w-3xl">
             <SectionBadge className="mb-6">
-              // SKILLSET STACKS //
+              // SKILLSET STACK //
             </SectionBadge>
             <AnimatedHeading>
               Technical Depth.
