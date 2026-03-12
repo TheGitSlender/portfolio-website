@@ -17,6 +17,9 @@ import { getFeaturedProjects } from '../../data/projects';
 import wazuhCarousel from '../../assets/pictures/wazuh_carousel.webp';
 import segmentatorCarousel from '../../assets/pictures/3d_CV_carousel.webp';
 import ctfCarousel from '../../assets/pictures/carousel_ctf.webp';
+import medicoreCarousel from '../../assets/pictures/medicore_carousel.png';
+import aegisCarousel from '../../assets/pictures/aegis_carousel.png';
+import callpilotCarousel from '../../assets/pictures/callpilot_carousel.png';
 
 /** Carousel card height in pixels — adjust this single value to resize all cards */
 const CARD_HEIGHT = 430;
@@ -28,6 +31,9 @@ const carouselImages = {
   'wazuh-llm': wazuhCarousel,
   '3d-segmentator': segmentatorCarousel,
   'ctf-achievements': ctfCarousel,
+  'medicore': medicoreCarousel,
+  'aegis': aegisCarousel,
+  'callpilot': callpilotCarousel,
 };
 
 const Projects = () => {
