@@ -17,7 +17,7 @@ export const personalInfo = {
   title: "AI Engineer | Cybersecurity & Cloud Engineering Student",
 
   // Hero tagline (1-2 sentences)
-  tagline: "I'm Hany, an AI Engineer building intelligent systems at the intersection of machine learning, cybersecurity, and cloud infrastructure. Currently a 4th student at ENSAM Casablanca in my penultimate year, I strive to learn more about the MLOps field everyday. Feel fee to reach out anytime!",
+  tagline: "I'm Hany, an AI Engineer building intelligent systems at the intersection of machine learning, cybersecurity, and cloud infrastructure. Currently a 4th year student at ENSAM Casablanca in my penultimate year, I strive to learn more about the MLOps field everyday. Feel free to reach out anytime!",
 
   // Full bio for About section (2-3 paragraphs)
   bio: `I'm a fourth-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca with a deep passion for artificial intelligence. My journey spans computer vision, reinforcement learning, and deep learning, where I've worked on projects ranging from 3D point cloud segmentation to network intrusion detection systems.
