@@ -28,13 +28,13 @@ const DomainAccordion = ({ domain, index, isOpen, toggle }) => {
       {/* Accordion Header */}
       <button
         onClick={toggle}
-        className="w-full text-left p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+        className="w-full text-left p-5 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6"
       >
         <div className="flex flex-col gap-2">
           <span className="text-[var(--color-accent-primary)] text-[10px] font-black uppercase tracking-[0.2em]">
             DOMAIN 0{index + 1}
           </span>
-          <h3 className="text-3xl md:text-4xl font-black tracking-tighter text-[var(--color-text-primary)] uppercase">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tighter text-[var(--color-text-primary)] uppercase">
             {domain.title}
           </h3>
         </div>
@@ -70,7 +70,7 @@ const DomainAccordion = ({ domain, index, isOpen, toggle }) => {
             exit={accordionContent.exit}
             transition={accordionContent.transition}
           >
-            <div className="px-8 pb-12 pt-4 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div className="px-5 md:px-8 pb-8 md:pb-12 pt-4 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
               {/* Core Architecture */}
               <div>
                 <h4 className="text-[var(--color-accent-primary)] text-sm font-black uppercase tracking-[0.1em] mb-8">
