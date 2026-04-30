@@ -15,10 +15,10 @@ const Skills = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="skills" className="py-24 bg-[var(--color-bg-primary)]">
+    <section id="skills" className="py-[var(--space-xl)] bg-[var(--color-bg-primary)]">
       <div className="container-main">
         {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-[var(--space-lg)] gap-8">
           <div className="max-w-3xl">
             <SectionBadge className="mb-6">
               // SKILLSET STACK //

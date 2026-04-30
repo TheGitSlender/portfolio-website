@@ -20,7 +20,7 @@ import {
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 bg-[var(--color-bg-primary)]">
+    <section id="contact" className="py-[var(--space-xl)] bg-[var(--color-bg-primary)]">
       <div className="container-main">
         {/* Main Container */}
         <motion.div

@@ -16,6 +16,9 @@ import { pageTransition } from '../config/animations';
 import wazuhDetail from '../assets/pictures/llm_project_details.webp';
 import segmentatorDetail from '../assets/pictures/3d_CV_projectdetails.webp';
 import ctfDetail from '../assets/pictures/ctf_project_details.webp';
+import medicoreDetail from '../assets/pictures/medicore_consultation.png';
+import aegisDetail from '../assets/pictures/aegis_page.png';
+import callpilotDetail from '../assets/pictures/callpilot_mainpage.png';
 
 /**
  * Image mapping for project details
@@ -24,6 +27,9 @@ const detailImages = {
   'wazuh-llm': wazuhDetail,
   '3d-segmentator': segmentatorDetail,
   'ctf-achievements': ctfDetail,
+  'medicore': medicoreDetail,
+  'aegis': aegisDetail,
+  'callpilot': callpilotDetail,
 };
 
 /**
@@ -147,26 +153,24 @@ const ProjectDetail = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="w-full aspect-video md:aspect-[21/9] bg-[var(--color-surface-card)] rounded-[var(--radius-2xl)] mb-24 relative overflow-hidden flex items-center justify-center shadow-xl border border-[var(--color-border-default)]">
+        <div className="w-full bg-[var(--color-surface-card)] rounded-[var(--radius-2xl)] mb-24 overflow-hidden shadow-xl border border-[var(--color-border-default)]">
           {detailImages[id] ? (
             <img
               src={detailImages[id]}
               alt={title}
-              className={`
-                absolute inset-0 w-full h-full object-cover
-                ${id === 'wazuh-llm' ? 'object-[center_70%]' : ''}
-                ${id === 'ctf-achievements' ? 'object-[center_30%]' : ''}
-              `}
+              className={`h-auto block ${id === 'medicore' ? 'max-h-[600px] mx-auto' : 'w-full'}`}
             />
           ) : (
-            <div className="text-center relative z-10">
-              <h2 className="text-[var(--color-text-primary)] text-4xl md:text-6xl font-bold mb-4">
-                {title}
-              </h2>
-              <div className="h-16 w-1 bg-gradient-to-b from-gray-300 to-transparent mx-auto mb-2" />
-              <p className="text-[var(--color-text-secondary)] text-xs tracking-[0.3em] uppercase">
-                Advanced Technology // Real-world Impact
-              </p>
+            <div className="aspect-video flex items-center justify-center">
+              <div className="text-center">
+                <h2 className="text-[var(--color-text-primary)] text-4xl md:text-6xl font-bold mb-4">
+                  {title}
+                </h2>
+                <div className="h-16 w-1 bg-gradient-to-b from-gray-300 to-transparent mx-auto mb-2" />
+                <p className="text-[var(--color-text-secondary)] text-xs tracking-[0.3em] uppercase">
+                  Advanced Technology // Real-world Impact
+                </p>
+              </div>
             </div>
           )}
         </div>

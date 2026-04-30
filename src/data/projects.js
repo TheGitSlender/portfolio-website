@@ -17,6 +17,9 @@ export const carouselImageMap = {
   'wazuh-llm': 'wazuh_carousel.webp',
   '3d-segmentator': '3d_CV_carousel.webp',
   'ctf-achievements': 'carousel_ctf.webp',
+  'medicore': 'medicore_carousel.png',
+  'aegis': 'aegis_carousel.png',
+  'callpilot': 'callpilot_carousel.png',
 };
 
 /**
@@ -26,6 +29,9 @@ export const detailImageMap = {
   'wazuh-llm': 'llm_project_details.webp',
   '3d-segmentator': '3d_CV_projectdetails.webp',
   'ctf-achievements': 'ctf_project_details.webp',
+  'medicore': 'medicore_consultation.png',
+  'aegis': 'aegis_page.png',
+  'callpilot': 'callpilot_mainpage.png',
 };
 
 // =============================================================================
@@ -147,6 +153,123 @@ export const projects = [
     impact: 'Demonstrated advanced problem-solving and security analysis skills in competitive environments.',
     date: '2023-2024',
     duration: 'Ongoing',
+  },
+  {
+    id: 'medicore',
+    featured: true,
+    title: 'MediCore — Clinical AI Safety Assistant',
+    shortDescription: 'Real-time medication safety checking during ward rounds using voice AI and Mistral OCR — 10th place worldwide at Mistral AI Hackathon.',
+    fullDescription: `Medication errors are among the most preventable causes of patient harm. During fast-paced ward rounds, doctors juggle handwritten charts, verbal histories, and prescriptions — making safety conflicts easy to miss.
+    MediCore eliminates this gap: upload a patient chart (PDF, handwritten, or photo), and Mistral OCR extracts all entities (allergies, medications, diagnosis). A voice session then opens with an ElevenLabs AI agent that has full patient context. When the doctor mentions a drug, the system instantly evaluates safety against the patient's allergies and current medications using Mistral Large, and responds in real time.`,
+    architectureDescription: `Chart upload triggers a two-step Mistral pipeline: OCR (mistral-ocr-latest) extracts text from any format, then Mistral Large (temperature=0) parses structured entities. A UUID session is created and passed to ElevenLabs Conversational AI via WebSocket proxy. Mid-conversation, ElevenLabs webhooks hit /check-safety with the drug name; the backend evaluates and returns {is_safe, issue, recommendation} before the agent continues speaking.`,
+    category: 'Healthcare AI & Voice',
+    tags: ['Healthcare AI', 'Voice AI', 'OCR', 'FastAPI', 'React', 'ElevenLabs', 'Mistral AI'],
+    thumbnail: '/assets/images/projects/medicore-thumbnail.webp',
+    carouselImage: 'wazuh_carousel.webp',
+    detailImage: 'llm_project_details.webp',
+    images: [],
+    highlights: [
+      { title: '10th Place Worldwide', description: 'Top 10 finish at the Mistral AI Hackathon out of global submissions' },
+      { title: 'Real-Time Safety Verdicts', description: 'Deterministic LLM evaluation of drug safety mid-conversation, before the doctor finishes speaking' },
+      { title: 'Multi-Format Chart OCR', description: 'Handles PDFs, handwritten notes, photos, and scanned documents via Mistral OCR' },
+      { title: 'Voice-First Clinical UX', description: 'Bidirectional WebSocket proxy to ElevenLabs gives doctors a natural conversation with full patient context' },
+    ],
+    techStack: [
+      { label: 'AI', value: 'Mistral Large' },
+      { label: 'VOICE', value: 'ElevenLabs' },
+      { label: 'BACKEND', value: 'FastAPI' },
+    ],
+    metrics: [
+      { label: 'Hackathon Rank', value: 'Top 10' },
+      { label: 'Scope', value: 'Worldwide' },
+      { label: 'Latency', value: 'Real-time' },
+    ],
+    technologies: ['Python', 'FastAPI', 'Mistral AI', 'ElevenLabs', 'React', 'TypeScript', 'Vite'],
+    links: {
+      github: 'https://github.com/mar1shell/MediCore',
+      demo: null,
+    },
+    impact: 'Automates medication safety validation at the point of prescription, reducing the risk of preventable drug errors during ward rounds.',
+    date: '2026',
+    duration: 'Hackathon',
+  },
+  {
+    id: 'aegis',
+    featured: true,
+    title: 'Aegis — AI Policy Intelligence Platform',
+    shortDescription: 'Evidence-based AI policy simulator for Moroccan policymakers — selected to present at AI Spring School alongside Yann LeCun and Michael Jordan.',
+    fullDescription: `Policymakers in developing nations lack accessible tools to understand AI governance, study international precedents, and predict policy impacts before committing to legislation. Aegis fills that gap for Morocco.
+    The platform combines a RAG-powered concept chatbot (with Morocco-specific context), a searchable library of 8 international case studies (EU AI Act, Singapore, Rwanda, etc.), and an impact simulator: describe a proposed policy, and the system finds the 5 most similar real-world policies, aggregates their outcomes, GDP-adjusts the metrics to Morocco's context, and generates a narrative analysis across 5 impact dimensions.`,
+    architectureDescription: `Fully local inference stack — no cloud lock-in. BM25 full-text search over JSON data files (concepts, case studies, Morocco context) loaded at startup. RAG retrieves relevant policy concepts, then Groq Llama-3.3-70B generates responses in <2 seconds. The impact simulator uses deterministic similarity scoring and weighted metric aggregation before an LLM generates the narrative. Frontend is React 19 + Vite deployed on Vercel; backend is FastAPI.`,
+    category: 'AI Policy & Governance',
+    tags: ['AI Policy', 'RAG', 'LLM', 'FastAPI', 'React', 'Governance', 'Morocco'],
+    thumbnail: '/assets/images/projects/aegis-thumbnail.webp',
+    carouselImage: '3d_CV_carousel.webp',
+    detailImage: '3d_CV_projectdetails.webp',
+    images: [],
+    highlights: [
+      { title: 'AI Spring School Selection', description: 'Selected to present at a 500+ attendee venue with Yann LeCun, Michael Jordan, and Joëlle Barral (Google DeepMind) as speakers' },
+      { title: 'Evidence-Based Impact Simulation', description: 'Predicts 5 policy impact dimensions using GDP-adjusted outcomes from 8 validated international case studies' },
+      { title: 'Morocco-Contextualized RAG', description: "Chatbot explains AI policy concepts tailored to Morocco's legal, economic, and language context" },
+      { title: 'Fully Local Inference', description: '<2s response times with Groq Llama-3.3-70B — no cloud dependency after startup' },
+    ],
+    techStack: [
+      { label: 'LLM', value: 'Llama 3.3-70B' },
+      { label: 'SEARCH', value: 'BM25 RAG' },
+      { label: 'BACKEND', value: 'FastAPI' },
+    ],
+    metrics: [
+      { label: 'Case Studies', value: '8 Nations' },
+      { label: 'Response Time', value: '<2s' },
+      { label: 'Venue', value: '500+ Attendees' },
+    ],
+    technologies: ['Python', 'FastAPI', 'Groq', 'Llama 3.3', 'BM25', 'React', 'Vite', 'Tailwind CSS'],
+    links: {
+      github: 'https://github.com/TheGitSlender/Aegis',
+      demo: null,
+    },
+    impact: 'Democratizes AI policy analysis for developing nations, enabling data-driven governance decisions without expensive consulting firms or cloud dependency.',
+    date: '2026',
+    duration: '2 months',
+  },
+  {
+    id: 'callpilot',
+    featured: true,
+    title: 'CallPilot — AI Voice Appointment Agent',
+    shortDescription: 'Voice-driven appointment booking that autonomously calls up to 15 providers in parallel, scores availability, and syncs to Google Calendar.',
+    fullDescription: `Booking appointments still means spending 15-30 minutes on hold, calling providers one by one. CallPilot eliminates that entirely.
+    Speak your appointment need to an ElevenLabs voice agent; it searches nearby providers via Google Places, launches up to 15 parallel inquiry calls simultaneously to gather availability and insurance info, scores each provider across 5 dimensions, and presents you with the best options. Confirm your pick — it makes the booking call and creates your Google Calendar event automatically.`,
+    architectureDescription: `Three-tier system: React/Expo web+mobile frontend, ElevenLabs Conversational AI orchestrator (with injected dynamic variables per call), and a FastAPI backend. The backend manages a campaign state machine (CREATED → SEARCHING → CALLING → SCORING → PRESENTING → BOOKED), calls Google Places/Distance Matrix/Calendar APIs, and broadcasts real-time updates to the client via WebSocket. Scoring is deterministic (no LLM) — weighted by availability (40%), distance (20%), rating (15%), time match (10%), insurance (10%), call success (15%). Deployed on Google Cloud Run.`,
+    category: 'AI Agents & Voice',
+    tags: ['Voice AI', 'AI Agents', 'ElevenLabs', 'FastAPI', 'Google APIs', 'React Native', 'WebSockets'],
+    thumbnail: '/assets/images/projects/callpilot-thumbnail.webp',
+    carouselImage: 'carousel_ctf.webp',
+    detailImage: 'ctf_project_details.webp',
+    images: [],
+    highlights: [
+      { title: 'Parallel Inquiry Swarm', description: 'Launches up to 15 simultaneous provider calls via ElevenLabs Batch Calling API — no sequential waiting' },
+      { title: 'Smart Scoring Algorithm', description: 'Deterministic weighted ranking (availability, distance, rating, time match, insurance) returns a match % per provider' },
+      { title: 'Full Calendar Integration', description: 'Automatically creates Google Calendar events post-booking — zero manual data entry' },
+      { title: 'Web + Mobile', description: 'React web app + Expo React Native mobile app share the same backend and ElevenLabs voice SDK' },
+    ],
+    techStack: [
+      { label: 'VOICE', value: 'ElevenLabs' },
+      { label: 'MOBILE', value: 'React Native' },
+      { label: 'BACKEND', value: 'FastAPI' },
+    ],
+    metrics: [
+      { label: 'Parallel Calls', value: 'Up to 15' },
+      { label: 'APIs', value: 'Google Suite' },
+      { label: 'Interface', value: 'Web + Mobile' },
+    ],
+    technologies: ['Python', 'FastAPI', 'ElevenLabs', 'React', 'React Native', 'Expo', 'Google Cloud', 'SQLite', 'WebSockets'],
+    links: {
+      github: 'https://github.com/mar1shell/CallPilot',
+      demo: null,
+    },
+    impact: 'Reduces appointment booking from 15-30 minutes of manual phone calls to a single voice conversation, with intelligent provider selection and automatic calendar sync.',
+    date: '2026',
+    duration: 'Hackathon',
   },
 ];
 
