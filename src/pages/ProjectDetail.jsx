@@ -8,9 +8,10 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, Zap, Shield, Globe } from 'lucide-react';
-import { getProjectById, getNextProjectId } from '../data/projects';
+import { ArrowLeft, Zap, Shield, Globe } from 'lucide-react';
+import { getProjectById } from '../data/projects';
 import { pageTransition } from '../config/animations';
+import ProjectCarousel from '../components/sections/ProjectCarousel';
 
 // Project detail images
 import wazuhDetail from '../assets/pictures/llm_project_details.webp';
@@ -63,7 +64,6 @@ const ProjectDetail = () => {
     duration,
   } = project;
 
-  const nextProjectId = getNextProjectId(id);
 
   return (
     <motion.div
@@ -235,14 +235,13 @@ const ProjectDetail = () => {
           </div>
         </div>
 
-        {/* Next Project Navigation */}
-        <div className="flex justify-center pb-20">
-          <Link
-            to={`/project/${nextProjectId}`}
-            className="bg-[var(--color-surface-muted)] hover:bg-[var(--color-bg-tertiary)] transition-colors px-12 py-5 rounded-full text-sm font-bold uppercase tracking-widest flex items-center gap-3"
-          >
-            Next Project <ArrowUpRight size={18} />
-          </Link>
+        {/* More Projects Carousel */}
+        <div className="mb-20 overflow-hidden">
+          <span className="bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] text-xs font-bold px-2 py-1 uppercase mb-6 inline-block">
+            More Work
+          </span>
+          <h2 className="text-4xl font-bold mb-10">Explore Projects.</h2>
+          <ProjectCarousel />
         </div>
       </div>
     </motion.div>
