@@ -1,21 +1,11 @@
-/**
- * Certifications Section
- *
- * Displays professional certifications and upcoming goals.
- * Features stacked cards with hover effects and progress tracking.
- */
-
 import { motion } from 'framer-motion';
-import { Cloud, BarChart, Shield, Cpu, Brain } from 'lucide-react';
+import { Cloud, Shield, Cpu, Brain } from 'lucide-react';
 import SectionBadge from '../ui/SectionBadge';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import ProgressBar from '../ui/ProgressBar';
 import { certifications, upcomingGoals } from '../../data/certifications';
 import { fadeUp, cardHover, viewport, indexedDelay } from '../../config/animations';
 
-/**
- * Decorative zigzag line for visual interest
- */
 const ZigZagLine = ({ side = 'left' }) => {
   return (
     <div
@@ -34,10 +24,7 @@ const ZigZagLine = ({ side = 'left' }) => {
   );
 };
 
-/**
- * Icon mapping for certifications
- */
-const IconMap = { Cloud, BarChart, Shield, Cpu, Brain };
+const IconMap = { Cloud, Shield, Cpu, Brain };
 
 const Certifications = () => {
   return (
