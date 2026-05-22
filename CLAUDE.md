@@ -33,12 +33,13 @@ This is a React portfolio website for Hany El Atlassi (AI Engineer) using Vite, 
 ### Component Organization
 
 - `/components/layout/` - Header, Footer, Layout wrapper
-- `/components/sections/` - Hero, About, Experience, Projects, Skills, Certifications, Contact
-- `/components/ui/` - Reusable primitives (Button, Card, Badge, SectionHeading, ProjectCard, AnimatedSection)
-- `/components/effects/` - Animation wrappers (ParallaxSection, MouseFollower)
+- `/components/sections/` - Hero, About, Experience, Projects, Skills, Certifications, Contact, **ProjectCarousel** (shared)
+- `/components/ui/` - Reusable primitives (Button, Card, Badge, SectionHeader, TiltCard, AnimatedSection)
 - `/pages/` - Route-level components (Home, ProjectDetail, NotFound)
-- `/hooks/` - Custom hooks for scroll animations and parallax
+- `/hooks/` - `useReducedMotion`, `useTheme`, `useMagnetic`
 - `/utils/` - Framer Motion animation variants and helpers
+
+`ProjectCarousel` is used in both `Projects.jsx` (home section) and `ProjectDetail.jsx` (bottom of project pages). To add a new project image to the carousel, add an entry to the `carouselImages` map in `ProjectCarousel.jsx` keyed by `project.id`.
 
 ### Design System
 
@@ -56,3 +57,19 @@ Use Framer Motion for all animations. Key patterns:
 - Stagger children: `staggerChildren: 0.1` in container variants
 
 Components should check `prefers-reduced-motion` and disable animations accordingly.
+
+### ProjectCarousel Gesture System
+
+The carousel uses **window-level pointer listeners** instead of Framer Motion's `drag` prop. This is intentional — Framer Motion's gesture system intercepts child element click events, making card navigation impossible. The pattern:
+
+1. `onPointerDown` on the `motion.div` track starts a gesture and registers `pointermove`/`pointerup` on `window`
+2. All mutable gesture state lives in `drag = useRef({...})` to avoid stale closure issues
+3. Navigation (`useNavigate`) fires on `pointerup` only when `totalMoved <= DRAG_THRESHOLD` (8 px) — distinguishing a click from a drag
+4. Cards use a plain `<div data-project-id={id}>` wrapper (not a React component) so `e.target.closest('[data-project-id]')` reliably finds it in the DOM
+5. The `<Link>` inside each card has `onClick={e => e.preventDefault()}` — it exists only to provide `href` for right-click → "Open in new tab"
+6. Auto-scroll uses `useAnimationFrame` + `useMotionValue` imperatively; pauses while `drag.current.active`
+7. Infinite loop: array is duplicated 2×, and `x` wraps at both `0` (drag right) and `-halfWidth` (drag left / auto-scroll)
+
+### Deployment
+
+Hosted on GitHub Pages. Because it's a client-side SPA with `BrowserRouter`, direct navigation to `/project/:id` returns a 404 from GitHub Pages (no server-side routing). This is a known open issue — the fix requires either a `404.html` redirect hack or switching to `HashRouter`.
