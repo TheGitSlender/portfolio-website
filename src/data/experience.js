@@ -25,8 +25,25 @@ export const experienceImageMap = {
 
 export const experiences = [
   {
+    id: 'app-attijari',
+    role: 'AI/ML Engineering Intern',
+    company: 'Attijari Payment (APP)',
+    companyUrl: null,
+    location: 'Casablanca, Morocco (On-site)',
+    period: {
+      start: 'Jul 2026',
+      end: 'Present',
+    },
+    current: true,
+    description: `Designing a multi-agent system to automate operational incident handling: supervisor-worker orchestration over LangGraph, retrieval-grounded diagnosis, and a human approval gate enforced directly in the state graph.
+Built a simulated department environment (ticketing, database, internal mail) to develop and evaluate agents on synthetic data, fully on-premise with local models and zero external API calls.`,
+    skills: ['LangGraph', 'Multi-Agent Systems', 'RAG', 'Python', 'On-Premise AI'],
+    type: 'work',
+    image: null,
+  },
+  {
     id: 'scale-ai',
-    role: 'AI Trainer',
+    role: 'AI Trainer, Code Specialist',
     company: 'Outlier.ai - Alignerr',
     companyUrl: null,
     location: 'San Francisco, California (Remote)',
@@ -35,9 +52,9 @@ export const experiences = [
       end: 'Present',
     },
     current: true,
-    description: `I design coding challenges that break AI models, then evaluate and fix their responses. Think of it as quality control for autonomous coding systems, finding edge cases, identifying logic flaws, and refactoring messy code into production-grade solutions across Python, C/C++, and Java.
+    description: `I evaluate AI-generated code for logic correctness, edge cases, and optimization across model families, and assess agentic behavior and function-calling decisions. Focused on failure modes in tool chaining, hallucinated API calls, and malformed structured output across Python, C/C++, and Java.
 The interesting part? Seeing exactly where state-of-the-art models struggle. That knowledge shapes how I architect my own ML systems.`,
-    skills: ['Python', 'C/C++', 'Java', 'Debugging', 'AI Research'],
+    skills: ['Python', 'C/C++', 'Java', 'Agentic AI', 'AI Research'],
     type: 'work',
     image: 'outlier_experience.webp',
   },
@@ -48,11 +65,11 @@ The interesting part? Seeing exactly where state-of-the-art models struggle. Tha
     companyUrl: null,
     location: 'Casablanca, Morocco',
     period: {
-      start: 'Jul 2024',
+      start: 'Jun 2024',
       end: 'Sep 2024',
     },
     current: false,
-    description: `Implemented Superpoint Transformer for 3D point cloud segmentation. Mainly training AI to understand indoor scenes from laser scans. Processed 30GB+ of Stanford's 3D dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. Built a real-time Streamlit demo where you upload a 3D scan and get instant segmentation results. The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.`,
+    description: `Implemented Superpoint Transformer for 3D point cloud segmentation, end-to-end from raw preprocessing to a deployed real-time Streamlit demo. Processed 30GB+ of Stanford's 3D Indoor Scenes dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.`,
     skills: ['PyTorch', 'Lightning AI', '3D Computer Vision', 'Streamlit', 'Weights & Biases', 'Linux'],
     type: 'work',
     image: '3d_CV_experience.webp',
@@ -60,7 +77,7 @@ The interesting part? Seeing exactly where state-of-the-art models struggle. Tha
   {
     id: 'ai-club-president',
     role: 'President',
-    company: 'AI Club - ENSAM Casablanca',
+    company: 'CIAM AI Club - ENSAM Casablanca',
     companyUrl: null,
     location: 'Casablanca, Morocco',
     period: {

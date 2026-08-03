@@ -14,17 +14,17 @@
 export const personalInfo = {
   // Basic Info
   name: "Hany El Atlassi",
-  title: "AI Engineer | Cybersecurity & Cloud Engineering Student",
+  title: "ML Engineer | AI & Cloud Engineer",
 
   // Hero tagline (1-2 sentences)
-  tagline: "I'm Hany, an AI Engineer building intelligent systems at the intersection of machine learning, cybersecurity, and cloud infrastructure. Currently a 4th year student at ENSAM Casablanca in my penultimate year, I strive to learn more about the MLOps field everyday. Feel free to reach out anytime!",
+  tagline: "I'm Hany, an ML Engineer building and deploying AI systems on AWS — voice pipelines, multi-agent orchestration, federated learning, and the security infrastructure underneath. Final-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca, open to opportunities and relocation. Feel free to reach out anytime!",
 
   // Full bio for About section (2-3 paragraphs)
-  bio: `I'm a fourth-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca with a deep passion for artificial intelligence. My journey spans computer vision, reinforcement learning, and deep learning, where I've worked on projects ranging from 3D point cloud segmentation to network intrusion detection systems.
+  bio: `I'm an AI & Cloud engineer with hands-on experience building and deploying ML systems on AWS: voice pipelines, multi-agent orchestration, federated learning, and the security infrastructure underneath it. I'm in my final (5th) year of the Cybersecurity & Cloud Engineering program at ENSAM Casablanca (2022–2027, GPA 3.7/4.0), where my academic specialization gives me a security-first lens on everything I build.
 
-As the President of the AI Club at ENSAM, I lead a community of over 200 members, organizing workshops, hackathons, and collaborative projects that bridge the gap between theoretical knowledge and practical application. My experience includes working as an AI Trainer at Scale AI and completing a machine learning internship focused on 3D computer vision.
+My journey spans computer vision, reinforcement learning, and deep learning, with projects ranging from 3D point cloud segmentation to network intrusion detection, federated meta-learning for speech recognition, and multi-agent orchestration systems for operational automation. As the President of the AI Club at ENSAM, I led a community of over 200 members through workshops, hackathons, and collaborative projects bridging theory and practice.
 
-Beyond AI, I'm an active participant in cybersecurity competitions, consistently ranking in the top 3% worldwide in CTF challenges. This polyvalent background allows me to approach problems from multiple angles, combining security-first thinking with cutting-edge AI solutions.`,
+Beyond AI, I'm an active participant in cybersecurity competitions, consistently ranking in the top 3% worldwide in CTF challenges. This polyvalent background lets me approach problems from multiple angles, combining security-first thinking with cutting-edge AI solutions — and I'm open to relocating for the right opportunity.`,
 
   // Contact Information
   email: "elatlassi.hany@gmail.com",
@@ -37,7 +37,7 @@ Beyond AI, I'm an active participant in cybersecurity competitions, consistently
   // Availability status
   availability: {
     status: "open", // "open", "limited", "unavailable"
-    message: "Open to opportunities",
+    message: "Open to opportunities, including relocation",
     seeking: ["AI/ML Engineering", "Internships", "Consulting", "Speaking"],
   },
 
@@ -45,7 +45,7 @@ Beyond AI, I'm an active participant in cybersecurity competitions, consistently
   // These appear as animated counters
   stats: [
     {
-      value: "4+",
+      value: "5+",
       label: "Years Experience",
       description: "University & practical experience in AI/ML",
     },

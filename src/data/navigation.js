@@ -9,6 +9,7 @@ export const navItems = [
   { label: 'Experience', href: '#experience' },
   { label: 'Stack', href: '#skills' },
   { label: 'Work', href: '#projects' },
+  { label: 'Achievements', href: '#achievements' },
   { label: 'Certifications', href: '#certifications' },
 ];
 
