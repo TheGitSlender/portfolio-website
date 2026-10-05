@@ -8,7 +8,6 @@
 import { ArrowUpRight, MoveHorizontal } from 'lucide-react';
 import ProjectCarousel from '../projects/ProjectCarousel';
 import SectionIntro from '../ui/SectionIntro';
-import Reveal from '../motion/Reveal';
 import { getFeaturedProjects } from '../../data/projects';
 import { getSocialLink } from '../../data/contact';
 
@@ -25,15 +24,15 @@ const Projects = () => (
       />
     </div>
 
-    <Reveal className="mt-[clamp(3rem,6vw,5rem)]">
+    <div className="mt-[clamp(3rem,6vw,5rem)]">
       <ProjectCarousel />
-    </Reveal>
+    </div>
 
     <div className="container-main mt-10 flex flex-wrap items-center justify-between gap-4">
       <p className="eyebrow flex items-center gap-3 text-fg-subtle">
         <MoveHorizontal size={14} className="text-accent" />
-        Drag to explore · <span className="text-fg">{String(getFeaturedProjects().length).padStart(2, '0')}</span>{' '}
-        projects
+        Drag to explore ·{' '}
+        <span className="text-fg">{String(getFeaturedProjects().length).padStart(2, '0')}</span> projects
       </p>
       {github && (
         <a

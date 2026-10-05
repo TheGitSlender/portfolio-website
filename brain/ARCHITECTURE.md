@@ -29,8 +29,8 @@ Content is fully separated from components — components import and render, nev
 
 ## Components
 - `layout/` — `Navbar` (hide on scroll down, local time, rolling links, theme toggle, CTA; full-screen ink menu on mobile), `Footer` (ink, link columns, back-to-top, giant wordmark), `Layout`, `LocalTime`
-- `motion/` — `SmoothScroll`, `Preloader`, `PageTransition`, `SplitText`, `ScrollRevealText`, `RotatingWords`, `VelocityMarquee`, `RollText`, `Counter`, `Reveal`, `ParallaxImage` (photos; crops while drifting), `ImageReveal` (screenshots; ends uncropped), `Cursor`, `ScrollProgress`
-- `sections/` — `Hero` (+ `DotField` ambient canvas, non-interactive; `CircularBadge`), `TickerTape`, `About`, `Experience` (+ `ExperienceEntry`, `ExperienceVisuals`: `ScanRadar`, `MetricCompare`), `Projects`, `Achievements`, `Skills`, `Certifications`, `Contact`
+- `motion/` — `SmoothScroll`, `Preloader`, `PageTransition`, `SplitText`, `ScrollRevealText`, `RotatingWords`, `VelocityMarquee`, `RollText`, `Counter`, `Reveal`, `ParallaxImage` (About portrait), `Cursor`, `ScrollProgress`
+- `sections/` — `Hero` (annotated: `hero/HeroParts`, `hero/HeroLayout`, `hero/HeroNotes`; `DotField` ambient canvas; `CircularBadge`), `TickerTape`, `About`, `Experience` (+ `ExperienceEntry`, `ExperienceVisuals`: `ScanRadar`, `MetricCompare`), `Projects`, `Achievements`, `Skills`, `Certifications`, `Contact`
 - `projects/` — `ProjectCarousel` (Home + project pages, `excludeId`), `ProjectCard`, `ProjectCover`
 - `ui/` — `SectionIntro` (+ `Eyebrow`), `ThemeToggle` (View Transitions circular reveal), `icons.js` (explicit Lucide registry; don't `import * as LucideIcons`)
 - `hooks/` — `useReducedMotion`, `useMediaQuery`/`useFinePointer`, `useScrollTo`, `useSectionNav`, `useLocalTime`, `IntroContext`/`useIntro`, `ThemeProvider`/`useTheme`

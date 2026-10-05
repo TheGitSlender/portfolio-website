@@ -1,11 +1,11 @@
 /**
  * Hero Data
  *
- * Copy for the hero options. Facts come from the other data files; this
- * file only holds hero-specific flavour text.
+ * Copy for the hero's hand-drawn notes. Facts come from the other data
+ * files; this file only holds hero-specific flavour text.
  */
 
-/** Hand-written margin notes for the "Annotated" hero */
+/** Hand-written margin notes around the name */
 export const heroNotes = {
   // Next to the first name
   intro: "hi, that's me",
@@ -14,14 +14,3 @@ export const heroNotes = {
   // Above the CTA; filled from the top achievement
   winPrefix: 'psst —',
 };
-
-/**
- * Illustrative utterances for the "Voice wave" hero, one per voice project.
- * Each links to the project it represents.
- */
-export const voiceSamples = [
-  { text: 'Walk me through how you would shard this service.', projectId: 'interviewforge' },
-  { text: 'The patient is allergic to penicillin. Is amoxicillin safe?', projectId: 'medicore' },
-  { text: 'When should I irrigate the olive grove this week?', projectId: 'jarvislfla7' },
-  { text: 'Find me a dentist tomorrow morning, within five kilometres.', projectId: 'callpilot' },
-];

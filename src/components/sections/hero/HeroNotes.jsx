@@ -1,15 +1,13 @@
 /**
- * Hero option: Annotated
+ * Hero notes
  *
- * Classic layout marked up by hand: accent margin notes and arrows that
+ * Hand-drawn annotations for the hero: accent margin notes and arrows that
  * draw themselves after the name lands ("hi, that's me", founder @ Axon,
  * the top hackathon win), plus a scribbled underline under the rotating
  * phrase. Notes tilt a little on hover; the Axon note links out.
  */
 
 import { motion } from 'framer-motion';
-import ClassicLayout from './ClassicLayout';
-import { HeroShell } from './HeroParts';
 import { heroNotes } from '../../../data/hero';
 import { experiences } from '../../../data/experience';
 import { achievements } from '../../../data/achievements';
@@ -54,7 +52,7 @@ const Ink = ({ children, className = '', as = 'div' }) => {
 };
 
 /** Right of "Hany": a looping arrow back to the name + "hi, that's me" */
-const IntroNote = () => (
+export const IntroNote = () => (
   <Ink className="flex h-full items-center gap-2">
     <svg aria-hidden="true" viewBox="0 0 170 100" className="h-24 w-40 shrink-0 -scale-x-100 rotate-6">
       <motion.path
@@ -75,7 +73,7 @@ const IntroNote = () => (
 );
 
 /** Left of "El Atlassi": founder note with an arrow pointing at the name */
-const FounderNote = () => (
+export const FounderNote = () => (
   <Ink className="flex h-full items-center justify-end gap-3">
     <motion.a
       href={founder.companyUrl}
@@ -98,7 +96,7 @@ const FounderNote = () => (
 );
 
 /** Scribbled double underline under the rotating phrase */
-const Underline = () => (
+export const Underline = () => (
   <Ink as="span" className="pointer-events-none absolute -bottom-2 left-0 right-0 block h-4">
     <svg aria-hidden="true" viewBox="0 0 300 16" preserveAspectRatio="none" className="h-full w-full">
       <motion.path
@@ -117,7 +115,7 @@ const Underline = () => (
 );
 
 /** Under the buttons: the top win, with an arrow up to "See the work" */
-const WinNote = () => (
+export const WinNote = () => (
   <Ink className="pointer-events-none absolute left-6 top-full mt-2 hidden items-start gap-1 md:flex">
     <svg aria-hidden="true" viewBox="0 0 60 50" className="h-11 w-14 shrink-0">
       <motion.path {...PATH_PROPS} variants={stroke(2.5, 0.6)} d="M46 44 C 30 40, 14 28, 12 8" />
@@ -131,19 +129,3 @@ const WinNote = () => (
     </motion.p>
   </Ink>
 );
-
-const HeroAnnotated = () => (
-  <HeroShell>
-    {(progress) => (
-      <ClassicLayout
-        progress={progress}
-        corner={<IntroNote />}
-        lead={<FounderNote />}
-        statementDecoration={<Underline />}
-        introNote={<WinNote />}
-      />
-    )}
-  </HeroShell>
-);
-
-export default HeroAnnotated;

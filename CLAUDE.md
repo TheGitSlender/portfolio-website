@@ -37,9 +37,9 @@ This is a React portfolio website for Hany El Atlassi (AI & Security Engineer, f
 ### Component Organization
 
 - `/components/layout/` - Navbar (hide-on-scroll, mobile menu), Footer, Layout, LocalTime
-- `/components/motion/` - Motion primitives: SmoothScroll, Preloader, PageTransition, SplitText, ScrollRevealText, RotatingWords, VelocityMarquee, RollText, Counter, Reveal, ParallaxImage (photos), ImageReveal (uncropped screenshots), Cursor, ScrollProgress
-- `/components/sections/hero/` - Hero options being compared, all built on the Classic composition (`ClassicLayout` with measured slots beside the name): Classic, Annotated (hand-drawn notes, `font-hand` = Caveat), Project deck, ASCII (`AsciiKnot`), Voice wave. `Hero.jsx` picks one via `?hero=<id>` and shows a TEMPORARY `HeroOptionPicker` — remove the picker, the unchosen options (and Caveat if Annotated isn't chosen) once the owner decides
-- `/components/sections/` - Hero (switcher), DotField ambient canvas, CircularBadge, TickerTape, About, Experience (+ ExperienceEntry, ExperienceVisuals), Projects, Achievements, Skills, Certifications, Contact
+- `/components/motion/` - Motion primitives: SmoothScroll, Preloader, PageTransition, SplitText, ScrollRevealText, RotatingWords, VelocityMarquee, RollText, Counter, Reveal, ParallaxImage (About portrait), Cursor, ScrollProgress
+- `/components/sections/hero/` - Hero internals: `HeroParts` (shell with dot field + meta row, statement, CTAs, badge), `HeroLayout` (split name with measured slots beside it), `HeroNotes` (hand-drawn annotations, `font-hand` = Caveat, copy in `data/hero.js`)
+- `/components/sections/` - Hero (annotated), DotField ambient canvas, CircularBadge, TickerTape, About, Experience (+ ExperienceEntry, ExperienceVisuals), Projects, Achievements, Skills, Certifications, Contact
 - `/components/projects/` - ProjectCarousel (shared by Home and ProjectDetail), ProjectCard, ProjectCover
 - `/components/ui/` - SectionIntro (+ Eyebrow), ThemeToggle, icons registry
 - `/pages/` - Route-level components (Home, ProjectDetail, NotFound)
@@ -64,7 +64,7 @@ Framer Motion for component animation, Lenis for scroll. Key patterns:
 - Hover: CSS `group/roll` + `RollText` only on real buttons (filled or outlined); plain text links (nav, footer, inline) just change color, `data-cursor="Label"` to show a labelled cursor (`data-cursor-variant="ink"` where the hover fill is accent). No magnetic/cursor-following buttons (owner's preference)
 - Programmatic scrolling must go through `useScrollTo` / `useSectionNav` (they use Lenis when active)
 
-Performance rules (scroll smoothness was profiled): animate entrances with whole `transform`/`opacity` values wrapped in `tf()` from `config/animations.js` (hardware-accelerated WAAPI; `tf` returns 'none' for reduced motion because Framer's reducedMotion only covers x/y/scale shorthands) — avoid x/y/scale shorthands for scroll-triggered animations; no `will-change` on per-letter spans; no `backdrop-filter` or CSS `mask-image` on elements that move or sit over animated content (use gradient overlays); prefer gradients to `filter: blur()` on animated layers; images are WebP sized for their slot with `decoding="async"`.
+Performance rules (scroll smoothness was profiled): animate entrances with whole `transform`/`opacity` values wrapped in `tf()` from `config/animations.js` (hardware-accelerated WAAPI; `tf` returns 'none' for reduced motion because Framer's reducedMotion only covers x/y/scale shorthands) — avoid x/y/scale shorthands for scroll-triggered animations; no `will-change` on per-letter spans; no `backdrop-filter` or CSS `mask-image` on elements that move or sit over animated content (use gradient overlays); prefer gradients to `filter: blur()` on animated layers; images are WebP sized for their slot; project images (covers, detail screenshots) are deliberately static — no reveal, zoom or drift — and load eagerly.
 
 Reduced motion: `MotionConfig reducedMotion="user"` disables transform animations globally; Lenis, the preloader, marquees, the hero dot-field animation (static frame) and the carousel's auto-scroll are skipped.
 
