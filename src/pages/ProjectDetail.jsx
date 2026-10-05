@@ -2,7 +2,7 @@
  * ProjectDetail Page
  *
  * Long-form case study for one project: Back button, kinetic title, meta
- * strip, a cover that wipes in uncropped, overview, metrics, architecture,
+ * strip, the cover image (shown as-is), overview, metrics, architecture,
  * numbered highlights, impact quote, and a "keep exploring" carousel of the
  * other projects with a second Back button.
  */
@@ -15,7 +15,6 @@ import SplitText from '../components/motion/SplitText';
 import RollText from '../components/motion/RollText';
 import Reveal from '../components/motion/Reveal';
 import Counter from '../components/motion/Counter';
-import ImageReveal from '../components/motion/ImageReveal';
 import ProjectCover from '../components/projects/ProjectCover';
 import ProjectCarousel from '../components/projects/ProjectCarousel';
 import { Eyebrow } from '../components/ui/SectionIntro';
@@ -38,23 +37,20 @@ const DetailCover = ({ project }) => {
   }
   if (media.fit === 'contain') {
     return (
-      <Reveal className="flex justify-center rounded-[2rem] bg-surface-muted p-6 md:p-12">
+      <div className="flex justify-center rounded-[2rem] bg-surface-muted p-6 md:p-12">
         <img
           src={media.src}
           alt={project.title}
           className="max-h-[75vh] w-auto rounded-2xl shadow-lift"
           draggable={false}
-          decoding="async"
         />
-      </Reveal>
+      </div>
     );
   }
   return (
-    <ImageReveal
-      src={media.src}
-      alt={project.title}
-      className="rounded-[2rem] border border-line bg-surface-muted shadow-card"
-    />
+    <div className="overflow-hidden rounded-[2rem] border border-line bg-surface-muted shadow-card">
+      <img src={media.src} alt={project.title} draggable={false} className="block h-auto w-full" />
+    </div>
   );
 };
 
@@ -106,9 +102,9 @@ const MoreProjects = ({ currentId }) => (
         <BackButton solid />
       </Reveal>
     </div>
-    <Reveal className="mt-12">
+    <div className="mt-12">
       <ProjectCarousel excludeId={currentId} />
-    </Reveal>
+    </div>
   </section>
 );
 

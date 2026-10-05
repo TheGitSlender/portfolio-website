@@ -1,9 +1,9 @@
 /**
- * Hero building blocks shared by every hero option.
+ * Hero building blocks.
  *
- * HeroShell owns the full-viewport section, the optional ambient dot field,
- * the meta row and the scroll-away (scale + fade). It passes the section's
- * scroll progress to its children so options can add their own parallax.
+ * HeroShell owns the full-viewport section, the ambient dot field, the meta
+ * row and the scroll-away (scale + fade). It passes the section's scroll
+ * progress to its children for parallax.
  */
 
 import { useRef } from 'react';
@@ -50,11 +50,11 @@ const MetaRow = () => {
   );
 };
 
-export const HeroShell = ({ children, dots = true, scaleOnScroll = true }) => {
+export const HeroShell = ({ children }) => {
   const { introDone } = useIntro();
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, scaleOnScroll ? 0.9 : 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const opacity = useTransform(scrollYProgress, [0, 0.75], [1, 0]);
 
   return (
@@ -63,16 +63,14 @@ export const HeroShell = ({ children, dots = true, scaleOnScroll = true }) => {
       id="top"
       className="relative flex min-h-[100svh] flex-col overflow-hidden pb-8 pt-[calc(var(--nav-h)+1.5rem)]"
     >
-      {dots && (
-        <motion.div
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: introDone ? 1 : 0 }}
-          transition={{ duration: 2, ease: ease.smooth, delay: 0.4 }}
-        >
-          <DotField />
-        </motion.div>
-      )}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: introDone ? 1 : 0 }}
+        transition={{ duration: 2, ease: ease.smooth, delay: 0.4 }}
+      >
+        <DotField />
+      </motion.div>
 
       <motion.div
         style={{ scale, opacity }}
@@ -82,21 +80,6 @@ export const HeroShell = ({ children, dots = true, scaleOnScroll = true }) => {
         {typeof children === 'function' ? children(scrollYProgress) : children}
       </motion.div>
     </section>
-  );
-};
-
-/** Two-line kinetic name. `split` right-aligns the surname on desktop. */
-export const HeroName = ({ className = '', split = false, style }) => {
-  const { introDone } = useIntro();
-  return (
-    <motion.h1 style={style} className={`font-semibold leading-[0.84] tracking-[-0.06em] ${className}`}>
-      <span className="block">
-        <SplitText text={personalInfo.firstName} play={introDone} delay={0.1} stagger={0.045} />
-      </span>
-      <span className={`block ${split ? 'md:text-right' : ''}`}>
-        <SplitText text={personalInfo.lastName} play={introDone} delay={0.3} stagger={0.045} />
-      </span>
-    </motion.h1>
   );
 };
 

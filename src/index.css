@@ -220,17 +220,6 @@ html.dark {
   }
 }
 
-/* Slow drifting glow used by generated project covers */
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(14%, -12%) scale(1.18);
-  }
-}
-
 /* Live status pulse */
 @keyframes pulse-ring {
   0% {

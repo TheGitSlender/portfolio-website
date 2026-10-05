@@ -1,14 +1,13 @@
 /**
- * ClassicLayout
+ * HeroLayout
  *
- * The Classic hero composition (oversized split name, statement, CTAs,
- * badge) with optional slots that hero options use to fill the empty areas:
+ * The hero composition (oversized split name, statement, CTAs, badge) with
+ * optional slots for decorations in the empty areas:
  *
  * - corner: right of the first name, as tall as that line (desktop)
  * - lead:   left of the right-aligned surname, as tall as that line (desktop)
  * - statementDecoration: drawn around the rotating phrase
  * - introNote: positioned relative to the CTA block
- * - below:  shown under the copy on smaller screens instead of the slots
  *
  * Each name line is measured (ResizeObserver) and exposed as CSS variables
  * (--first-w, --last-w, --line-h), so slots track font loading and resizes.
@@ -23,13 +22,12 @@ import { useIntro } from '../../../hooks/IntroContext';
 
 const SLOT_GAP = '3rem';
 
-const ClassicLayout = ({
+const HeroLayout = ({
   progress,
   corner = null,
   lead = null,
   statementDecoration = null,
   introNote = null,
-  below = null,
 }) => {
   const { introDone } = useIntro();
   const wrapperRef = useRef(null);
@@ -99,10 +97,8 @@ const ClassicLayout = ({
           className="hidden justify-self-end md:col-span-1 md:col-start-12 md:block"
         />
       </HeroReveal>
-
-      {below && <div className="mt-10 lg:hidden">{below}</div>}
     </div>
   );
 };
 
-export default ClassicLayout;
+export default HeroLayout;
