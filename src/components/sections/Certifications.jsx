@@ -1,126 +1,109 @@
-import { motion } from 'framer-motion';
-import { Cloud, Shield, Cpu, Brain } from 'lucide-react';
-import SectionBadge from '../ui/SectionBadge';
-import AnimatedHeading from '../ui/AnimatedHeading';
-import ProgressBar from '../ui/ProgressBar';
-import { certifications, upcomingGoals } from '../../data/certifications';
-import { fadeUp, cardHover, viewport, indexedDelay } from '../../config/animations';
+/**
+ * Certifications Section
+ *
+ * Certificate cards with a pointer-following spotlight, plus the current
+ * learning goal with a progress bar that fills on view.
+ */
 
-const ZigZagLine = ({ side = 'left' }) => {
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import SectionIntro from '../ui/SectionIntro';
+import Reveal from '../motion/Reveal';
+import Counter from '../motion/Counter';
+import { getIcon } from '../ui/icons';
+import { certifications, upcomingGoals } from '../../data/certifications';
+import { ease, viewportOnce, tf } from '../../config/animations';
+
+const renderBold = (text) =>
+  text.split(/(\*\*.*?\*\*)/).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') ? (
+      <strong key={i} className="font-semibold text-fg">
+        {part.slice(2, -2)}
+      </strong>
+    ) : (
+      part
+    )
+  );
+
+const SpotlightCard = ({ children, className = '' }) => {
+  const ref = useRef(null);
+
+  const handleMove = (event) => {
+    const rect = ref.current.getBoundingClientRect();
+    ref.current.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+    ref.current.style.setProperty('--my', `${event.clientY - rect.top}px`);
+  };
+
   return (
     <div
-      className={`
-        absolute top-0 bottom-0 w-4 flex flex-col justify-between py-12
-        ${side === 'left' ? '-left-8' : '-right-8'}
-      `}
+      ref={ref}
+      onPointerMove={handleMove}
+      className={`group/spot relative overflow-hidden rounded-[1.5rem] border border-line bg-surface transition-[border-color,transform] duration-500 ease-expo hover:-translate-y-1 hover:border-accent/40 ${className}`}
     >
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className="h-4 w-[2px] bg-[var(--color-accent-primary)] rotate-45 mb-4"
-        />
-      ))}
+      <div className="spotlight pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/spot:opacity-100" />
+      <div className="relative h-full">{children}</div>
     </div>
   );
 };
 
-const IconMap = { Cloud, Shield, Cpu, Brain };
-
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-24 bg-[var(--color-bg-secondary)] relative overflow-hidden">
-      <div className="container-main relative">
-        {/* Header */}
-        <div className="mb-24">
-          <SectionBadge className="mb-8">// GLOBAL ACCOLADES //</SectionBadge>
-          <AnimatedHeading>
-            Certifications <br />
-            <span className="text-[var(--color-accent-primary)]">& Accolades.</span>
-          </AnimatedHeading>
+    <section id="certifications" className="relative py-[clamp(5rem,10vw,9rem)]">
+      <div className="container-main">
+        <SectionIntro index="06" label="Certifications" title="Always *learning*" />
+
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {certifications.map((cert, index) => {
+            const Icon = getIcon(cert.icon);
+            return (
+              <Reveal key={cert.id} delay={index * 0.08} className="h-full">
+                <SpotlightCard className="h-full">
+                  <div className="flex h-full flex-col p-7 md:p-8">
+                    <div className="flex items-center justify-between">
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-accent">
+                        <Icon size={22} strokeWidth={1.5} />
+                      </span>
+                      <span className="font-mono text-xs text-fg-subtle">{String(index + 1).padStart(2, '0')}</span>
+                    </div>
+                    <p className="eyebrow mt-10 text-accent">{cert.title}</p>
+                    <h3 className="mt-2 text-2xl font-semibold leading-tight tracking-[-0.03em]">{cert.subtitle}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-fg-muted">{cert.description}</p>
+                  </div>
+                </SpotlightCard>
+              </Reveal>
+            );
+          })}
         </div>
 
-        {/* Stacked Cards Container */}
-        <div className="relative max-w-5xl mx-auto px-4 md:px-16">
-          {/* Decorative Lines - Hidden on mobile */}
-          <div className="hidden md:block">
-            <ZigZagLine side="left" />
-            <ZigZagLine side="right" />
-          </div>
-
-          {/* Certification Cards */}
-          <div className="flex flex-col gap-8 md:gap-12">
-            {certifications.map((cert, index) => {
-              const Icon = IconMap[cert.icon] || Cloud;
-              return (
-                <motion.div
-                  key={cert.id}
-                  variants={fadeUp}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewport}
-                  transition={indexedDelay(index)}
-                  whileHover={cardHover}
-                  className={`
-                    relative bg-[var(--color-surface-muted)] rounded-[2.5rem] p-10 md:p-12
-                    border border-[var(--color-border-default)] flex flex-col md:flex-row
-                    items-center gap-8 transition-all duration-300
-                    cursor-pointer w-full
-                    ${index % 2 === 0 ? 'md:-translate-x-8' : 'md:translate-x-8'}
-                  `}
-                >
-                  {/* Icon Circle */}
-                  <div className="w-24 h-24 rounded-full bg-[var(--color-surface-card)] flex items-center justify-center shadow-md border border-[var(--color-border-subtle)] shrink-0">
-                    <Icon
-                      className="w-12 h-12 text-[var(--color-accent-primary)]"
-                      strokeWidth={1.2}
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 text-center md:text-left">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[var(--color-accent-primary)] mb-2 block">
-                      {cert.title}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
-                      {cert.subtitle}
-                    </h3>
-                    <p className="text-[var(--color-text-secondary)] text-sm leading-relaxed max-w-2xl">
-                      {cert.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Upcoming Goals */}
-        <div className="mt-32 max-w-5xl mx-auto px-4 md:px-16">
-          <div className="bg-[var(--color-surface-muted)] rounded-[2.5rem] p-12 border border-[var(--color-border-default)]">
-            <h3 className="text-2xl font-bold mb-8 italic tracking-tight font-sans">
-              Upcoming Goals
-            </h3>
-            {upcomingGoals.map((goal, i) => (
-              <div key={i} className="space-y-6">
-                <p className="text-[var(--color-text-secondary)] text-base leading-relaxed max-w-3xl">
-                  {goal.description.split(/(\*\*.*?\*\*)/).map((part, index) =>
-                    part.startsWith('**') && part.endsWith('**') ? (
-                      <strong key={index} className="text-[var(--color-text-primary)] font-bold">
-                        {part.slice(2, -2)}
-                      </strong>
-                    ) : (
-                      part
-                    )
-                  )}
+        {upcomingGoals.map((goal, i) => (
+          <Reveal key={i} className="mt-5">
+            <div className="grid gap-8 rounded-[1.5rem] border border-dashed border-line-strong p-7 md:grid-cols-12 md:items-center md:p-10">
+              <div className="md:col-span-7">
+                <p className="eyebrow mb-3 flex items-center gap-2 text-fg-subtle">
+                  <span className="pulse-dot relative h-1.5 w-1.5 rounded-full bg-accent" />
+                  In progress
                 </p>
-                <ProgressBar
-                  progress={goal.progress}
-                  label="Training Progress"
-                />
+                <p className="text-lg leading-relaxed text-fg-muted">{renderBold(goal.description)}</p>
               </div>
-            ))}
-          </div>
-        </div>
+              <div className="md:col-span-4 md:col-start-9">
+                <div className="flex items-baseline justify-between">
+                  <span className="eyebrow text-fg-subtle">Training progress</span>
+                  <Counter value={`${goal.progress}%`} className="text-3xl font-semibold tracking-[-0.04em]" />
+                </div>
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-line">
+                  <motion.div
+                    className="h-full origin-left rounded-full bg-accent"
+                    style={{ width: `${goal.progress}%` }}
+                    initial={{ transform: tf('scaleX(0)') }}
+                    whileInView={{ transform: tf('scaleX(1)') }}
+                    viewport={viewportOnce}
+                    transition={{ duration: 1.8, ease: ease.expo }}
+                  />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );

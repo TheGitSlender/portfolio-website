@@ -1,28 +1,26 @@
 /**
  * Layout Component
  *
- * Main layout wrapper that provides consistent structure across all pages.
+ * Persistent chrome around every route: scroll progress, cursor follower,
+ * film grain, navbar and footer. Pages swap inside <main>.
  */
 
 import Navbar from './Navbar';
 import Footer from './Footer';
-import CustomCursor from '../common/CustomCursor';
-import ThemeToggle from '../ui/ThemeToggle';
+import Cursor from '../motion/Cursor';
+import ScrollProgress from '../motion/ScrollProgress';
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--color-bg-primary)]">
-      <CustomCursor />
-      <ThemeToggle />
-      {/* Sticky header navigation */}
+    <div className="relative flex min-h-screen flex-col bg-bg">
+      <ScrollProgress />
+      <Cursor />
+      <div className="grain" aria-hidden="true" />
+
       <Navbar />
 
-      {/* Main content area */}
-      <main className="flex-grow pt-24">
-        {children}
-      </main>
+      <main className="flex-grow">{children}</main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

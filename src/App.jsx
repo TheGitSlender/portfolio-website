@@ -2,9 +2,9 @@
  * App Component
  *
  * Root application component that handles:
- * - Route definitions for all pages
- * - Layout wrapper for consistent page structure
- * - Scroll restoration on route change
+ * - Smooth scrolling (Lenis) and reduced-motion aware animation defaults
+ * - The first-visit preloader and the intro state hero entrances wait on
+ * - Route definitions with stair-wipe page transitions
  *
  * Routes:
  * - "/" : Home page (main portfolio)
@@ -12,12 +12,15 @@
  * - "*" : 404 Not Found page
  */
 
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, MotionConfig } from 'framer-motion';
 
-// Layout
+// Layout & motion shell
 import Layout from './components/layout/Layout';
+import SmoothScroll from './components/motion/SmoothScroll';
+import Preloader from './components/motion/Preloader';
+import { IntroContext } from './hooks/IntroContext';
 
 // Pages
 import Home from './pages/Home';
@@ -27,51 +30,71 @@ import NotFound from './pages/NotFound';
 // Favicon
 import logo from './assets/pictures/logo.png';
 
-/**
- * ScrollToTop Component
- * Scrolls to top of page on route change
- */
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
+const INTRO_KEY = 'intro-seen';
 
 /**
- * Main App Component
+ * The preloader plays once per session, only when landing on the home page,
+ * and never for users who prefer reduced motion.
  */
+const shouldPlayIntro = () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  if (window.location.pathname !== '/') return false;
+  try {
+    return sessionStorage.getItem(INTRO_KEY) !== '1';
+  } catch {
+    return true;
+  }
+};
+
 function App() {
   const location = useLocation();
+  const [showPreloader, setShowPreloader] = useState(shouldPlayIntro);
+  const [introDone, setIntroDone] = useState(() => !showPreloader);
+
+  const handleReveal = useCallback(() => {
+    setIntroDone(true);
+    try {
+      sessionStorage.setItem(INTRO_KEY, '1');
+    } catch {
+      // Storage blocked: the intro will simply play again next visit
+    }
+  }, []);
+
+  const handlePreloaderFinish = useCallback(() => setShowPreloader(false), []);
+
+  // Page transitions own scroll position; stop the browser restoring it
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) window.history.scrollRestoration = 'manual';
+  }, []);
+
+  const intro = useMemo(() => ({ introDone }), [introDone]);
 
   return (
-    <>
-      {/* React 19 document metadata */}
-      <link rel="icon" type="image/png" href={logo} />
+    <MotionConfig reducedMotion="user">
+      <SmoothScroll>
+        <IntroContext.Provider value={intro}>
+          {/* React 19 document metadata */}
+          <link rel="icon" type="image/png" href={logo} />
 
-      {/* Scroll restoration on route change */}
-      <ScrollToTop />
+          {showPreloader && <Preloader onReveal={handleReveal} onFinish={handlePreloaderFinish} />}
 
-      {/* Main layout wrapper with header and footer */}
-      <Layout>
-        {/* AnimatePresence for page transition animations */}
-        <AnimatePresence mode="wait">
-          <Routes location={location} key={location.pathname}>
-            {/* Home page - main portfolio */}
-            <Route path="/" element={<Home />} />
+          <Layout>
+            <AnimatePresence mode="wait">
+              <Routes location={location} key={location.pathname}>
+                {/* Home page - main portfolio */}
+                <Route path="/" element={<Home />} />
 
-            {/* Project detail page - dynamic route */}
-            <Route path="/project/:id" element={<ProjectDetail />} />
+                {/* Project detail page - dynamic route */}
+                <Route path="/project/:id" element={<ProjectDetail />} />
 
-            {/* 404 Not Found - catches all unmatched routes */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AnimatePresence>
-      </Layout>
-    </>
+                {/* 404 Not Found - catches all unmatched routes */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AnimatePresence>
+          </Layout>
+        </IntroContext.Provider>
+      </SmoothScroll>
+    </MotionConfig>
   );
 }
 

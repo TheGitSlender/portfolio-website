@@ -17,6 +17,9 @@ export const skillCategories = [
       { name: 'PyTorch', proficiency: 'advanced' },
       { name: 'TensorFlow', proficiency: 'advanced' },
       { name: 'Scikit-Learn', proficiency: 'advanced' },
+      { name: 'LangGraph', proficiency: 'advanced' },
+      { name: 'LangChain', proficiency: 'advanced' },
+      { name: 'Flower (Federated Learning)', proficiency: 'intermediate' },
       { name: 'Lightning AI', proficiency: 'advanced' },
       { name: 'Keras', proficiency: 'intermediate' },
     ],
@@ -42,6 +45,19 @@ export const skillCategories = [
       { name: 'Deep Learning', proficiency: 'advanced' },
       { name: 'CNNs / RNNs', proficiency: 'advanced' },
       { name: 'NLP', proficiency: 'intermediate' },
+      { name: 'Federated Learning', proficiency: 'advanced' },
+      { name: 'Multi-Agent Systems', proficiency: 'advanced' },
+    ],
+  },
+  {
+    name: 'Cloud & DevOps',
+    icon: 'Cloud',
+    skills: [
+      { name: 'AWS', proficiency: 'advanced' },
+      { name: 'Kubernetes', proficiency: 'intermediate' },
+      { name: 'Docker', proficiency: 'advanced' },
+      { name: 'Terraform', proficiency: 'intermediate' },
+      { name: 'ArgoCD', proficiency: 'intermediate' },
     ],
   },
   {
@@ -63,6 +79,7 @@ export const skillCategories = [
       { name: 'Network Analysis', proficiency: 'intermediate' },
       { name: 'NTFS Artifacts', proficiency: 'intermediate' },
       { name: 'Linux Bash Workflows', proficiency: 'advanced' },
+      { name: 'Prompt Injection Hardening', proficiency: 'intermediate' },
     ],
   },
   {
@@ -77,69 +94,117 @@ export const skillCategories = [
 ];
 
 // =============================================================================
-// SKILL DOMAINS (For accordion display)
+// SKILL DOMAINS (rendered as tabs)
 // =============================================================================
 
 /**
  * High-level skill domains with architecture and tools breakdown.
- * Used by the DomainAccordion component in the Skills section.
+ * Rendered as tabs by the Skills section.
  */
 export const skillDomains = [
   {
     id: 'ai',
     title: 'Artificial Intelligence',
+    shortTitle: 'AI',
     icon: 'Brain',
     architecture: [
       'Transformer Models & LLMs',
-      'Computer Vision Pipelines',
+      'Federated & Meta-Learning (FedAvg, MAML, LoRA)',
+      'Speech Recognition (Wav2Vec2, CTC)',
+      'Computer Vision & 3D Point Clouds',
       'Natural Language Processing',
       'Reinforcement Learning',
     ],
     tools: [
       { name: 'PyTorch', icon: 'Cpu' },
       { name: 'TensorFlow', icon: 'Zap' },
+      { name: 'Scikit-Learn', icon: 'Code' },
       { name: 'HuggingFace', icon: 'Globe' },
-      { name: 'LangChain', icon: 'Code' },
+      { name: 'Flower (Federated Learning)', icon: 'Network' },
       { name: 'Lightning AI', icon: 'Zap' },
+      { name: 'Weights & Biases', icon: 'Database' },
+      { name: 'Streamlit', icon: 'Box' },
       { name: 'Pinecone', icon: 'Database' },
+    ],
+  },
+  {
+    id: 'agents',
+    title: 'Voice & Agents',
+    shortTitle: 'Agents',
+    icon: 'Bot',
+    architecture: [
+      'Multi-Agent Orchestration (LangGraph)',
+      'Real-Time Voice Pipelines (STT → LLM → TTS)',
+      'Tool-Driven Investigation Agents',
+      'On-Premise LLMs with Zero Egress',
+      'Human-in-the-Loop & Audit Trails',
+      'Prompt Caching over RAG for Cost',
+    ],
+    tools: [
+      { name: 'LangGraph', icon: 'Code' },
+      { name: 'LangChain', icon: 'Code' },
+      { name: 'Ollama (local LLMs)', icon: 'Cpu' },
+      { name: 'Claude API', icon: 'Bot' },
+      { name: 'OpenAI Realtime', icon: 'Bot' },
+      { name: 'Mistral AI', icon: 'Bot' },
+      { name: 'Deepgram', icon: 'Mic' },
+      { name: 'Pipecat', icon: 'Mic' },
+      { name: 'LiveKit (WebRTC)', icon: 'Network' },
+      { name: 'Cartesia', icon: 'Mic' },
+      { name: 'ElevenLabs', icon: 'Mic' },
+      { name: 'BM25 Retrieval', icon: 'Database' },
     ],
   },
   {
     id: 'cloud',
     title: 'Cloud Architectures',
+    shortTitle: 'Cloud',
     icon: 'Cloud',
     architecture: [
-      'Container Orchestration',
-      'Distributed Systems',
-      'Multi-Cloud Strategy',
+      'Container Orchestration (Kubernetes)',
+      'Infrastructure as Code (Terraform)',
+      'GitOps Delivery (ArgoCD)',
       'Serverless Computing',
+      'Edge Security (Kong, Cloudflare WAF)',
+      'Sandboxed Code Execution (Judge0, gVisor)',
     ],
     tools: [
       { name: 'AWS', icon: 'Cloud' },
+      { name: 'Kubernetes', icon: 'Box' },
       { name: 'Docker', icon: 'Box' },
-      { name: 'GIT CI/CD', icon: 'Code' },
-      { name: 'n8n', icon: 'Zap' },
+      { name: 'Terraform', icon: 'Code' },
+      { name: 'ArgoCD', icon: 'Zap' },
+      { name: 'Git / GitHub CI/CD', icon: 'Code' },
+      { name: 'Linux', icon: 'Terminal' },
+      { name: 'Kong', icon: 'Network' },
+      { name: 'Cloudflare', icon: 'Shield' },
       { name: 'GCP', icon: 'Cloud' },
-      { name: 'MongoDB/ OracleDB', icon: 'Database' },
+      { name: 'n8n', icon: 'Zap' },
+      { name: 'MongoDB / OracleDB', icon: 'Database' },
     ],
   },
   {
     id: 'security',
     title: 'Cybersecurity',
+    shortTitle: 'Security',
     icon: 'Shield',
     architecture: [
-      'OS & Memory Forensics',
+      'AI Security Posture (ISO 42001, NIST AI RMF, OWASP)',
+      'Agent & MCP Server Security',
+      'Prompt Injection Hardening',
+      'OS, Memory & NTFS Forensics',
       'Network Traffic Analysis',
-      'Penetration Testing',
-      'Threat Modeling',
+      'PCI-DSS-Constrained Systems',
+      'Penetration Testing & Threat Modeling',
     ],
     tools: [
-      { name: 'Fortinet Security', icon: 'Shield' },
       { name: 'Volatility', icon: 'Cpu' },
-      { name: 'Wazuh (Open Source SIEM)', icon: 'Terminal' },
+      { name: 'Wireshark', icon: 'Network' },
       { name: 'Ghidra', icon: 'Code' },
       { name: 'Burp Suite', icon: 'Lock' },
-      { name: 'Wireshark', icon: 'Network' },
+      { name: 'Wazuh (Open Source SIEM)', icon: 'Terminal' },
+      { name: 'Fortinet Security', icon: 'Shield' },
+      { name: 'gVisor & seccomp', icon: 'Lock' },
     ],
   },
 ];

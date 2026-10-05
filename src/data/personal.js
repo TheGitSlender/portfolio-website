@@ -1,68 +1,95 @@
 /**
  * Personal Information Data
  *
- * Contains all personal/bio information for the portfolio:
- * - Name, title, tagline
- * - Full bio text
- * - Contact information
- * - Availability status
- * - Quick stats for About section
+ * Name, positioning, bio copy, quick facts and stats used across the site.
  *
- * Update this file to change personal information across the site.
+ * Copy supports a markdown-lite emphasis marker: wrap words in *asterisks*
+ * to render them in the italic serif accent (see utils/emphasis.js).
  */
 
 export const personalInfo = {
   // Basic Info
-  name: "Hany El Atlassi",
-  title: "AI Engineer | Cybersecurity & Cloud Engineering Student",
+  name: 'Hany El Atlassi',
+  firstName: 'Hany',
+  lastName: 'El Atlassi',
+  title: 'AI & Security Engineer',
 
-  // Hero tagline (1-2 sentences)
-  tagline: "I'm Hany, an AI Engineer building intelligent systems at the intersection of machine learning, cybersecurity, and cloud infrastructure. Currently a 4th year student at ENSAM Casablanca in my penultimate year, I strive to learn more about the MLOps field everyday. Feel free to reach out anytime!",
+  // Hero
+  heroStatement: 'AI & Security Engineer building',
+  heroRotatingWords: [
+    'secure AI infrastructure.',
+    'multi-agent systems.',
+    'real-time voice AI.',
+    'federated learning systems.',
+  ],
+  tagline:
+    'I build and deploy ML systems end to end: voice pipelines, multi-agent orchestration, federated learning, and the security infrastructure underneath all of it.',
 
-  // Full bio for About section (2-3 paragraphs)
-  bio: `I'm a fourth-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca with a deep passion for artificial intelligence. My journey spans computer vision, reinforcement learning, and deep learning, where I've worked on projects ranging from 3D point cloud segmentation to network intrusion detection systems.
+  // Preloader words (last one gets the accent)
+  introWords: ['Design', 'Build', 'Secure', 'Ship.'],
 
-As the President of the AI Club at ENSAM, I lead a community of over 200 members, organizing workshops, hackathons, and collaborative projects that bridge the gap between theoretical knowledge and practical application. My experience includes working as an AI Trainer at Scale AI and completing a machine learning internship focused on 3D computer vision.
+  // Marquee tape
+  focusAreas: [
+    'AI Security',
+    'Multi-Agent Systems',
+    'Real-Time Voice AI',
+    'Federated Learning',
+    'Cloud & Kubernetes',
+    'Digital Forensics',
+  ],
 
-Beyond AI, I'm an active participant in cybersecurity competitions, consistently ranking in the top 3% worldwide in CTF challenges. This polyvalent background allows me to approach problems from multiple angles, combining security-first thinking with cutting-edge AI solutions.`,
+  // About: scroll-revealed statement
+  manifesto:
+    'I build AI systems that *actually ship* — voice pipelines, multi-agent orchestration, federated learning — and the *security underneath* all of it. Right now I am founding *Axon,* an agentless security posture platform for the AI infrastructure organisations run.',
+
+  // About: supporting paragraphs
+  bio: [
+    "I'm a final-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca (2022–2027, GPA 3.7/4.0), working where machine learning meets security. This summer I built an on-premise incident-triage agent for card-payment operations at Attijari Payment; now I'm building Axon inside HackNation's Venture Lab (out of MIT).",
+    'Along the way: 3D point cloud segmentation, federated meta-learning for accented speech, real-time voice agents, and hackathon wins from AgorAI to HackAI. I grew ENSAM’s AI club to 200+ members, and I still play CTFs, because thinking like an attacker makes for better defensive AI.',
+  ],
+
+  // About: quick facts
+  facts: [
+    { label: 'Based in', value: 'Casablanca, Morocco' },
+    { label: 'Studying', value: 'Cybersecurity & Cloud Eng., ENSAM' },
+    { label: 'Speaks', value: 'English, French, Arabic' },
+    { label: 'Status', value: 'Open to work & relocation' },
+  ],
 
   // Contact Information
-  email: "elatlassi.hany@gmail.com",
-  phone: "+212642909790",
-  location: "Casablanca, Morocco",
-
-  // Profile photo path (update when actual photo is added)
-  photo: "/assets/images/profile.webp",
+  email: 'elatlassi.hany@gmail.com',
+  phone: '+212642909790',
+  location: 'Casablanca, Morocco',
+  timeZone: 'Africa/Casablanca',
 
   // Availability status
   availability: {
-    status: "open", // "open", "limited", "unavailable"
-    message: "Open to opportunities",
-    seeking: ["AI/ML Engineering", "Internships", "Consulting", "Speaking"],
+    status: 'open', // "open", "limited", "unavailable"
+    message: 'Open to work & relocation',
+    seeking: ['AI/ML Engineering', 'AI Security', 'Consulting', 'Speaking'],
   },
 
-  // Quick stats for About section
-  // These appear as animated counters
+  // Quick stats for the About section (animated counters)
   stats: [
     {
-      value: "4+",
-      label: "Years Experience",
-      description: "University & practical experience in AI/ML",
+      value: '94%',
+      label: 'Triage accuracy',
+      description: 'Tool-driven incident agent at Attijari Payment, vs 65% without tools',
     },
     {
-      value: "200+",
-      label: "AI Club Members",
-      description: "Led and mentored as Club President",
+      value: '~295×',
+      label: 'Less traffic',
+      description: 'Per federated round in VoiceFL-MAML, by sending only LoRA adapters',
     },
     {
-      value: "Top 3%",
-      label: "CTF Ranking",
-      description: "Worldwide in HTB Forensics CTF",
+      value: 'Top 3%',
+      label: 'HackTheBox',
+      description: 'Worldwide, plus top 10–15 nationally in Moroccan CTFs',
     },
     {
-      value: "90%",
-      label: "ML Accuracy",
-      description: "Achieved in 3D segmentation project",
+      value: '200+',
+      label: 'AI club members',
+      description: 'Grew and led the CIAM AI Club at ENSAM',
     },
   ],
 };

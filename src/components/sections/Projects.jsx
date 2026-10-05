@@ -1,28 +1,51 @@
 /**
  * Projects Section
  *
- * Section wrapper for the home page carousel.
- * The carousel itself lives in ProjectCarousel for reuse on ProjectDetail.
+ * Section header plus the shared ProjectCarousel, which runs full-bleed
+ * across the viewport. The carousel itself is reused on project pages.
  */
 
-import SectionHeader from '../ui/SectionHeader';
-import ProjectCarousel from './ProjectCarousel';
+import { ArrowUpRight, MoveHorizontal } from 'lucide-react';
+import ProjectCarousel from '../projects/ProjectCarousel';
+import SectionIntro from '../ui/SectionIntro';
+import Reveal from '../motion/Reveal';
+import { getFeaturedProjects } from '../../data/projects';
+import { getSocialLink } from '../../data/contact';
+
+const github = getSocialLink('GitHub');
 
 const Projects = () => (
-  <section id="projects" className="py-[var(--space-xl)] bg-[var(--color-bg-primary)] overflow-hidden">
+  <section id="projects" className="relative py-[clamp(5rem,10vw,9rem)]">
     <div className="container-main">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-[var(--space-lg)] gap-8">
-        <SectionHeader
-          title="Selected Work."
-          subtitle="// Projects //"
-          className="mb-0"
-        />
-        <p className="text-[var(--color-text-secondary)] max-w-xs text-right hidden md:block italic font-medium text-sm">
-          Continuous technical innovation across security and AI.
-        </p>
-      </div>
+      <SectionIntro
+        index="03"
+        label="Selected work"
+        title="Things I've *built*"
+        aside="Voice AI, federated research, agents and security tooling. Hackathon winners and long-haul builds alike."
+      />
+    </div>
 
+    <Reveal className="mt-[clamp(3rem,6vw,5rem)]">
       <ProjectCarousel />
+    </Reveal>
+
+    <div className="container-main mt-10 flex flex-wrap items-center justify-between gap-4">
+      <p className="eyebrow flex items-center gap-3 text-fg-subtle">
+        <MoveHorizontal size={14} className="text-accent" />
+        Drag to explore · <span className="text-fg">{String(getFeaturedProjects().length).padStart(2, '0')}</span>{' '}
+        projects
+      </p>
+      {github && (
+        <a
+          href={github.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+        >
+          More on GitHub
+          <ArrowUpRight size={15} />
+        </a>
+      )}
     </div>
   </section>
 );
