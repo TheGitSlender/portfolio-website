@@ -1,62 +1,67 @@
 /**
  * Work Experience Data
  *
- * Contains all professional experience entries for the Experience section.
- * Displayed as a timeline with connecting lines.
+ * Rendered as stacking cards in the Experience section, newest first.
+ * Images are resolved by id in `src/assets/media.js` to keep this file clean.
+ *
+ * Optional fields:
+ * - badges:    short context pills shown next to the role
+ * - standards: frameworks the work aligns with (rendered as chips)
+ * - metric:    a headline result shown instead of an image
  */
-
-// =============================================================================
-// IMAGE MAPPINGS
-// =============================================================================
-
-/**
- * Experience image filenames by experience ID.
- * Actual imports happen in the component to keep data files clean.
- */
-export const experienceImageMap = {
-  'scale-ai': 'outlier_experience.webp',
-  '3d-smart-factory': '3d_CV_experience.webp',
-  'ai-club-president': 'president_experience.webp',
-};
-
-// =============================================================================
-// EXPERIENCE DATA
-// =============================================================================
 
 export const experiences = [
   {
+    id: 'axon',
+    role: 'Founder',
+    company: 'Axon',
+    companyUrl: 'https://axonsecurity.tech',
+    location: 'Pre-seed',
+    period: {
+      start: '2026',
+      end: 'Present',
+    },
+    current: true,
+    type: 'founder',
+    typeLabel: 'Founder',
+    summary:
+      'Founding an agentless, AI-native security posture management platform for the AI infrastructure organisations run.',
+    highlights: [
+      'Continuously discovers, analyses, and secures models, data, MCP servers, agent architectures, and the cloud and data posture beneath them.',
+      'Surfaces vulnerabilities and misconfigurations before and during deployment.',
+      "Pre-seed, building the MVP within HackNation's Venture Lab (out of MIT).",
+    ],
+    badges: ['Pre-seed', 'HackNation Venture Lab · MIT'],
+    standards: ['ISO 42001', 'NIST AI RMF', 'OWASP'],
+    skills: ['AI Security', 'Posture Management', 'MCP Servers', 'Agent Architectures', 'Cloud Posture'],
+  },
+  {
     id: 'app-attijari',
     role: 'AI/ML Engineering Intern',
-    company: 'Attijari Payment (APP)',
+    company: 'Attijari Payment',
     companyUrl: null,
     location: 'Casablanca, Morocco (On-site)',
     period: {
       start: 'Jul 2026',
-      end: 'Present',
+      end: 'Sep 2026',
     },
-    current: true,
-    description: `Designing a multi-agent system to automate operational incident handling: supervisor-worker orchestration over LangGraph, retrieval-grounded diagnosis, and a human approval gate enforced directly in the state graph.
-Built a simulated department environment (ticketing, database, internal mail) to develop and evaluate agents on synthetic data, fully on-premise with local models and zero external API calls.`,
-    skills: ['LangGraph', 'Multi-Agent Systems', 'RAG', 'Python', 'On-Premise AI'],
+    current: false,
     type: 'work',
-    image: null,
-  },
-  {
-    id: 'scale-ai',
-    role: 'AI Trainer, Code Specialist',
-    company: 'Outlier.ai - Alignerr',
-    companyUrl: null,
-    location: 'San Francisco, California (Remote)',
-    period: {
-      start: 'Oct 2024',
-      end: 'Present',
+    typeLabel: 'Internship',
+    summary:
+      'Built an on-premise AI agent that triages incident tickets in card-payment operations (monétique) by verified urgency, P1 to P4.',
+    highlights: [
+      'A local LLM (qwen3:8b via Ollama) investigates the operational database read-only, isolates root cause, and drafts a diagnosis and resolution plan for human-in-the-loop validation.',
+      'Zero external API calls (PCI-DSS constraint), locked down by a read-only DB role and 36 automated security tests.',
+      'Tool-driven investigation (read-only SQL guard, BM25 retrieval, full audit trail) lifted triage accuracy to 94%, vs 65% for the same model with no tools.',
+    ],
+    metric: {
+      value: '94%',
+      baseline: '65%',
+      label: 'Triage accuracy',
+      caption: 'Same model, with tools vs. without',
     },
-    current: true,
-    description: `I evaluate AI-generated code for logic correctness, edge cases, and optimization across model families, and assess agentic behavior and function-calling decisions. Focused on failure modes in tool chaining, hallucinated API calls, and malformed structured output across Python, C/C++, and Java.
-The interesting part? Seeing exactly where state-of-the-art models struggle. That knowledge shapes how I architect my own ML systems.`,
-    skills: ['Python', 'C/C++', 'Java', 'Agentic AI', 'AI Research'],
-    type: 'work',
-    image: 'outlier_experience.webp',
+    skills: ['Ollama', 'Local LLMs', 'AI Agents', 'BM25', 'SQL', 'PCI-DSS'],
   },
   {
     id: '3d-smart-factory',
@@ -69,28 +74,35 @@ The interesting part? Seeing exactly where state-of-the-art models struggle. Tha
       end: 'Sep 2024',
     },
     current: false,
-    description: `Implemented Superpoint Transformer for 3D point cloud segmentation, end-to-end from raw preprocessing to a deployed real-time Streamlit demo. Processed 30GB+ of Stanford's 3D Indoor Scenes dataset, achieved 90% accuracy and 70% mean IoU across 13 object classes. The cool part was handling 3D data with transformer architectures to work efficiently on indoor factory environments.`,
-    skills: ['PyTorch', 'Lightning AI', '3D Computer Vision', 'Streamlit', 'Weights & Biases', 'Linux'],
     type: 'work',
-    image: '3d_CV_experience.webp',
+    typeLabel: 'Internship',
+    summary:
+      'Implemented Superpoint Transformer for 3D point cloud segmentation, end to end from raw data preprocessing to a deployed real-time Streamlit demo.',
+    highlights: [
+      "Trained on 30 GB+ of Stanford's 3D Indoor Scenes, reaching 90% accuracy and 70% mean IoU across 13 object classes.",
+      'Made transformer attention tractable on millions of points by grouping them into superpoints first.',
+    ],
+    skills: ['PyTorch', 'Lightning AI', '3D Computer Vision', 'Streamlit', 'Weights & Biases'],
   },
   {
     id: 'ai-club-president',
     role: 'President',
-    company: 'CIAM AI Club - ENSAM Casablanca',
+    company: 'CIAM AI Club',
     companyUrl: null,
-    location: 'Casablanca, Morocco',
+    location: 'ENSAM Casablanca',
     period: {
       start: 'Sep 2023',
       end: 'Jun 2025',
     },
     current: false,
-    description: `
-Leading 200+ students through hands-on ML workshops, Python, computer vision, NLP, deployment. Getting through the theory, while building actual projects.
-Also coordinate team projects and run monthly technical sessions on everything from reinforcement learning to MLOps.`,
-    skills: ['Leadership', 'Python', 'Machine Learning', 'Strategic Planning'],
     type: 'leadership',
-    image: 'president_experience.webp',
+    typeLabel: 'Leadership',
+    summary: "Grew and ran ENSAM's AI community to 200+ members.",
+    highlights: [
+      'Organised weekly technical workshops, from Python and computer vision to NLP and deployment.',
+      'Coordinated student participation in national AI competitions.',
+    ],
+    skills: ['Leadership', 'Teaching', 'Machine Learning', 'Community Building'],
   },
 ];
 

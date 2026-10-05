@@ -1,88 +1,44 @@
 /**
  * Experience Section
  *
- * Displays work experience as a vertical timeline with animated progress line.
- * Each experience entry is shown as a TimelineCard component.
+ * A centre-line timeline, newest first. Role cards alternate left and right
+ * of the spine; an accent line draws down the spine as you scroll through
+ * the section, and each node lights up when its role arrives.
  */
 
-import { motion } from 'framer-motion';
-import TimelineCard from './TimelineCard';
-import SectionBadge from '../ui/SectionBadge';
-import AnimatedHeading from '../ui/AnimatedHeading';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import ExperienceEntry from './ExperienceEntry';
+import SectionIntro from '../ui/SectionIntro';
 import { experiences } from '../../data/experience';
-import {
-  staggerContainer,
-  fadeFromRight,
-  viewport,
-  durations,
-} from '../../config/animations';
+import { springs } from '../../config/animations';
 
-// Experience images
-import outlierImg from '../../assets/pictures/outlier_experience.webp';
-import smartFactoryImg from '../../assets/pictures/3d_CV_experience.webp';
-import presidentImg from '../../assets/pictures/president_experience.webp';
-
-/**
- * Image mapping for experiences
- */
-const experienceImages = {
-  'scale-ai': outlierImg,
-  '3d-smart-factory': smartFactoryImg,
-  'ai-club-president': presidentImg,
-};
+const SPINE = 'absolute bottom-0 left-[11px] top-0 w-px md:left-1/2 md:-translate-x-1/2';
 
 const Experience = () => {
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: timelineRef, offset: ['start 0.6', 'end 0.6'] });
+  const drawn = useSpring(scrollYProgress, springs.soft);
+
   return (
-    <section id="experience" className="py-[var(--space-xl)] bg-[var(--color-bg-primary)]">
+    <section id="experience" className="relative py-[clamp(5rem,10vw,9rem)]">
       <div className="container-main">
-        {/* Header Section */}
-        <motion.div
-          className="flex flex-col lg:flex-row lg:items-end justify-between mb-[var(--space-lg)] gap-8"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-        >
-          <div className="flex flex-col gap-6">
-            <SectionBadge>// CAREER JOURNEY //</SectionBadge>
-            <AnimatedHeading>
-              Experience & <br /> History
-            </AnimatedHeading>
-          </div>
+        <SectionIntro
+          index="02"
+          label="Experience"
+          title="Where I've *shipped*"
+          aside="Founder, engineer, intern, community lead. From AI security posture to card-payment operations, newest first."
+        />
 
-          <motion.p
-            className="text-[var(--color-text-secondary)] font-medium max-w-xs text-right hidden lg:block leading-relaxed"
-            variants={fadeFromRight}
-          >
-            A chronicle of engineering impact across specialized domains in tech.
-          </motion.p>
-        </motion.div>
+        <div ref={timelineRef} className="relative mt-[clamp(4rem,8vw,7rem)]">
+          <div aria-hidden="true" className={`${SPINE} bg-line-strong`} />
+          <motion.div aria-hidden="true" className={`${SPINE} origin-top bg-accent`} style={{ scaleY: drawn }} />
 
-        {/* Timeline Content */}
-        <div className="relative">
-          {/* Background Timeline Line */}
-          <div className="absolute left-4 md:left-[60px] top-0 bottom-0 w-[2px] md:w-[4px] bg-[var(--color-border-default)]/50" />
-
-          {/* Animated Progress Line */}
-          <motion.div
-            className="absolute left-4 md:left-[60px] top-0 w-[2px] md:w-[4px] bg-[var(--color-accent-primary)]"
-            initial={{ height: 0 }}
-            whileInView={{ height: '100%' }}
-            viewport={{ once: true, margin: '-200px' }}
-            transition={{ duration: durations.verySlow + 0.3, ease: 'easeOut' }}
-          />
-
-          {/* Experience Cards */}
-          <div className="flex flex-col gap-[var(--space-md)] md:gap-[var(--space-lg)] relative z-10">
+          <ol className="relative space-y-20 md:space-y-32">
             {experiences.map((experience, index) => (
-              <TimelineCard
-                key={experience.id}
-                experience={experience}
-                index={index}
-                imageSrc={experienceImages[experience.id]}
-              />
+              <ExperienceEntry key={experience.id} experience={experience} index={index} />
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

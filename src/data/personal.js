@@ -1,68 +1,95 @@
 /**
  * Personal Information Data
  *
- * Contains all personal/bio information for the portfolio:
- * - Name, title, tagline
- * - Full bio text
- * - Contact information
- * - Availability status
- * - Quick stats for About section
+ * Name, positioning, bio copy, quick facts and stats used across the site.
  *
- * Update this file to change personal information across the site.
+ * Copy supports a markdown-lite emphasis marker: wrap words in *asterisks*
+ * to render them in the italic serif accent (see utils/emphasis.js).
  */
 
 export const personalInfo = {
   // Basic Info
-  name: "Hany El Atlassi",
-  title: "ML Engineer | AI & Cloud Engineer",
+  name: 'Hany El Atlassi',
+  firstName: 'Hany',
+  lastName: 'El Atlassi',
+  title: 'AI & Security Engineer',
 
-  // Hero tagline (1-2 sentences)
-  tagline: "I'm Hany, an ML Engineer building and deploying AI systems on AWS — voice pipelines, multi-agent orchestration, federated learning, and the security infrastructure underneath. Final-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca, open to opportunities and relocation. Feel free to reach out anytime!",
+  // Hero
+  heroStatement: 'AI & Security Engineer building',
+  heroRotatingWords: [
+    'secure AI infrastructure.',
+    'multi-agent systems.',
+    'real-time voice AI.',
+    'federated learning systems.',
+  ],
+  tagline:
+    'I build and deploy ML systems end to end: voice pipelines, multi-agent orchestration, federated learning, and the security infrastructure underneath all of it.',
 
-  // Full bio for About section (2-3 paragraphs)
-  bio: `I'm an AI & Cloud engineer with hands-on experience building and deploying ML systems on AWS: voice pipelines, multi-agent orchestration, federated learning, and the security infrastructure underneath it. I'm in my final (5th) year of the Cybersecurity & Cloud Engineering program at ENSAM Casablanca (2022–2027, GPA 3.7/4.0), where my academic specialization gives me a security-first lens on everything I build.
+  // Preloader words (last one gets the accent)
+  introWords: ['Design', 'Build', 'Secure', 'Ship.'],
 
-My journey spans computer vision, reinforcement learning, and deep learning, with projects ranging from 3D point cloud segmentation to network intrusion detection, federated meta-learning for speech recognition, and multi-agent orchestration systems for operational automation. As the President of the AI Club at ENSAM, I led a community of over 200 members through workshops, hackathons, and collaborative projects bridging theory and practice.
+  // Marquee tape
+  focusAreas: [
+    'AI Security',
+    'Multi-Agent Systems',
+    'Real-Time Voice AI',
+    'Federated Learning',
+    'Cloud & Kubernetes',
+    'Digital Forensics',
+  ],
 
-Beyond AI, I'm an active participant in cybersecurity competitions, consistently ranking in the top 3% worldwide in CTF challenges. This polyvalent background lets me approach problems from multiple angles, combining security-first thinking with cutting-edge AI solutions — and I'm open to relocating for the right opportunity.`,
+  // About: scroll-revealed statement
+  manifesto:
+    'I build AI systems that *actually ship* — voice pipelines, multi-agent orchestration, federated learning — and the *security underneath* all of it. Right now I am founding *Axon,* an agentless security posture platform for the AI infrastructure organisations run.',
+
+  // About: supporting paragraphs
+  bio: [
+    "I'm a final-year Cybersecurity & Cloud Engineering student at ENSAM Casablanca (2022–2027, GPA 3.7/4.0), working where machine learning meets security. This summer I built an on-premise incident-triage agent for card-payment operations at Attijari Payment; now I'm building Axon inside HackNation's Venture Lab (out of MIT).",
+    'Along the way: 3D point cloud segmentation, federated meta-learning for accented speech, real-time voice agents, and hackathon wins from AgorAI to HackAI. I grew ENSAM’s AI club to 200+ members, and I still play CTFs, because thinking like an attacker makes for better defensive AI.',
+  ],
+
+  // About: quick facts
+  facts: [
+    { label: 'Based in', value: 'Casablanca, Morocco' },
+    { label: 'Studying', value: 'Cybersecurity & Cloud Eng., ENSAM' },
+    { label: 'Speaks', value: 'English, French, Arabic' },
+    { label: 'Status', value: 'Open to work & relocation' },
+  ],
 
   // Contact Information
-  email: "elatlassi.hany@gmail.com",
-  phone: "+212642909790",
-  location: "Casablanca, Morocco",
-
-  // Profile photo path (update when actual photo is added)
-  photo: "/assets/images/profile.webp",
+  email: 'elatlassi.hany@gmail.com',
+  phone: '+212642909790',
+  location: 'Casablanca, Morocco',
+  timeZone: 'Africa/Casablanca',
 
   // Availability status
   availability: {
-    status: "open", // "open", "limited", "unavailable"
-    message: "Open to opportunities, including relocation",
-    seeking: ["AI/ML Engineering", "Internships", "Consulting", "Speaking"],
+    status: 'open', // "open", "limited", "unavailable"
+    message: 'Open to work & relocation',
+    seeking: ['AI/ML Engineering', 'AI Security', 'Consulting', 'Speaking'],
   },
 
-  // Quick stats for About section
-  // These appear as animated counters
+  // Quick stats for the About section (animated counters)
   stats: [
     {
-      value: "5+",
-      label: "Years Experience",
-      description: "University & practical experience in AI/ML",
+      value: '94%',
+      label: 'Triage accuracy',
+      description: 'Tool-driven incident agent at Attijari Payment, vs 65% without tools',
     },
     {
-      value: "200+",
-      label: "AI Club Members",
-      description: "Led and mentored as Club President",
+      value: '~295×',
+      label: 'Less traffic',
+      description: 'Per federated round in VoiceFL-MAML, by sending only LoRA adapters',
     },
     {
-      value: "Top 3%",
-      label: "CTF Ranking",
-      description: "Worldwide in HTB Forensics CTF",
+      value: 'Top 3%',
+      label: 'HackTheBox',
+      description: 'Worldwide, plus top 10–15 nationally in Moroccan CTFs',
     },
     {
-      value: "90%",
-      label: "ML Accuracy",
-      description: "Achieved in 3D segmentation project",
+      value: '200+',
+      label: 'AI club members',
+      description: 'Grew and led the CIAM AI Club at ENSAM',
     },
   ],
 };

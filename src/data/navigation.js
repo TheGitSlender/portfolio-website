@@ -6,15 +6,15 @@
  */
 
 export const navItems = [
+  { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Stack', href: '#skills' },
   { label: 'Work', href: '#projects' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Wins', href: '#achievements' },
+  { label: 'Stack', href: '#skills' },
 ];
 
 export const ctaButton = {
-  label: 'Get in touch',
+  label: "Let's talk",
   href: '#contact',
 };
 

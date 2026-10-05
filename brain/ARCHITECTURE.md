@@ -3,60 +3,53 @@
 Living document. Update whenever structure, data shape, or major patterns change — don't let this drift from reality.
 
 ## Stack
-React 19 + Vite + Tailwind CSS v4 (CSS-based `@theme` config) + Framer Motion + React Router (`BrowserRouter`).
+React 19 + Vite + Tailwind CSS v4 (CSS-based `@theme` config) + Framer Motion 12 + Lenis (smooth scroll, `lenis/react`) + React Router (`BrowserRouter`).
 
 ## Routing
-- `/` — `Home.jsx`, composes: Hero → Experience → Skills → Projects → Certifications → Contact
+- `/` — `Home.jsx`, composes: Hero → TickerTape → About → Experience → Projects → Achievements → Skills → Certifications → Contact
 - `/project/:id` — `ProjectDetail.jsx`
 - `*` — `NotFound.jsx`
 
-`App.jsx` wraps routes in `Layout.jsx` (sticky Header/Navbar + Footer), uses `AnimatePresence mode="wait"` for page transitions, and a `ScrollToTop` effect on route change.
+`App.jsx`: `MotionConfig reducedMotion="user"` → `SmoothScroll` (root Lenis, skipped for reduced motion) → `IntroContext` → first-visit `Preloader` + `Layout` (navbar/footer/cursor/progress/grain) → `AnimatePresence mode="wait"` routes. Each page wraps itself in `PageTransition` (5-column stair wipe; resets scroll while covered). `history.scrollRestoration = 'manual'`.
 
 ## Data layer (`/src/data/`)
-Content is fully separated from components — components import and render, never hardcode copy.
+Content is fully separated from components — components import and render, never hardcode copy. Strings may contain `*emphasis*` (rendered italic serif via `utils/emphasis.js`).
 
-- `personal.js` — name, title, tagline, bio, stats, availability
-- `experience.js` — timeline entries (`experiences[]`), keyed image map (`experienceImageMap`), helpers (`getCurrentExperiences`, `getExperienceById`, `getExperiencesByType`)
-- `projects.js` — `projects[]` (id, featured, title, descriptions, category, tags, techStack, metrics, highlights, links, images), plus `carouselImageMap` / `detailImageMap` keyed by project id, and helpers (`getFeaturedProjects`, `getProjectById`, `getNextProjectId`, `getPrevProjectId`)
-- `skills.js` — two shapes: `skillCategories[]` (flat list w/ proficiency, used for `getAllSkills`/`getSkillsByProficiency`) and `skillDomains[]` (AI / Cloud / Security, each with `architecture[]` + `tools[]`, used by `DomainAccordion` in `Skills.jsx`)
-- `certifications.js` — `certifications[]` + `upcomingGoals[]` (progress bar + markdown-lite `**bold**` description)
-- `contact.js` — `contactInfo`, `socialLinks[]`, `platformStyles` (per-platform card styling), `contactContent`
-- `navigation.js` — nav links
+- `personal.js` — name/firstName/lastName, title, hero statement + rotating words, tagline, preloader `introWords`, marquee `focusAreas`, About `manifesto` + `bio[]` + `facts[]`, `stats[]` (animated counters), timeZone, availability
+- `experience.js` — `experiences[]`: id, role, company, companyUrl, location, period {start,end}, current, type (`founder`|`work`|`leadership`), typeLabel, summary, highlights[], skills[], optional `badges[]`, `standards[]`, `metric {value, baseline, label, caption}`. Order = display order (newest first).
+- `projects.js` — `projects[]` in display order (id, featured, title "Name — Tagline", short/full/architecture descriptions, category, tags, highlights, techStack, metrics, technologies, links, impact, date, duration) + helpers (`getFeaturedProjects`, `getProjectById`, `getNext/PrevProjectId`, `getProjectTitleParts`, `getProjectNumber`)
+- `achievements.js` — `achievements[]` (rank, rankLabel, place, event, project, projectId, description, date) + `getAchievementForProject`
+- `skills.js` — `skillDomains[]` (rendered as tabs) and `skillCategories[]` (only "Programming Languages" and "Languages" are rendered, under the tabs)
+- `certifications.js` — `certifications[]` + `upcomingGoals[]` (progress + `**bold**` description)
+- `contact.js` — `contactInfo`, `socialLinks[]`, `getSocialLink`, `contactContent`
+- `navigation.js` — nav links + CTA
 
-**No achievements/hackathons data file yet** — hackathon wins currently live embedded inside individual `projects[]` entries (e.g. MediCore "10th Place Worldwide — Mistral AI Hackathon", Aegis "AI Spring School Selection", CallPilot). A dedicated achievements section (per user request, see LOG) will need its own data file, e.g. `data/achievements.js`.
+## Media
+`src/assets/media.js` is the only place images are imported: `portrait`, `getProjectCover(id)`, `getProjectDetailMedia(id)` (`{src, fit?}`; `fit: 'contain'` for tall screenshots), `getExperienceImage(id)`. Missing project covers render a generated cover (ink, dot grid, drifting accent glow, outlined name). Pending real images: VoiceFL-MAML, InterviewForge, JarvisLfla7, Axon, Attijari Payment.
 
 ## Components
-
-- `/components/layout/` — `Header`/`Navbar`, `Footer`, `Layout` (wraps children with sticky header/footer)
-- `/components/sections/` — one per home-page section: `Hero`, `Experience`, `Skills` (renders `DomainAccordion`), `Projects` (thin wrapper around `ProjectCarousel`), `Certifications` (also renders `upcomingGoals`), `Contact`, plus shared `ProjectCarousel` (used on both Home and `ProjectDetail`), `TimelineCard`, `ProfileCard`, `DomainAccordion`
-- `/components/ui/` — primitives: `Button`, `Card`, `Badge`/`SectionBadge`, `SectionHeader`, `AnimatedHeading`, `TiltCard`, `ProgressBar`, `ThemeToggle`
-- `/components/common/` — `CustomCursor`
-- `/hooks/` — `useReducedMotion`, `useTheme` + `ThemeContext`/`ThemeProvider`, `useMagnetic`
-- `/config/animations.js` — shared Framer Motion variants (`fadeUp`, `cardHover`, `viewport`, `indexedDelay`, stagger configs)
-
-### ProjectCarousel — gesture system (important, non-obvious)
-Uses **window-level pointer listeners** instead of Framer Motion's `drag` prop, because FM's gesture system intercepts child click events and breaks card navigation. Key mechanics:
-1. `onPointerDown` on the track starts a gesture, registers `pointermove`/`pointerup` on `window`
-2. All mutable gesture state lives in `drag = useRef({...})` (avoids stale closures)
-3. `useNavigate()` fires on `pointerup` only if `totalMoved <= DRAG_THRESHOLD` (8px) — click vs. drag
-4. Cards are plain `<div data-project-id={id}>` (not React components) so `e.target.closest('[data-project-id]')` works
-5. `<Link>` inside each card has `onClick={e => e.preventDefault()}` — exists only so right-click → "open in new tab" works
-6. Auto-scroll: `useAnimationFrame` + `useMotionValue`, pauses while `drag.current.active`
-7. Infinite loop: array duplicated 2x; `x` wraps at `0` and `-halfWidth`
-
-To add a project's carousel image: add an entry to `carouselImages` map in `ProjectCarousel.jsx` keyed by `project.id` (separate from the `carouselImageMap`/`detailImageMap` exported from `data/projects.js` — those are documentation-only, the component does its own static imports).
+- `layout/` — `Navbar` (hide on scroll down, local time, rolling links, theme toggle, CTA; full-screen ink menu on mobile), `Footer` (ink, link columns, back-to-top, giant wordmark), `Layout`, `LocalTime`
+- `motion/` — `SmoothScroll`, `Preloader`, `PageTransition`, `SplitText`, `ScrollRevealText`, `RotatingWords`, `VelocityMarquee`, `RollText`, `Counter`, `Reveal`, `ParallaxImage` (photos; crops while drifting), `ImageReveal` (screenshots; ends uncropped), `Cursor`, `ScrollProgress`
+- `sections/` — `Hero` (+ `DotField` ambient canvas, non-interactive; `CircularBadge`), `TickerTape`, `About`, `Experience` (+ `ExperienceEntry`, `ExperienceVisuals`: `ScanRadar`, `MetricCompare`), `Projects`, `Achievements`, `Skills`, `Certifications`, `Contact`
+- `projects/` — `ProjectCarousel` (Home + project pages, `excludeId`), `ProjectCard`, `ProjectCover`
+- `ui/` — `SectionIntro` (+ `Eyebrow`), `ThemeToggle` (View Transitions circular reveal), `icons.js` (explicit Lucide registry; don't `import * as LucideIcons`)
+- `hooks/` — `useReducedMotion`, `useMediaQuery`/`useFinePointer`, `useScrollTo`, `useSectionNav`, `useLocalTime`, `IntroContext`/`useIntro`, `ThemeProvider`/`useTheme`
 
 ## Design system
-Apple-inspired aesthetic + tech accents, defined via CSS custom properties in `index.css` under `@theme`:
-- Colors: `--color-primary-text`, `--color-accent-blue` / `--color-accent-primary`, `--color-surface-card`, `--color-surface-muted`, `--color-bg-primary`/`secondary`, `--color-text-primary`/`secondary`/`muted`, `--color-border-default`/`subtle`
-- Shadows: layered Formix-style (`--shadow-md`, `--shadow-lg`)
-- Spacing tokens: `--space-xl`, `--space-lg`, etc.
-- `container-main` utility class for consistent max-width containers
+Tokens in `index.css` `@theme`: `--color-bg/surface/surface-muted/fg/fg-muted/fg-subtle/line/line-strong/accent/accent-2/accent-3/ink/ink-soft/paper`, fonts (Geist, Instrument Serif, Geist Mono — loaded via `<link>` in `index.html`), `--ease-expo`, `--ease-quart`, shadows. Dark mode overrides on `html.dark`. Base element styles in `@layer base`, custom classes in `@layer components` (utilities must be able to override them).
 
-Section header pattern: `SectionBadge` (small `// LABEL //` tag) + `AnimatedHeading` (large heading, often with `<span className="text-[var(--color-accent-primary)]">` accent on part of it).
+## Motion conventions
+- Easing: `ease.expo` for reveals, `ease.quart` for curtains (`config/animations.js`)
+- Headings: `SectionIntro`/`SplitText` (masked char rise); entrances: `Reveal` with `viewportOnce`
+- Scroll-linked via `useScroll`/`useTransform`; programmatic scroll only via `useScrollTo`/`useSectionNav`
+- Hover: `group/roll` + `RollText`, `data-cursor="Label"` (+ `data-cursor-variant="ink"` on accent fills); no magnetic buttons
+- Reduced motion: global `MotionConfig`, plus explicit skips (Lenis, preloader, marquees, carousel auto-scroll)
 
-## Animation conventions
-Framer Motion throughout. Scroll-triggered via `useInView`/`whileInView` (threshold 0.2–0.3), stagger via `staggerChildren: 0.1`, hover via `whileHover` scale/shadow. All should respect `prefers-reduced-motion` via `useReducedMotion` hook.
+### Experience timeline
+Centre spine (left on mobile) with an accent fill driven by scroll progress; entries alternate card side; the dates + visual column is sticky on desktop; nodes light up at 60% viewport.
+
+### ProjectCarousel
+Window-level pointer gesture system (not Framer `drag`), click vs drag threshold 8px, 3 copies with wrap, hover/keyboard pause, momentum, keyboard-safe focus. Full notes in CLAUDE.md.
 
 ## Known constraints
-- **GitHub Pages SPA routing**: direct navigation to `/project/:id` 404s because GH Pages has no server-side routing and the app uses `BrowserRouter`. Open issue — fix is either a `404.html` redirect hack or switching to `HashRouter`. See `brain/ISSUES.md`.
+- **GitHub Pages SPA routing**: direct navigation to `/project/:id` 404s (no server rewrites + `BrowserRouter`). Open issue — see `brain/ISSUES.md`.

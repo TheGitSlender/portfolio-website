@@ -13,7 +13,7 @@ npm run lint     # Run ESLint
 
 ## Architecture
 
-This is a React portfolio website for Hany El Atlassi (AI Engineer) using Vite, Tailwind CSS v4, and Framer Motion.
+This is a React portfolio website for Hany El Atlassi (AI & Security Engineer, founder of Axon) using Vite, Tailwind CSS v4, Framer Motion and Lenis (smooth scroll).
 
 ### Routing Structure
 - `/` - Home page (composes all portfolio sections)
@@ -22,53 +22,65 @@ This is a React portfolio website for Hany El Atlassi (AI Engineer) using Vite, 
 
 ### Key Architectural Patterns
 
-**Layout System**: `App.jsx` wraps all routes in `Layout.jsx`, which provides the sticky Header and Footer. BrowserRouter is in `main.jsx`.
+**App shell**: `main.jsx` mounts BrowserRouter + ThemeProvider. `App.jsx` wraps everything in `MotionConfig reducedMotion="user"` → `SmoothScroll` (root Lenis) → `IntroContext` provider, renders the first-visit `Preloader`, and the routes inside `Layout.jsx` (navbar, footer, cursor follower, scroll progress, grain overlay).
 
-**Page Transitions**: Uses Framer Motion's `AnimatePresence` with `mode="wait"` for smooth page transitions.
+**Page Transitions**: `AnimatePresence mode="wait"` in `App.jsx`; every page wraps its content in `components/motion/PageTransition.jsx`, which renders five ink columns that sweep up over the outgoing page and off the top of the incoming one. The incoming page resets scroll (or Home jumps to `location.hash`) while the screen is covered. Don't put transforms on ancestors of the transition columns (they are `position: fixed`).
 
-**Data Separation**: All content lives in `/src/data/` files (personal.js, experience.js, projects.js, skills.js, certifications.js, contact.js). Components import and render this data - never hardcode content in components.
+**Intro**: the preloader plays once per session, only when landing on `/`, never with reduced motion. Components that should start with the curtain lift read `useIntro().introDone` (Hero, Navbar).
 
-**Tailwind v4 Configuration**: Uses CSS-based config with `@theme` directive in `index.css`. Custom design tokens (colors, shadows, typography) are defined there using CSS custom properties like `--color-accent-blue`.
+**Data Separation**: All content lives in `/src/data/` files (personal.js, experience.js, projects.js, achievements.js, skills.js, certifications.js, contact.js, navigation.js). Components import and render this data - never hardcode content in components. Copy supports `*emphasis*` markers rendered in the italic serif accent (`utils/emphasis.js`).
+
+**Media**: data files never import images. `src/assets/media.js` is the single image registry keyed by content id (`getProjectCover`, `getProjectDetailMedia`, `getExperienceImage`, `portrait`). Projects without a cover get a generated one (`components/projects/ProjectCover.jsx`). To add a project image, import it in `media.js` and add it to the relevant map.
+
+**Tailwind v4 Configuration**: CSS-based config with `@theme` in `index.css`. Base element styles live in `@layer base`, custom classes (`container-main`, `eyebrow`, `grain`, `spotlight`, ...) in `@layer components`, so utilities always win. Keep it that way: unlayered rules override utilities.
 
 ### Component Organization
 
-- `/components/layout/` - Header, Footer, Layout wrapper
-- `/components/sections/` - Hero, About, Experience, Projects, Skills, Certifications, Contact, **ProjectCarousel** (shared)
-- `/components/ui/` - Reusable primitives (Button, Card, Badge, SectionHeader, TiltCard, AnimatedSection)
+- `/components/layout/` - Navbar (hide-on-scroll, mobile menu), Footer, Layout, LocalTime
+- `/components/motion/` - Motion primitives: SmoothScroll, Preloader, PageTransition, SplitText, ScrollRevealText, RotatingWords, VelocityMarquee, RollText, Counter, Reveal, ParallaxImage (photos), ImageReveal (uncropped screenshots), Cursor, ScrollProgress
+- `/components/sections/hero/` - Hero options being compared, all built on the Classic composition (`ClassicLayout` with measured slots beside the name): Classic, Annotated (hand-drawn notes, `font-hand` = Caveat), Project deck, ASCII (`AsciiKnot`), Voice wave. `Hero.jsx` picks one via `?hero=<id>` and shows a TEMPORARY `HeroOptionPicker` — remove the picker, the unchosen options (and Caveat if Annotated isn't chosen) once the owner decides
+- `/components/sections/` - Hero (switcher), DotField ambient canvas, CircularBadge, TickerTape, About, Experience (+ ExperienceEntry, ExperienceVisuals), Projects, Achievements, Skills, Certifications, Contact
+- `/components/projects/` - ProjectCarousel (shared by Home and ProjectDetail), ProjectCard, ProjectCover
+- `/components/ui/` - SectionIntro (+ Eyebrow), ThemeToggle, icons registry
 - `/pages/` - Route-level components (Home, ProjectDetail, NotFound)
-- `/hooks/` - `useReducedMotion`, `useTheme`, `useMagnetic`
-- `/utils/` - Framer Motion animation variants and helpers
-
-`ProjectCarousel` is used in both `Projects.jsx` (home section) and `ProjectDetail.jsx` (bottom of project pages). To add a new project image to the carousel, add an entry to the `carouselImages` map in `ProjectCarousel.jsx` keyed by `project.id`.
+- `/hooks/` - `useReducedMotion`, `useMediaQuery`/`useFinePointer`, `useScrollTo`, `useSectionNav`, `useLocalTime`, `IntroContext`, theme (`ThemeProvider`, `useTheme`)
+- `/config/animations.js` - shared easings (`ease.expo`, `ease.quart`), durations, springs, variants (`fadeUp`, `maskUp`, `lineDraw`, `popIn`, `stagger()`)
+- `/utils/emphasis.js` - `*emphasis*` parsing
 
 ### Design System
 
-Apple-inspired aesthetic with tech accents. Key CSS custom properties:
-- Colors: `--color-primary-text`, `--color-accent-blue`, `--color-surface-card`
-- Shadows: Layered Formix-style (`--shadow-md`, `--shadow-lg`)
-- Use `container-main` class for consistent max-width container
+Editorial, motion-first aesthetic on the original palette. Tokens in `index.css`:
+- Colors: `--color-bg` (#f0f0f0 / #0a0a0a), `--color-surface`, `--color-fg`, `--color-fg-muted`, `--color-fg-subtle`, `--color-line`, `--color-line-strong`, `--color-accent` (#ff3700), theme-independent `--color-ink` / `--color-paper`. Use as utilities: `bg-bg`, `text-fg`, `border-line`, `bg-accent`...
+- Fonts (loaded in `index.html`): Geist (`font-sans`/`font-display`), Instrument Serif italic (`font-serif`, accents), Geist Mono (`font-mono`, `.eyebrow` labels)
+- Dark mode: `.dark` class on `<html>` (set before paint by an inline script in `index.html`); the toggle uses the View Transitions API for a circular reveal
+- Use `container-main` for the max-width container
 
 ### Animation Guidelines
 
-Use Framer Motion for all animations. Key patterns:
-- Scroll-triggered: `useInView` hook with threshold 0.2-0.3
-- Page transitions: variants with opacity/y transforms
-- Hover effects: `whileHover` with scale and shadow changes
-- Stagger children: `staggerChildren: 0.1` in container variants
+Framer Motion for component animation, Lenis for scroll. Key patterns:
+- Section headings: `SectionIntro` (numbered eyebrow + `SplitText` masked character reveal)
+- Scroll-triggered entrances: `Reveal` / `whileInView` with `viewportOnce` from `config/animations.js`
+- Scroll-linked: `useScroll` + `useTransform` (hero parallax, experience spine, word reveal)
+- Hover: CSS `group/roll` + `RollText` only on real buttons (filled or outlined); plain text links (nav, footer, inline) just change color, `data-cursor="Label"` to show a labelled cursor (`data-cursor-variant="ink"` where the hover fill is accent). No magnetic/cursor-following buttons (owner's preference)
+- Programmatic scrolling must go through `useScrollTo` / `useSectionNav` (they use Lenis when active)
 
-Components should check `prefers-reduced-motion` and disable animations accordingly.
+Performance rules (scroll smoothness was profiled): animate entrances with whole `transform`/`opacity` values wrapped in `tf()` from `config/animations.js` (hardware-accelerated WAAPI; `tf` returns 'none' for reduced motion because Framer's reducedMotion only covers x/y/scale shorthands) — avoid x/y/scale shorthands for scroll-triggered animations; no `will-change` on per-letter spans; no `backdrop-filter` or CSS `mask-image` on elements that move or sit over animated content (use gradient overlays); prefer gradients to `filter: blur()` on animated layers; images are WebP sized for their slot with `decoding="async"`.
 
-### ProjectCarousel Gesture System
+Reduced motion: `MotionConfig reducedMotion="user"` disables transform animations globally; Lenis, the preloader, marquees, the hero dot-field animation (static frame) and the carousel's auto-scroll are skipped.
 
-The carousel uses **window-level pointer listeners** instead of Framer Motion's `drag` prop. This is intentional — Framer Motion's gesture system intercepts child element click events, making card navigation impossible. The pattern:
+### Notable Mechanics
 
-1. `onPointerDown` on the `motion.div` track starts a gesture and registers `pointermove`/`pointerup` on `window`
-2. All mutable gesture state lives in `drag = useRef({...})` to avoid stale closure issues
+**Experience timeline** (`Experience.jsx` + `ExperienceEntry.jsx`): centre spine (left spine on mobile) whose accent fill is `scaleY` = scroll progress; entries alternate card left/right, the opposite column (dates + visual) is `md:sticky`. No `overflow: hidden` on ancestors or sticky breaks.
+
+**ProjectCarousel gesture system** (`components/projects/ProjectCarousel.jsx`): uses **window-level pointer listeners** instead of Framer Motion's `drag` prop. This is intentional — Framer Motion's gesture system intercepts child click events, making card navigation impossible. The pattern:
+1. `onPointerDown` on the track starts a gesture and registers `pointermove`/`pointerup` on `window`
+2. All mutable gesture state lives in `gesture = useRef({...})` to avoid stale closure issues
 3. Navigation (`useNavigate`) fires on `pointerup` only when `totalMoved <= DRAG_THRESHOLD` (8 px) — distinguishing a click from a drag
-4. Cards use a plain `<div data-project-id={id}>` wrapper (not a React component) so `e.target.closest('[data-project-id]')` reliably finds it in the DOM
-5. The `<Link>` inside each card has `onClick={e => e.preventDefault()}` — it exists only to provide `href` for right-click → "Open in new tab"
-6. Auto-scroll uses `useAnimationFrame` + `useMotionValue` imperatively; pauses while `drag.current.active`
-7. Infinite loop: array is duplicated 2×, and `x` wraps at both `0` (drag right) and `-halfWidth` (drag left / auto-scroll)
+4. Cards use a plain `<div data-project-id={id}>` wrapper so `e.target.closest('[data-project-id]')` reliably finds it
+5. Each card's `<Link>` keeps its `href` (right/middle/Cmd-click open in new tab); plain mouse clicks are `preventDefault`ed (`event.detail > 0`), keyboard Enter navigates natively
+6. Auto-scroll uses `useAnimationFrame` + `useMotionValue`; it eases to a stop on hover / keyboard focus, idles off-screen, and a released drag glides with decaying momentum
+7. Infinite loop: the list is rendered 3× and `x` wraps every one copy width; only copy 0 is tabbable, and keyboard focus clamps `x` (never wraps) to show the focused card
+8. `excludeId` hides the current project on project pages
 
 ### Deployment
 

@@ -36,3 +36,53 @@ Each entry: date, what was requested, what was decided/done, and any open follow
 - No browser automation tool available in this sandbox (Chrome extension declined, Playwright MCP bridge extension not installed) — the new Achievements section and repositioned Hero have **not** been visually verified in-browser by Claude; asked the user to spot-check `http://localhost:5174/` directly.
 - Real images for VoiceFL-MAML, InterviewForge, JarvisLfla7, and the APP internship are still pending from Hany — once supplied, add to `carouselImages` (`ProjectCarousel.jsx`), `detailImages` (`ProjectDetail.jsx`), and `experienceImages` (`Experience.jsx`) respectively.
 - Branch `content/cv-update-2026-08` has not been merged to `master` — awaiting user review/approval per the hard branching rule.
+
+---
+
+## 2026-10-05 — Motion-first redesign (branch `redesign/motion-revamp`)
+**Requested**: Revamp the entire design while keeping the color themes ("show me what you can do, I love motion design and smooth animations"). Content: remove Alignerr/Outlier from experience, update the Attijari Payment internship from the current CV, add the founder role at Axon.
+
+**Decided/Done** (branched from `content/cv-update-2026-08`, which is still unmerged into `master`, so the new branch carries that CV work too):
+- Kept palette (#f0f0f0 / #0a0a0a / #ff3700); new type system Geist + Instrument Serif italic accents + Geist Mono labels. Tokens renamed to short semantic names (`bg`, `fg`, `line`, `accent`, `ink`, `paper`...).
+- Added Lenis smooth scroll; new motion toolkit in `components/motion/`; first-visit preloader with curved-edge lift; stair-wipe page transitions; cursor follower with labels; hide-on-scroll navbar with live Casablanca time; View Transitions theme toggle.
+- Sections rebuilt: canvas signal-field hero with kinetic name + portrait pill, crossing velocity marquees, scroll-revealed About statement + counters, stacking Experience cards (Axon radar card, APP 94% vs 65% metric card), pinned horizontal project gallery (grid fallback), editorial Achievements list with hover preview, tabbed Skills, spotlight Certifications, accent Contact block, ink Footer with giant wordmark. Project detail page and 404 redesigned.
+- Content: `experience.js` now Axon (founder, links to axonsecurity.tech) → Attijari Payment (Jul–Sep 2026, CV bullets) → 3D Smart Factory → CIAM AI Club; Outlier/Alignerr removed (and its image). Hero/About/stats repositioned to "AI & Security Engineer" per CV; projects reordered (InterviewForge, VoiceFL-MAML, Aegis, JarvisLfla7 first); bundled résumé PDF replaced with the current CV.
+- Removed replaced components (ProjectCarousel, TimelineCard, DomainAccordion, ProfileCard, Card, TiltCard, Button, SectionBadge, AnimatedHeading, SectionHeader, ProgressBar, CustomCursor, useMagnetic) and the docs-only image maps / dead per-project image fields in `projects.js`.
+- Verified: lint clean, build passes, headless-Chrome screenshot sweep (desktop/mobile/dark/detail) with no console errors and no horizontal overflow.
+- QA fixes from the screenshot review: preloader words overlapping (popLayout exit needs a *positioned* overflow mask), generated-cover label colliding with the index badge, achievement arrow wrapping, footer wordmark width/descender, project-detail covers cropped by parallax zoom (new `ImageReveal`), and `/#section` landing short because Lenis clamps to a stale max scroll after a route change (`useScrollTo` now calls `lenis.resize()` first).
+- Code-review fixes: cursor blend mode moved to the fixed stacking-context element (was a plain white dot on light), cards only recede where they stick, keyboard focus inside the pinned gallery scrolls the page instead of the sticky box, WAI-ARIA tab keys in Skills, navbar reveals on focus, mobile menu is a dialog with Escape + initial focus, marquee idles off-screen, canvas does one layout read per frame.
+
+- Second visual-QA pass: achievement preview now positions on row enter (no fly-in from 0,0); label cursor goes ink over accent fills (`data-cursor-variant="ink"`); generated covers `isolate` so the blurred glow respects rounded corners; looser tracking on outlined cover names; steeper ticker crossing (±4°); dark-mode cards cast an upward shadow to separate the stack; short Skills tab labels on phones (`shortTitle`); counters use a shorter-tailed ease.
+
+**Open follow-ups**:
+- Not committed yet — awaiting user review.
+- Real images still pending for InterviewForge, VoiceFL-MAML, JarvisLfla7 (generated covers for now).
+- `upcomingGoals` still says the RL Specialization is in progress while the CV lists it as earned — confirm with user.
+
+---
+
+## 2026-10-05 (cont'd) — Owner feedback round 1 (same branch)
+**Requested**: no photo in the hero (About only), remove the mouse-interactive grid, lift the hero text; replace the sliding/stacking experience cards (suggested: cards left/right along a line); bring back the project carousel; on project pages, a way to choose another project plus a clear "Back" button; achievements: "View" cursor with a slightly smaller circle, no image following the cursor; fix Technical Depth panel not showing when clicking a tab while scrolling; add CV skills; remove buttons that follow the cursor.
+
+**Done**:
+- Hero: removed portrait pill + `SignalField` canvas; name/statement block centred and biased up.
+- Experience: new centre-spine timeline (`ExperienceEntry`), scroll-drawn accent line, alternating cards, sticky dates + visuals (Axon radar now in its own ink panel). Removed `ExperienceCard` and the `.stack-card` CSS. Looked at timeline patterns (Awwwards/Framer marketplace) — alternating cards on a drawn line with animated nodes is the common thread.
+- Projects: restored the original carousel's gesture system as `components/projects/ProjectCarousel.jsx` (restyled), plus hover-to-stop, drag momentum, keyboard support (old version blocked Enter), off-screen idling. Removed `HorizontalGallery`.
+- Project pages: top "Back" pill + bottom "Keep exploring / More work" section with the carousel (current project excluded) and a solid "Back" button → `/#projects`. Removed the single "Next project" block.
+- Achievements: removed the floating preview; label cursor 76 → 66 px.
+- Skills: panel visibility now keyed to the section having been seen once (per-panel `whileInView` could leave a panel stuck hidden when it mounted mid-scroll — reproduced and verified fixed). Added a "Voice & Agents" domain and CV items across all domains.
+- Removed `Magnetic` entirely.
+- Follow-up: owner only wanted the *interactive* part of the hero grid gone. Restored the ambient dot field with its diagonal wave as `DotField.jsx` (no pointer push, no accent mesh, no phantom pointer on touch).
+
+## 2026-10-05 (cont'd) — Hero options preview
+**Requested**: landing page feels empty; wants an interactive hero and to see several options.
+
+**Done**: split the hero into shared parts (`hero/HeroParts.jsx`) and five options switchable live via `?hero=` + a temporary floating picker: Classic (current), Terminal (typeable shell fed by /src/data, boot script, history, Tab completion, `open <n>` navigation, easter egg), Bento (Axon / rotating stats / rotating project peek / Casablanca clock tiles), Globe (draggable 3D dot sphere with skill tags + orbit ring), Playground (matter-js tag tray, custom pointer-constraint dragging, contained throws, lazy chunk ~27 kB gz). Copy lives in `data/hero.js`. Added `matter-js` dependency (remove if Playground isn't chosen).
+
+**Open follow-ups**: owner to pick an option → delete `HeroOptionPicker`, the unused options (and `matter-js` if unused), and simplify `Hero.jsx`. Pre-existing `npm audit` advisories (vite, react-router, postcss, …) not addressed yet.
+- Round 2: owner rejected Terminal, Bento, Playground; Globe "nice but overused"; Classic preferred. Removed those (and `matter-js`). New options keep the Classic composition and fill its empty areas via `ClassicLayout` slots: Annotated (self-drawing hand-written notes with real facts), Project deck (auto-shuffling fanned project cards), ASCII (rotating ASCII torus knot, drag to turn), Voice wave (speaking waveform + typed sample utterances from the voice projects, `data/hero.js`).
+
+## 2026-10-05 (cont'd) — Polish + scroll performance
+**Requested**: remove the live dot next to the name in the navbar; keep the rolling-text hover only on real buttons (not plain text links); fix FPS dips while scrolling.
+
+**Done**: dot removed; RollText removed from nav links, wordmark, footer links and "More on GitHub". Profiled scroll with a Playwright frame-timing harness (wheel-driven through Lenis, 4× CPU throttle to amplify): long frames 10–12% → ~1.5–2%, 0% unthrottled. Fixes: per-letter `will-change` removed from SplitText; carousel card badges no longer `backdrop-blur`; carousel/hero-dots CSS masks replaced (gradient overlays / fade baked into canvas); generated-cover glow is a radial gradient instead of `blur()`; navbar blur lightened, hero pill blur removed; grain promoted to its own layer; images re-encoded to WebP and sized (≈3 MB → <1 MB; e.g. ctf detail 1.3 MB → 85 KB) with async decoding; entrance animations converted from x/y/scale to `transform` strings (WAAPI, compositor) via `tf()` which also restores reduced-motion behaviour; cursor scales with transform instead of width/height. Profiling showed the remaining dips came from first-time entrance animations (second pass was ~0.5%).
