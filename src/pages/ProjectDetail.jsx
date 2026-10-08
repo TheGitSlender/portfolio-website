@@ -29,12 +29,7 @@ const toParagraphs = (text) =>
     .map((paragraph) => paragraph.trim())
     .filter(Boolean);
 
-const DetailCover = ({ project }) => {
-  const media = getProjectDetailMedia(project.id);
-
-  if (!media) {
-    return <ProjectCover project={project} className="aspect-[16/9] rounded-[2rem]" />;
-  }
+const DetailImage = ({ project, media }) => {
   if (media.fit === 'contain') {
     return (
       <div className="flex justify-center rounded-[2rem] bg-surface-muted p-6 md:p-12">
@@ -51,6 +46,32 @@ const DetailCover = ({ project }) => {
     <div className="overflow-hidden rounded-[2rem] border border-line bg-surface-muted shadow-card">
       <img src={media.src} alt={project.title} draggable={false} className="block h-auto w-full" />
     </div>
+  );
+};
+
+const DetailCover = ({ project }) => {
+  const media = getProjectDetailMedia(project.id);
+
+  if (!media) {
+    return <ProjectCover project={project} className="aspect-[16/9] rounded-[2rem]" />;
+  }
+  if (!media.credit) {
+    return <DetailImage project={project} media={media} />;
+  }
+  return (
+    <figure>
+      <DetailImage project={project} media={media} />
+      <figcaption className="mt-3 text-right text-xs text-fg-subtle">
+        <a
+          href={media.credit.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition-colors hover:text-fg"
+        >
+          {media.credit.text}
+        </a>
+      </figcaption>
+    </figure>
   );
 };
 
