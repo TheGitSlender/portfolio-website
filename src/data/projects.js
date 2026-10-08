@@ -11,40 +11,6 @@
 
 export const projects = [
   {
-    id: 'interviewforge',
-    featured: true,
-    title: 'InterviewForge — Voice AI Interview Platform',
-    shortDescription: 'Real-time voice AI technical interview platform with sub-second turn-taking, sandboxed code execution, and cost-optimized knowledge grounding.',
-    fullDescription: `Conducting a technical interview over voice means the AI has to listen, decide when the candidate is actually done talking, think, and speak back — all without the awkward silences or interruptions that make voice AI feel robotic. InterviewForge is a voice-first technical interview platform built around a 5-layer concurrent voice architecture: Deepgram Flux + Pipecat Smart Turn v3 (12ms CPU turn-detection) feed a gpt-4o-realtime-mini filler layer (~329ms) while Cartesia Sonic-3 (40–90ms time-to-first-byte) handles speech synthesis, all streamed over LiveKit WebRTC.`,
-    architectureDescription: `Behind the voice layer sits a 7-agent LangGraph pipeline that conducts the interview, grounded in a Claude cached prefix instead of RAG (a ~90% cost reduction for repeated knowledge lookups). Candidate code runs in a Judge0 + gVisor sandbox with seccomp, cgroups, and zero network egress. The whole stack is deployed on Kubernetes behind Kong and Cloudflare WAF, with GitOps delivery via ArgoCD.`,
-    category: 'Voice AI & Developer Tools',
-    tags: ['Voice AI', 'LangGraph', 'LiveKit', 'Kubernetes', 'Sandboxed Execution'],
-    highlights: [
-      { title: '5-Layer Concurrent Voice Pipeline', description: 'Deepgram Flux + Pipecat Smart Turn v3 (12ms CPU) turn-detection, gpt-4o-realtime-mini filler (~329ms), Cartesia Sonic-3 (40-90ms TTFB) over LiveKit WebRTC' },
-      { title: '7-Agent LangGraph Pipeline', description: 'Multi-agent interview orchestration grounded via a Claude cached prefix — a ~90% cost reduction versus a RAG pipeline' },
-      { title: 'Sandboxed Code Execution', description: 'Judge0 + gVisor sandbox for candidate code, hardened with seccomp, cgroups, and zero network egress' },
-      { title: 'Production-Grade Deployment', description: 'Kubernetes behind Kong and Cloudflare WAF, with GitOps delivery via ArgoCD' },
-    ],
-    techStack: [
-      { label: 'VOICE', value: 'Deepgram + Cartesia' },
-      { label: 'AGENTS', value: 'LangGraph' },
-      { label: 'INFRA', value: 'Kubernetes' },
-    ],
-    metrics: [
-      { label: 'Turn Detection', value: '12ms CPU' },
-      { label: 'TTS Latency', value: '40-90ms' },
-      { label: 'Cost Cut', value: '~90%' },
-    ],
-    technologies: ['Python', 'LangGraph', 'Deepgram', 'Cartesia', 'LiveKit', 'Judge0', 'Kubernetes', 'ArgoCD', 'Claude'],
-    links: {
-      github: null,
-      demo: null,
-    },
-    impact: 'Delivers a natural, low-latency voice interview experience while keeping code execution secure and knowledge-grounding costs low enough to run at scale.',
-    date: '2026',
-    duration: 'Ongoing',
-  },
-  {
     id: 'voicefl-maml',
     featured: true,
     title: 'VoiceFL-MAML — Federated Meta-Learning for Accented Speech Recognition',

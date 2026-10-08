@@ -8,7 +8,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDownRight, Download } from 'lucide-react';
+import { ArrowDownRight } from 'lucide-react';
 import CircularBadge from '../CircularBadge';
 import DotField from '../DotField';
 import SplitText from '../../motion/SplitText';
@@ -16,7 +16,6 @@ import RotatingWords from '../../motion/RotatingWords';
 import RollText from '../../motion/RollText';
 import { personalInfo } from '../../../data/personal';
 import { experiences } from '../../../data/experience';
-import resumePdf from '../../../assets/resume/Hany_El_Atlassi_CV.pdf';
 import { ease, fadeUp, stagger } from '../../../config/animations';
 import { useIntro } from '../../../hooks/IntroContext';
 import { useScrollTo } from '../../../hooks/useScrollTo';
@@ -105,7 +104,7 @@ export const HeroStatement = ({ className = '', decoration = null }) => {
   );
 };
 
-/** Tagline + "See the work" / "Résumé" buttons */
+/** Tagline + "See the work" button */
 export const HeroIntro = ({ className = '', showTagline = true, children = null }) => {
   const scrollTo = useScrollTo();
   return (
@@ -127,14 +126,6 @@ export const HeroIntro = ({ className = '', showTagline = true, children = null 
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/15 transition-transform duration-500 ease-expo group-hover/roll:-rotate-45">
             <ArrowDownRight size={16} />
           </span>
-        </a>
-        <a
-          href={resumePdf}
-          download="Hany_El_Atlassi_CV.pdf"
-          className="group/roll flex items-center gap-2 rounded-full border border-line-strong px-5 py-3 font-medium transition-colors hover:border-fg"
-        >
-          <Download size={15} />
-          <RollText>Résumé</RollText>
         </a>
       </div>
     </motion.div>
